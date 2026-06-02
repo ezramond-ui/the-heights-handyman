@@ -58,6 +58,10 @@ module.exports = function services() {
         <h2 id="key-h">What we install</h2>
         <p class="lead">Smart lighting is our core focus — the rest brings your whole home together.</p>
       </div>
+      <figure class="section-figure">
+        <img src="/images/smart-switch-install.jpg" width="1408" height="768"
+             alt="Cleveland Smart Home Solutions technician installing a smart light switch with no wall damage" loading="lazy" decoding="async">
+      </figure>
       <div class="service-grid">${C.serviceGrid()}</div>
     </div>
   </section>

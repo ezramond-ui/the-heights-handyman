@@ -43,17 +43,20 @@ module.exports = function home() {
           <li>${C.icon('check', 'icon icon-sm icon-accent')} Licensed &amp; insured</li>
         </ul>
       </div>
-      <div class="hero-visual" aria-hidden="true">
-        <div class="hero-card">
-          <div class="hero-card-top">
-            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-            <span class="hero-card-title">Good Evening</span>
+      <div class="hero-visual">
+        <figure class="hero-media">
+          <img class="hero-photo" src="/images/thermostat-install.jpg" width="1408" height="768"
+               alt="Cleveland Smart Home Solutions technician installing a smart thermostat on a living room wall" loading="eager" decoding="async">
+          <div class="hero-card" aria-hidden="true">
+            <div class="hero-card-top">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="hero-card-title">Good Evening</span>
+            </div>
+            <div class="hero-scene"><span>Living Room</span><span class="hero-toggle on"></span></div>
+            <div class="hero-scene"><span>Kitchen</span><span class="hero-toggle on"></span></div>
+            <div class="hero-scene dim"><span>Movie Night</span><span class="hero-pill">Tap to start</span></div>
           </div>
-          <div class="hero-scene"><span>Living Room</span><span class="hero-toggle on"></span></div>
-          <div class="hero-scene"><span>Kitchen</span><span class="hero-toggle on"></span></div>
-          <div class="hero-scene"><span>Front Porch</span><span class="hero-toggle"></span></div>
-          <div class="hero-scene dim"><span>Movie Night</span><span class="hero-pill">Tap to start</span></div>
-        </div>
+        </figure>
       </div>
     </div>
   </section>

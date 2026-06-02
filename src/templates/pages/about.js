@@ -42,9 +42,9 @@ module.exports = function about() {
         </div>
         <aside class="about-side">
           <div class="founder-card">
-            <div class="founder-photo" role="img" aria-label="Founder photo placeholder">
-              <span>Photo</span>
-            </div>
+            <img class="founder-photo" src="/images/technician-tablet-kitchen.jpg" width="1408" height="768"
+                 alt="Cleveland Smart Home Solutions founder configuring a smart home system on a tablet in a client’s kitchen" loading="lazy" decoding="async">
+
             <h3>Founder &amp; Lead Installer</h3>
             <p class="muted">Smart home specialist · ${esc(site.serviceAreaLabel)}</p>
             <p>“I built this company to give my neighbors the smart home they deserve — beautifully done, honestly priced, and without tearing their house apart.”</p>
