@@ -29,7 +29,7 @@ function header(activePath) {
   return `<header class="site-header" id="top">
   <div class="container header-inner">
     <a class="brand" href="/index.html" aria-label="${esc(site.name)} home">
-      <img class="brand-logo" src="/images/logo.png" width="58" height="58" alt="${esc(site.name)} logo">
+      <img class="brand-logo" src="/images/logo.png?v=3" width="122" height="107" alt="${esc(site.name)} logo">
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu">
       <span class="nav-toggle-bar"></span>
@@ -135,7 +135,7 @@ function layout({ title, description, path, body, jsonLd = '', bodyClass = '', o
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/styles.css?v=3">
   ${jsonLd}
 </head>
 <body class="${bodyClass}">

@@ -5,10 +5,10 @@
 
 :root {
   /* Palette — modern, techy: navy, blue-grey, grey */
-  --bg: #f5f7fa;          /* cool light page */
+  --bg: #eaeff6;          /* light blue-grey page */
   --surface: #ffffff;
-  --soft: #eef2f7;        /* blue-grey section */
-  --soft-2: #e3e9f1;
+  --soft: #dbe4f0;        /* visible blue-grey section */
+  --soft-2: #cdd9e8;
   --ink: #0f1d2e;         /* navy near-black text */
   --ink-soft: #2c3a4d;
   --muted: #5c6b7e;       /* blue-grey */
@@ -119,16 +119,15 @@ strong { font-weight: 600; color: var(--ink); }
    ========================================================================= */
 .site-header {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(245, 247, 250, .88);
+  background: rgba(255, 255, 255, .9);
   backdrop-filter: saturate(180%) blur(12px);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--line-strong);
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 76px; }
 .brand { display: inline-flex; align-items: center; gap: .8rem; color: var(--ink); }
 .brand:hover { color: var(--ink); }
 .brand-logo {
-  width: 58px; height: 58px; flex: none;
-  object-fit: contain; border-radius: 10px;
+  height: 54px; width: auto; flex: none; display: block;
 }
 .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
 .brand-name { font-family: var(--serif); font-weight: 600; font-size: 1.12rem; letter-spacing: -.01em; }
@@ -154,7 +153,7 @@ strong { font-weight: 600; color: var(--ink); }
 /* =========================================================================
    Hero
    ========================================================================= */
-.hero { background: linear-gradient(180deg, var(--accent-tint), var(--bg) 70%); overflow: hidden; }
+.hero { background: linear-gradient(160deg, var(--accent-soft), var(--bg) 65%); overflow: hidden; }
 .hero-inner {
   display: grid; grid-template-columns: 1.05fr .95fr; gap: 3rem; align-items: center;
   padding: clamp(3rem, 6vw, 5.5rem) 0;
@@ -164,8 +163,12 @@ strong { font-weight: 600; color: var(--ink); }
 .hero-points { display: flex; flex-wrap: wrap; gap: 1.2rem; list-style: none; color: var(--ink-soft); font-weight: 500; font-size: .95rem; }
 .hero-points li { display: inline-flex; align-items: center; gap: .4rem; }
 
-.hero-visual { display: flex; justify-content: center; }
-.hero-photo { width: 100%; max-width: 520px; height: auto; display: block; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+.hero-visual { display: flex; justify-content: center; align-items: center; }
+.hero-photo {
+  width: 100%; max-width: 480px; aspect-ratio: 3 / 2; height: auto;
+  object-fit: cover; display: block;
+  border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+}
 
 /* =========================================================================
    Trust row
@@ -270,17 +273,21 @@ strong { font-weight: 600; color: var(--ink); }
 /* =========================================================================
    Page hero (inner pages)
    ========================================================================= */
-.page-hero { background: linear-gradient(180deg, var(--accent-tint), var(--bg)); padding: clamp(2.6rem, 5vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem); }
+.page-hero { background: linear-gradient(160deg, var(--accent-soft), var(--bg) 70%); padding: clamp(2.6rem, 5vw, 4.5rem) 0 clamp(2rem, 4vw, 3rem); }
 .page-hero h1 { max-width: 18ch; }
 .page-hero.center h1 { max-width: none; margin-inline: auto; }
 .page-hero.center .lead { max-width: 60ch; margin-inline: auto; }
 .page-hero .lead { max-width: 64ch; }
 
-/* Services hero — copy left, photo in the open space on the right. */
-.services-hero-inner { display: grid; grid-template-columns: 1.1fr .9fr; gap: 3rem; align-items: center; }
-.services-hero-copy h1 { max-width: 16ch; }
-.services-hero-media { margin: 0; }
-.services-hero-media img { width: 100%; height: auto; display: block; border-radius: var(--radius-lg); box-shadow: var(--shadow); }
+/* Services hero — copy left, compact photo in the open space on the right. */
+.services-hero-inner { display: grid; grid-template-columns: 1.55fr .45fr; gap: 2.5rem; align-items: center; }
+.services-hero-copy h1 { max-width: 18ch; }
+.services-hero-media { margin: 0; justify-self: end; }
+.services-hero-media img {
+  width: 100%; max-width: 300px; aspect-ratio: 4 / 3; height: auto;
+  object-fit: cover; display: block; margin-left: auto;
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
 
 /* Homepage "Why choose us" — photo + copy. */
 .why-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
