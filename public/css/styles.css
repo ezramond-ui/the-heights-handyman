@@ -123,12 +123,13 @@ strong { font-weight: 600; color: var(--ink); }
   backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--line-strong);
 }
-.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 116px; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 84px; }
 .brand { display: inline-flex; align-items: center; gap: .8rem; color: var(--ink); }
 .brand:hover { color: var(--ink); }
 .brand-logo {
-  height: 94px; width: auto; flex: none; display: block;
+  height: 58px; width: auto; flex: none; display: block;
 }
+.brand .brand-name { font-size: 1.3rem; white-space: nowrap; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
 .brand-name { font-family: var(--serif); font-weight: 600; font-size: 1.12rem; letter-spacing: -.01em; }
 .brand-tag { font-size: .72rem; color: var(--muted); letter-spacing: .02em; }
@@ -437,14 +438,15 @@ strong { font-weight: 600; color: var(--ink); }
 }
 @media (max-width: 760px) {
   body { font-size: 16px; }
-  .header-inner { height: 88px; }
-  .brand-logo { height: 68px; }
+  .header-inner { height: 72px; }
+  .brand-logo { height: 46px; }
+  .brand .brand-name { font-size: 1.05rem; white-space: normal; }
   .nav-toggle { display: flex; }
   .primary-nav {
-    position: fixed; inset: 88px 0 auto 0; flex-direction: column; align-items: stretch;
+    position: fixed; inset: 72px 0 auto 0; flex-direction: column; align-items: stretch;
     background: var(--surface); border-bottom: 1px solid var(--line); padding: 1.2rem 1.5rem 1.6rem;
     gap: 1rem; box-shadow: var(--shadow); transform: translateY(-12px); opacity: 0; pointer-events: none;
-    transition: var(--transition); max-height: calc(100vh - 88px); overflow-y: auto;
+    transition: var(--transition); max-height: calc(100vh - 72px); overflow-y: auto;
   }
   .primary-nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
   .primary-nav ul { flex-direction: column; align-items: stretch; gap: .2rem; }
