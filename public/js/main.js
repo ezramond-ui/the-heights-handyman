@@ -21,7 +21,7 @@
   }
 
   /* ---------------- Pre-fill contact form from query string ---------------- */
-  // e.g. /contact.html?tier=comfort  or  ?city=Shaker%20Heights
+  // e.g. /contact.html?tier=landlord  or  ?city=Shaker%20Heights
   try {
     var params = new URLSearchParams(window.location.search);
     var tier = params.get('tier');

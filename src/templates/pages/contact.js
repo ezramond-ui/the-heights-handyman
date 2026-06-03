@@ -54,9 +54,8 @@ module.exports = function contact() {
             <label for="tier">I’m interested in</label>
             <select id="tier" name="tier">
               <option value="">Not sure yet — help me decide</option>
-              <option value="essentials">Essentials — Start Smart</option>
-              <option value="comfort">Comfort — Live Smarter</option>
-              <option value="signature">Signature — Total Control</option>
+              <option value="Smart lighting and switches">Smart lighting &amp; switches</option>
+              <option value="Full home automation">Full home automation</option>
               <option value="landlord">Landlord / rental property solutions</option>
               <option value="other">Something else</option>
             </select>
