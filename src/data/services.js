@@ -64,7 +64,7 @@ const keyServices = [
     name: 'Smart Lighting',
     core: true,
     blurb:
-      'Our specialty. Switches, dimmers, and scenes that turn everyday lighting into something effortless and beautiful — without tearing into your walls.',
+      'Our specialty. Scenes like “Movie Night” or “Good Morning” set every light in a room — or your whole floor — with one tap, and automatic schedules handle the rest, like all your downstairs lights switching off at 10pm. The heart of a smart home, installed without tearing into your walls.',
     icon: 'bulb',
   },
   {
