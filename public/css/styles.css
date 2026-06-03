@@ -340,7 +340,9 @@ strong { font-weight: 600; color: var(--ink); }
 }
 .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--accent); background: #fff; box-shadow: 0 0 0 3px var(--accent-soft); }
 .field textarea { resize: vertical; }
-.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+/* Honeypot: display:none so browsers/password managers never autofill it
+   (off-screen fields still get autofilled, which falsely tripped the bot check). */
+.hp { display: none; }
 .form-submit { width: 100%; margin-top: .4rem; }
 .form-status { margin: 1rem 0 0; font-weight: 600; font-size: .95rem; min-height: 1.2em; }
 .form-status.is-success { color: var(--success); }
