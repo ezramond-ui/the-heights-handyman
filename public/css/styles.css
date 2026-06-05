@@ -251,16 +251,10 @@ strong { font-weight: 600; color: var(--ink); }
 /* =========================================================================
    Reviews
    ========================================================================= */
-.review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.4rem; }
-.review-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.8rem; margin: 0; box-shadow: var(--shadow-sm); }
-.review-stars { color: var(--accent); letter-spacing: .12em; margin-bottom: .8rem; }
-.review-card blockquote { margin: 0 0 1.1rem; font-size: 1.02rem; color: var(--ink-soft); line-height: 1.6; font-family: var(--serif); font-weight: 400; }
-.review-card figcaption { font-weight: 600; font-size: .95rem; display: flex; flex-direction: column; }
-.review-card figcaption span { font-weight: 400; color: var(--muted); font-size: .85rem; }
-.rating-summary { display: inline-flex; align-items: center; gap: .7rem; margin-top: 1.2rem; flex-wrap: wrap; justify-content: center; }
-.rating-big { font-family: var(--serif); font-size: 2.4rem; font-weight: 600; color: var(--ink); }
-.rating-stars { color: var(--accent); font-size: 1.4rem; letter-spacing: .1em; }
-.rating-count { color: var(--muted); font-size: .92rem; }
+.review-invite { max-width: 640px; margin: 1.4rem auto 0; text-align: center; }
+.review-invite .icon-xl { color: var(--accent); }
+.review-invite-lead { color: var(--ink-soft); font-size: 1.08rem; line-height: 1.7; margin: .8rem 0 0; }
+.review-invite-actions { display: flex; gap: .8rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
 
 /* =========================================================================
    CTA band
@@ -416,7 +410,7 @@ strong { font-weight: 600; color: var(--ink); }
 .service-card-interactive:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .service-card-interactive:hover { box-shadow: var(--shadow); transform: translateY(-3px); border-color: var(--accent); }
 .service-card-cta {
-  display: inline-flex; align-items: center; gap: .4rem; margin-top: 1rem;
+  display: inline-flex; align-items: center; gap: .4rem; margin: 0 0 .9rem;
   font-weight: 600; font-size: .92rem; color: var(--accent-dark);
 }
 .service-card-interactive:hover .service-card-cta { color: var(--accent); }

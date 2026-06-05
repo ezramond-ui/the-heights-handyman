@@ -96,20 +96,21 @@ const popularInstallIds = [
   'smart-shades',
 ];
 
-function popularInstalls({ id, lead, interactiveSwitch = false } = {}) {
+function popularInstalls({ id, lead } = {}) {
   const cards = popularInstallIds
     .map((id) => keyServices.find((s) => s.id === id))
     .filter(Boolean)
     .map((s) => {
-      // On the services page, the second-switch card opens an animated
-      // before/after explainer modal. Everywhere else it stays a plain card.
-      if (interactiveSwitch && s.id === 'three-way-switches') {
+      // The second-switch card is clickable everywhere it appears — it opens
+      // the animated before/after explainer modal. The trigger sits at the
+      // top of the card.
+      if (s.id === 'three-way-switches') {
         return `<article class="service-card service-card-interactive" role="button" tabindex="0"
         data-switch-demo-open aria-haspopup="dialog" aria-controls="switch-demo-modal">
+      <span class="service-card-cta">${icon('spark', 'icon icon-sm')} See the before &amp; after</span>
       ${icon(s.icon, 'icon icon-lg icon-accent')}
       <h3>${esc(s.name)}</h3>
       <p>${esc(s.blurb)}</p>
-      <span class="service-card-cta">${icon('spark', 'icon icon-sm')} See the before &amp; after</span>
     </article>`;
       }
       return `<article class="service-card">
@@ -132,7 +133,8 @@ function popularInstalls({ id, lead, interactiveSwitch = false } = {}) {
       <div class="service-grid">${cards}</div>
       <div class="center mt-lg"><a class="btn btn-accent btn-lg" href="/contact.html">Get a Free Quote</a></div>
     </div>
-  </section>`;
+  </section>
+  ${switchDemoModal()}`;
 }
 
 // Animated before/after explainer for the second-switch upgrade.
@@ -244,19 +246,17 @@ function ctaBand(heading, sub) {
   </section>`;
 }
 
-// Testimonial cards.
-function testimonialCards(list, limit) {
-  const items = (limit ? list.slice(0, limit) : list)
-    .map((t) => {
-      const stars = '★'.repeat(t.rating || 5);
-      return `<figure class="review-card">
-      <div class="review-stars" aria-label="${t.rating || 5} out of 5 stars">${stars}</div>
-      <blockquote>${esc(t.quote)}</blockquote>
-      <figcaption>— ${esc(t.author)}<span>${esc(t.location)}</span></figcaption>
-    </figure>`;
-    })
-    .join('');
-  return `<div class="review-grid">${items}</div>`;
+// Review invitation — an honest, confident call for the first reviews
+// (used in place of testimonials until real, owner-approved ones arrive).
+function reviewInvite({ reviewHref = '/reviews.html#leave-review' } = {}) {
+  return `<div class="review-invite">
+    ${icon('star', 'icon icon-xl icon-accent')}
+    <p class="review-invite-lead">We’d love the chance to earn your trust. Every ${esc(site.name)} install is backed by clean, careful work and genuine care — and your honest feedback helps neighbors across ${esc(site.serviceAreaLabel)} choose with confidence. Contact us today for a free quote.</p>
+    <div class="review-invite-actions">
+      <a class="btn btn-accent btn-lg" href="/contact.html">Get a Free Quote</a>
+      <a class="btn btn-outline" href="${reviewHref}">Leave a Review</a>
+    </div>
+  </div>`;
 }
 
 /* ──────────────────────── JSON-LD schema builders ─────────────────── */
@@ -336,7 +336,7 @@ module.exports = {
   processSteps,
   trustRow,
   ctaBand,
-  testimonialCards,
+  reviewInvite,
   jsonLdScript,
   localBusinessSchema,
   breadcrumbSchema,

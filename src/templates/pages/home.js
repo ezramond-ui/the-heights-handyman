@@ -1,6 +1,5 @@
 const { layout, site, esc } = require('../layout');
 const C = require('../components');
-const testimonials = require('../../data/testimonials');
 
 module.exports = function home() {
   const jsonLd =
@@ -114,11 +113,10 @@ module.exports = function home() {
   <section class="section section-soft" aria-labelledby="reviews-h">
     <div class="container">
       <div class="section-head center">
-        <span class="eyebrow">Loved by neighbors</span>
-        <h2 id="reviews-h">What ${esc(site.serviceAreaLabel)} homeowners are saying</h2>
+        <span class="eyebrow">Reviews</span>
+        <h2 id="reviews-h">Be among our first reviewers</h2>
       </div>
-      ${C.testimonialCards(testimonials, 3)}
-      <div class="center mt-lg"><a class="btn btn-outline" href="/reviews.html">Read more &amp; leave a review</a></div>
+      ${C.reviewInvite()}
     </div>
   </section>
 

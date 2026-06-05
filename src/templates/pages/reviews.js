@@ -1,6 +1,5 @@
 const { layout, site, esc } = require('../layout');
 const C = require('../components');
-const testimonials = require('../../data/testimonials');
 
 module.exports = function reviews() {
   const crumbs = [
@@ -8,52 +7,24 @@ module.exports = function reviews() {
     { name: 'Reviews', path: '/reviews.html' },
   ];
 
-  const avg = (
-    testimonials.reduce((s, t) => s + (t.rating || 5), 0) / testimonials.length
-  ).toFixed(1);
-
-  // AggregateRating schema from the published (approved) reviews.
-  const jsonLd =
-    C.jsonLdScript(C.breadcrumbSchema(crumbs)) +
-    C.jsonLdScript(
-      C.localBusinessSchema({
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: avg,
-          reviewCount: testimonials.length,
-          bestRating: 5,
-        },
-        review: testimonials.map((t) => ({
-          '@type': 'Review',
-          reviewRating: { '@type': 'Rating', ratingValue: t.rating || 5, bestRating: 5 },
-          author: { '@type': 'Person', name: t.author },
-          reviewBody: t.quote,
-        })),
-      })
-    );
+  const jsonLd = C.jsonLdScript(C.breadcrumbSchema(crumbs)) +
+    C.jsonLdScript(C.localBusinessSchema());
 
   const body = `
   ${C.breadcrumbTrail(crumbs)}
   <section class="page-hero center">
     <div class="container">
-      <span class="eyebrow">Reviews &amp; testimonials</span>
-      <h1>Trusted by neighbors across ${esc(site.serviceAreaLabel)}</h1>
-      <p class="lead">We’re building our reputation one happy home at a time. Here’s what our customers are saying.</p>
-      <div class="rating-summary">
-        <span class="rating-big">${avg}</span>
-        <span class="rating-stars" aria-label="${avg} out of 5 stars">★★★★★</span>
-        <span class="rating-count">based on ${testimonials.length} reviews</span>
+      <span class="eyebrow">Reviews</span>
+      <h1>Be among our first reviewers</h1>
+      <p class="lead">We’d love the chance to earn your trust. Every ${esc(site.name)} install is backed by clean, careful work and genuine care — and your honest feedback helps neighbors across ${esc(site.serviceAreaLabel)} choose with confidence. Contact us today for a free quote.</p>
+      <div class="hero-actions" style="justify-content:center;">
+        <a class="btn btn-accent btn-lg" href="/contact.html">Get a Free Quote</a>
+        <a class="btn btn-outline btn-lg" href="#leave-review">Leave a Review</a>
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      ${C.testimonialCards(testimonials)}
-    </div>
-  </section>
-
-  <section class="section section-soft" aria-labelledby="leave-h">
+  <section class="section section-soft" id="leave-review" aria-labelledby="leave-h">
     <div class="container review-form-layout">
       <div class="review-intro">
         <span class="eyebrow">Share your experience</span>
@@ -105,7 +76,7 @@ module.exports = function reviews() {
     </div>
   </section>
 
-  ${C.ctaBand('Ready to join our happy customers?', 'Get a free quote and see why neighbors across Northeast Ohio trust us with their homes.')}
+  ${C.ctaBand('Ready for a smarter, simpler home?', 'Get a free, no-pressure quote and let’s design a clean, elegant install that fits your home and your life.')}
   `;
 
   return {
