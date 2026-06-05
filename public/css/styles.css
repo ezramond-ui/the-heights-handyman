@@ -410,6 +410,64 @@ strong { font-weight: 600; color: var(--ink); }
 .footer-legal p { margin: 0; font-size: .72rem; line-height: 1.5; color: #5d6b7d; text-align: center; }
 
 /* =========================================================================
+   Interactive second-switch card + explainer modal
+   ========================================================================= */
+.service-card-interactive { cursor: pointer; position: relative; }
+.service-card-interactive:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.service-card-interactive:hover { box-shadow: var(--shadow); transform: translateY(-3px); border-color: var(--accent); }
+.service-card-cta {
+  display: inline-flex; align-items: center; gap: .4rem; margin-top: 1rem;
+  font-weight: 600; font-size: .92rem; color: var(--accent-dark);
+}
+.service-card-interactive:hover .service-card-cta { color: var(--accent); }
+
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center; padding: 1.2rem;
+  background: rgba(15, 29, 46, .62); backdrop-filter: blur(3px);
+  animation: modal-fade .2s ease;
+}
+.modal-overlay[hidden] { display: none; }
+.modal {
+  position: relative; background: var(--surface); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg); width: min(940px, 100%); max-height: 92vh; overflow-y: auto;
+  padding: 1.8rem clamp(1.1rem, 3vw, 2.2rem) 1.6rem; animation: modal-pop .24s ease;
+}
+.modal-close {
+  position: absolute; top: .85rem; right: .85rem; width: 40px; height: 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink-soft);
+  border-radius: 50%; cursor: pointer; transition: var(--transition);
+}
+.modal-close:hover { background: var(--soft); color: var(--ink); border-color: var(--line-strong); }
+.modal-close svg { width: 20px; height: 20px; }
+
+.switch-demo-head { text-align: center; margin-bottom: 1.4rem; padding-right: 2.2rem; }
+.switch-demo-head h2 { margin: .3rem 0 0; font-size: clamp(1.3rem, 3vw, 1.7rem); }
+.switch-demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.switch-demo-panel { margin: 0; border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem; background: var(--accent-tint); }
+.switch-demo-before { background: #fdf0ef; border-color: #f3cfca; }
+.switch-demo-after { background: #ecf7f2; border-color: #c4e6d6; }
+.switch-demo-side-title { font-family: var(--serif); font-weight: 600; font-size: 1.05rem; margin: 0 0 .6rem; text-align: center; }
+.switch-demo-before .switch-demo-side-title { color: #b5392e; }
+.switch-demo-after .switch-demo-side-title { color: #1d7a55; }
+.switch-demo-stage { border-radius: var(--radius-sm); overflow: hidden; background: var(--surface); border: 1px solid rgba(15,29,46,.06); }
+.switch-demo-canvas { display: block; width: 100%; aspect-ratio: 4 / 3; }
+.switch-demo-status {
+  margin: .7rem 0 .1rem; min-height: 2.6em; text-align: center;
+  font-size: .92rem; font-weight: 500; color: var(--ink-soft);
+}
+.switch-demo-actions { display: flex; justify-content: center; margin-top: 1.4rem; }
+
+@keyframes modal-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modal-pop { from { opacity: 0; transform: translateY(12px) scale(.98); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 680px) {
+  .switch-demo-grid { grid-template-columns: 1fr; }
+  .switch-demo-status { min-height: 0; }
+}
+
+/* =========================================================================
    Responsive
    ========================================================================= */
 @media (max-width: 980px) {

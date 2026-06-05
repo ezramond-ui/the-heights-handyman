@@ -23,6 +23,7 @@ module.exports = function services() {
   const body = `
   ${C.breadcrumbTrail(crumbs)}
   ${C.popularInstalls({
+    interactiveSwitch: true,
     lead:
       'The smart upgrades homeowners ask for most — start with a single room or design a whole connected home. Smart lighting is our core focus, and the rest brings your whole home together.',
   })}
@@ -73,6 +74,7 @@ module.exports = function services() {
   ${C.processSteps()}
 
   ${C.ctaBand('Let’s design your smart home', 'Tell us what you’re hoping for. We’ll put together a clean, no-pressure plan and a free quote.')}
+  ${C.switchDemoModal()}
   `;
 
   return {

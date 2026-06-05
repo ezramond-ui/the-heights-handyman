@@ -96,17 +96,28 @@ const popularInstallIds = [
   'smart-shades',
 ];
 
-function popularInstalls({ id, lead } = {}) {
+function popularInstalls({ id, lead, interactiveSwitch = false } = {}) {
   const cards = popularInstallIds
     .map((id) => keyServices.find((s) => s.id === id))
     .filter(Boolean)
-    .map(
-      (s) => `<article class="service-card">
+    .map((s) => {
+      // On the services page, the second-switch card opens an animated
+      // before/after explainer modal. Everywhere else it stays a plain card.
+      if (interactiveSwitch && s.id === 'three-way-switches') {
+        return `<article class="service-card service-card-interactive" role="button" tabindex="0"
+        data-switch-demo-open aria-haspopup="dialog" aria-controls="switch-demo-modal">
       ${icon(s.icon, 'icon icon-lg icon-accent')}
       <h3>${esc(s.name)}</h3>
       <p>${esc(s.blurb)}</p>
-    </article>`
-    )
+      <span class="service-card-cta">${icon('spark', 'icon icon-sm')} See the before &amp; after</span>
+    </article>`;
+      }
+      return `<article class="service-card">
+      ${icon(s.icon, 'icon icon-lg icon-accent')}
+      <h3>${esc(s.name)}</h3>
+      <p>${esc(s.blurb)}</p>
+    </article>`;
+    })
     .join('');
   const leadText =
     lead ||
@@ -122,6 +133,39 @@ function popularInstalls({ id, lead } = {}) {
       <div class="center mt-lg"><a class="btn btn-accent btn-lg" href="/contact.html">Get a Free Quote</a></div>
     </div>
   </section>`;
+}
+
+// Animated before/after explainer for the second-switch upgrade.
+// The canvases are driven by the switch-demo code in /js/main.js.
+function switchDemoModal() {
+  return `<div class="modal-overlay" id="switch-demo-modal" hidden>
+    <div class="modal switch-demo" role="dialog" aria-modal="true" aria-labelledby="switch-demo-title">
+      <button class="modal-close" type="button" data-switch-demo-close aria-label="Close explainer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+      <div class="switch-demo-head">
+        <span class="eyebrow">A second switch, anywhere</span>
+        <h2 id="switch-demo-title">The old way vs. a smart wireless switch</h2>
+      </div>
+      <div class="switch-demo-grid">
+        <figure class="switch-demo-panel switch-demo-before">
+          <figcaption class="switch-demo-side-title">Before</figcaption>
+          <div class="switch-demo-stage"><canvas class="switch-demo-canvas" data-scene="before" aria-label="Animation: a person walks across the room to reach a single light switch, then walks back."></canvas></div>
+          <p class="switch-demo-status" data-status="before" aria-live="polite"></p>
+        </figure>
+        <figure class="switch-demo-panel switch-demo-after">
+          <figcaption class="switch-demo-side-title">After — Smart Switch</figcaption>
+          <div class="switch-demo-stage"><canvas class="switch-demo-canvas" data-scene="after" aria-label="Animation: a person taps a smart switch beside them; a wireless signal crosses to the far switch and turns the light off."></canvas></div>
+          <p class="switch-demo-status" data-status="after" aria-live="polite"></p>
+        </figure>
+      </div>
+      <div class="switch-demo-actions">
+        <button class="btn btn-accent" type="button" data-switch-demo-replay>
+          ${icon('spark', 'icon icon-sm')} Replay
+        </button>
+      </div>
+    </div>
+  </div>`;
 }
 
 // Key services grid.
@@ -287,6 +331,7 @@ module.exports = {
   differentiator,
   tierCards,
   popularInstalls,
+  switchDemoModal,
   serviceGrid,
   processSteps,
   trustRow,
