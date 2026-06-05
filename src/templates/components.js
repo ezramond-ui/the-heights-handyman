@@ -107,9 +107,9 @@ function popularInstalls({ id, lead } = {}) {
       if (s.id === 'three-way-switches') {
         return `<article class="service-card service-card-interactive" role="button" tabindex="0"
         data-switch-demo-open aria-haspopup="dialog" aria-controls="switch-demo-modal">
-      <span class="service-card-cta">${icon('spark', 'icon icon-sm')} See the before &amp; after</span>
       ${icon(s.icon, 'icon icon-lg icon-accent')}
       <h3>${esc(s.name)}</h3>
+      <span class="service-card-cta">${icon('spark', 'icon icon-sm')} See the before &amp; after</span>
       <p>${esc(s.blurb)}</p>
     </article>`;
       }
