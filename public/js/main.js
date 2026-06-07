@@ -144,6 +144,57 @@
     });
   }
 
+  /* ---------------- Published reviews (owner-approved) ---------------- */
+  setupPublishedReviews();
+
+  function setupPublishedReviews() {
+    var grids = [].slice.call(document.querySelectorAll('[data-reviews-grid]'));
+    if (!grids.length) return;
+
+    fetch('/api/reviews', { headers: { Accept: 'application/json' } })
+      .then(function (r) { return r.ok ? r.json() : { reviews: [] }; })
+      .then(function (data) {
+        var reviews = (data && data.reviews) || [];
+        if (!reviews.length) return; // leave the review invite in place
+        grids.forEach(function (grid) {
+          var limit = parseInt(grid.getAttribute('data-reviews-limit'), 10);
+          var list = limit > 0 ? reviews.slice(0, limit) : reviews;
+          list.forEach(function (rev) { grid.appendChild(renderReviewCard(rev)); });
+          var section = grid.closest('[data-reviews-section]');
+          if (section) section.hidden = false;
+        });
+      })
+      .catch(function () { /* no-op: invite stays visible */ });
+  }
+
+  // Build a review card with textContent only — never inject user HTML.
+  function renderReviewCard(rev) {
+    var n = Math.max(1, Math.min(5, parseInt(rev.rating, 10) || 5));
+    var fig = document.createElement('figure');
+    fig.className = 'review-card';
+
+    var stars = document.createElement('div');
+    stars.className = 'review-stars';
+    stars.textContent = '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
+    stars.setAttribute('aria-label', n + ' out of 5 stars');
+
+    var quote = document.createElement('blockquote');
+    quote.textContent = rev.message || '';
+
+    var cap = document.createElement('figcaption');
+    cap.appendChild(document.createTextNode('— ' + (rev.name || '')));
+    if (rev.city) {
+      var span = document.createElement('span');
+      span.textContent = rev.city;
+      cap.appendChild(span);
+    }
+
+    fig.appendChild(stars);
+    fig.appendChild(quote);
+    fig.appendChild(cap);
+    return fig;
+  }
+
   /* ---------------- Second-switch before/after explainer ---------------- */
   setupSwitchDemo();
 

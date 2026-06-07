@@ -24,6 +24,16 @@ module.exports = function reviews() {
     </div>
   </section>
 
+  <section class="section" data-reviews-section hidden aria-labelledby="published-h">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Reviews</span>
+        <h2 id="published-h">What neighbors are saying</h2>
+      </div>
+      <div class="review-grid" data-reviews-grid></div>
+    </div>
+  </section>
+
   <section class="section section-soft" id="leave-review" aria-labelledby="leave-h">
     <div class="container review-form-layout">
       <div class="review-intro">

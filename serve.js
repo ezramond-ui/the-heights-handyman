@@ -33,6 +33,8 @@ const MIME = {
 const apiHandlers = {
   '/api/contact': require('./api/contact'),
   '/api/review': require('./api/review'),
+  '/api/approve-review': require('./api/approve-review'),
+  '/api/reviews': require('./api/reviews'),
 };
 
 function send(res, status, body, type) {
