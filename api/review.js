@@ -76,16 +76,16 @@ module.exports = async function handler(req, res) {
     review.message,
     '',
     approveUrl
-      ? `To publish it to the website, open this one-click approval link:\n${approveUrl}`
-      : 'Approval link unavailable — set REVIEW_SECRET (or SMTP_PASS) to enable one-click approval.',
+      ? `To review and publish it, open this link and click Publish:\n${approveUrl}`
+      : 'Approval link unavailable — set REVIEW_SECRET (or SMTP_PASS) to enable approval.',
   ].join('\n');
 
   const approveButton = approveUrl
-    ? `<table cellpadding="0" cellspacing="0" style="margin:18px 0"><tr><td style="border-radius:999px;background:#1d9b6c">
-        <a href="${approveUrl}" style="display:inline-block;padding:14px 26px;font-family:Arial,sans-serif;font-size:15px;font-weight:bold;color:#ffffff;text-decoration:none;border-radius:999px">✓ Approve &amp; publish to website</a>
+    ? `<table cellpadding="0" cellspacing="0" style="margin:18px 0"><tr><td style="border-radius:999px;background:#2563c9">
+        <a href="${approveUrl}" style="display:inline-block;padding:14px 26px;font-family:Arial,sans-serif;font-size:15px;font-weight:bold;color:#ffffff;text-decoration:none;border-radius:999px">Read &amp; publish review →</a>
       </td></tr></table>
-      <p style="font-family:Arial,sans-serif;font-size:12px;color:#6b6e76">One click publishes this review to your reviews page — no other steps needed. If you don’t want it published, simply ignore this email.</p>`
-    : `<p style="font-family:Arial,sans-serif;font-size:13px;color:#b5392e">One-click approval is unavailable until <code>REVIEW_SECRET</code> (or <code>SMTP_PASS</code>) is set.</p>`;
+      <p style="font-family:Arial,sans-serif;font-size:12px;color:#6b6e76">Opens a secure page where you can read the review and click <strong>Publish</strong> to add it to your website. Nothing is published until you do — if you’d rather not, simply ignore this email.</p>`
+    : `<p style="font-family:Arial,sans-serif;font-size:13px;color:#b5392e">Review approval is unavailable until <code>REVIEW_SECRET</code> (or <code>SMTP_PASS</code>) is set.</p>`;
 
   const html = `
     <h2 style="font-family:Georgia,serif">New review — awaiting approval</h2>
