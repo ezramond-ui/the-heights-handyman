@@ -6,14 +6,47 @@
  * (via /api/reviews) and renders the cards client-side, so an approval shows
  * up immediately with no rebuild.
  *
- * Setup: enable Blob storage in the Vercel project (Storage → Blob). Vercel
- * injects BLOB_READ_WRITE_TOKEN automatically. When it isn't configured the
- * store degrades gracefully — reads return [] and writes report not-configured.
+ * Setup: enable Blob storage in the Vercel project (Storage → Blob) and
+ * connect it to the project, then redeploy so the token reaches the function.
+ *
+ * Token: the standard env var is BLOB_READ_WRITE_TOKEN. If the store was
+ * connected with a custom env-var prefix, Vercel instead exposes it as
+ * <PREFIX>_READ_WRITE_TOKEN (e.g. reviews_READ_WRITE_TOKEN). All Vercel Blob
+ * read/write tokens begin with "vercel_blob_rw_", so we detect the token by
+ * value as a fallback — meaning any prefix works without code changes. When no
+ * token is present the store degrades gracefully.
  */
 const PATHNAME = 'reviews/published.json';
 
+// Resolve the Blob read/write token regardless of which env var name Vercel
+// used. Cached after first lookup.
+let cachedToken;
+function resolveToken() {
+  if (cachedToken !== undefined) return cachedToken;
+  cachedToken =
+    process.env.BLOB_READ_WRITE_TOKEN ||
+    findByValue('vercel_blob_rw_') ||
+    findByKeySuffix('_READ_WRITE_TOKEN') ||
+    '';
+  return cachedToken;
+}
+
+function findByValue(prefix) {
+  for (const v of Object.values(process.env)) {
+    if (typeof v === 'string' && v.startsWith(prefix)) return v;
+  }
+  return '';
+}
+
+function findByKeySuffix(suffix) {
+  for (const [k, v] of Object.entries(process.env)) {
+    if (k.endsWith(suffix) && v) return v;
+  }
+  return '';
+}
+
 function isConfigured() {
-  return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+  return Boolean(resolveToken());
 }
 
 // Lazy-require so a missing module never crashes handler/module load.
@@ -22,10 +55,11 @@ function blob() {
 }
 
 async function getReviews() {
-  if (!isConfigured()) return [];
+  const token = resolveToken();
+  if (!token) return [];
   try {
     const { list } = blob();
-    const { blobs } = await list({ prefix: PATHNAME, token: process.env.BLOB_READ_WRITE_TOKEN });
+    const { blobs } = await list({ prefix: PATHNAME, token });
     const found = blobs.find((b) => b.pathname === PATHNAME) || blobs[0];
     if (!found) return [];
     const res = await fetch(found.url, { cache: 'no-store' });
@@ -40,7 +74,8 @@ async function getReviews() {
 
 // Append a review. Idempotent on review.id so repeat link clicks are safe.
 async function addReview(review) {
-  if (!isConfigured()) throw new Error('blob-not-configured');
+  const token = resolveToken();
+  if (!token) throw new Error('blob-not-configured');
   const { put } = blob();
   const current = await getReviews();
   if (current.some((r) => r.id === review.id)) return current;
@@ -52,9 +87,9 @@ async function addReview(review) {
     allowOverwrite: true,
     contentType: 'application/json',
     cacheControlMaxAge: 0,
-    token: process.env.BLOB_READ_WRITE_TOKEN,
+    token,
   });
   return updated;
 }
 
-module.exports = { isConfigured, getReviews, addReview, PATHNAME };
+module.exports = { isConfigured, getReviews, addReview, resolveToken, PATHNAME };
