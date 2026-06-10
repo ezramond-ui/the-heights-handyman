@@ -71,7 +71,7 @@ const keyServices = [
     id: 'three-way-switches',
     name: 'A Second Switch, Anywhere',
     blurb:
-      'Got a light you can only turn on or off from one spot — and the switch is on the wrong side of the room, or only at the bottom of the stairs? Normally, adding a second switch means an electrician opening your walls and fishing wire across the room or up the staircase. We do it without any of that. We install a smart wireless switch exactly where you need it — no wire runs, no holes in your walls, no mess. Just a second switch right where it makes sense.',
+      'Want a light switch where there isn’t one — top of the stairs, across the room? We add a second switch wherever you need it. No wall damage, no wire fishing.',
     icon: 'switch',
   },
   {

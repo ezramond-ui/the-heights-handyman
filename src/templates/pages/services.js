@@ -20,19 +20,25 @@ module.exports = function services() {
   const jsonLd =
     C.jsonLdScript(C.breadcrumbSchema(crumbs)) + C.jsonLdScript(offerCatalog);
 
+  // Pricing anchor — show a concrete "starting at" figure when one is set
+  // in site.pricing.startingAt; otherwise fall back to softer reassurance.
+  const priceAnchor = site.pricing && site.pricing.startingAt
+    ? `<p class="lead">Most homeowners start small and grow from there. Smart switch projects begin around <strong>${esc(site.pricing.startingAt)}</strong> installed; whole-home design is quoted room by room. Every quote is free, honest, and pressure-free.</p>`
+    : `<p class="lead">There’s no one-size-fits-all package here. Many homeowners start with a single room and grow from there — and most are surprised it costs far less than a renovation. Tell us about your home and we’ll find the best solution for you: honest, transparent, and always free to quote.</p>`;
+
   const body = `
   ${C.breadcrumbTrail(crumbs)}
-  ${C.popularInstalls({
-    lead:
-      'The smart upgrades homeowners ask for most — start with a single room or design a whole connected home. Smart lighting is our core focus, and the rest brings your whole home together.',
-  })}
-
   <section class="page-hero services-hero">
     <div class="container services-hero-inner">
       <div class="services-hero-copy">
         <span class="eyebrow">Services</span>
         <h1>Smart home services, installed simply</h1>
         <p class="lead">Everything we do starts with the same promise: a clean, elegant install with <strong>no major construction, no mess, and no stress</strong>. Mix and match the upgrades that fit your home.</p>
+        <div class="hero-actions">
+          <a class="btn btn-accent btn-lg" href="${site.primaryCta.href}">${esc(site.primaryCta.label)}</a>
+          <a class="btn btn-outline btn-lg" href="#popular-h">See popular installs</a>
+        </div>
+        ${C.ctaNote()}
       </div>
       <figure class="services-hero-media">
         <img src="/images/smart-switch-install.jpg?v=2" width="1408" height="768"
@@ -41,6 +47,11 @@ module.exports = function services() {
     </div>
   </section>
 
+  ${C.popularInstalls({
+    lead:
+      'The smart upgrades homeowners ask for most — start with a single room or design a whole connected home. Smart lighting is our core focus, and the rest brings your whole home together.',
+  })}
+
   ${C.differentiator('plain')}
 
   <section class="section section-soft" aria-labelledby="quote-h">
@@ -48,8 +59,9 @@ module.exports = function services() {
       <div class="section-head center">
         <span class="eyebrow">Honest, custom pricing</span>
         <h2 id="quote-h">Every home is different</h2>
-        <p class="lead">There’s no one-size-fits-all package here. Tell us about your home and how you’d like to live in it, and we will figure out the best solution for you — honest, transparent, and always free to quote.</p>
-        <p class="center mt-lg"><a class="btn btn-accent btn-lg" href="/contact.html">Get a Free Quote</a></p>
+        ${priceAnchor}
+        <p class="center mt-lg"><a class="btn btn-accent btn-lg" href="/contact.html">${esc(site.primaryCta.label)}</a></p>
+        ${C.ctaNote()}
       </div>
     </div>
   </section>

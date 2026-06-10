@@ -113,6 +113,7 @@
   }
 
   wireForm('contact-form', 'Thank you! Your request is on its way — we’ll be in touch within one business day.');
+  wireForm('home-quote-form', 'Thank you! Your request is on its way — we’ll be in touch within one business day to schedule your free consult.');
   wireForm('review-form', 'Thank you for your review! It has been sent to us and will appear after approval.');
 
   /* ---------------- Service-area filter ---------------- */

@@ -119,7 +119,7 @@ function renderLocation(l, index) {
       <h1>Smart Home Installation in ${esc(l.name)}, Ohio</h1>
       <p class="lead">${esc(intro)}</p>
       <div class="hero-actions">
-        <a class="btn btn-accent btn-lg" href="/contact.html?city=${encodeURIComponent(l.name)}">Get a free ${esc(l.name)} quote</a>
+        <a class="btn btn-accent btn-lg" href="/contact.html?city=${encodeURIComponent(l.name)}">Book a free ${esc(l.name)} consult</a>
         <a class="btn btn-outline btn-lg" href="tel:${site.phoneHref}">${C.icon('phone', 'icon icon-sm')} ${esc(site.phone)}</a>
       </div>
     </div>

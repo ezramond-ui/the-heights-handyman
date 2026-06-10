@@ -145,6 +145,14 @@ strong { font-weight: 600; color: var(--ink); }
 }
 .nav-cta { padding: .62rem 1.15rem; }
 
+.header-right { display: flex; align-items: center; gap: 1.2rem; }
+.header-call { display: inline-flex; align-items: center; gap: .55rem; color: var(--ink); }
+.header-call svg { width: 22px; height: 22px; color: var(--accent); flex: none; }
+.header-call:hover { color: var(--accent-dark); }
+.header-call-text { display: flex; flex-direction: column; line-height: 1.1; }
+.header-call-label { font-size: .7rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 600; }
+.header-call-num { font-weight: 700; font-size: .98rem; }
+
 .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: .5rem; flex-direction: column; gap: 5px; }
 .nav-toggle-bar { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; transition: var(--transition); }
 .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -470,15 +478,64 @@ strong { font-weight: 600; color: var(--ink); }
 }
 
 /* =========================================================================
+   CTA reassurance note
+   ========================================================================= */
+.cta-note { font-size: .85rem; color: var(--muted); margin: .9rem 0 0; }
+.hero-actions + .cta-note { margin-top: -.4rem; margin-bottom: 1.4rem; }
+.cta-note-band { width: 100%; color: #9fb0c2; margin-top: .9rem; }
+
+/* =========================================================================
+   Homepage quick-quote band (lead capture)
+   ========================================================================= */
+.quote-band { background: linear-gradient(180deg, var(--bg), var(--soft)); }
+.quote-band-inner { display: grid; grid-template-columns: .85fr 1.15fr; gap: 2.6rem; align-items: center; }
+.quote-band-copy h2 { margin-bottom: .6rem; }
+.quote-band-copy > p { color: var(--ink-soft); }
+.quote-band-copy .check-list { margin-bottom: 0; }
+.quote-band-form { margin: 0; }
+.quote-band-form .field:last-of-type { margin-bottom: .6rem; }
+
+/* =========================================================================
+   Guarantee (homepage trust section)
+   ========================================================================= */
+.guarantee-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+.guarantee-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.8rem; box-shadow: var(--shadow-sm); }
+.guarantee-card h3 { margin: 1rem 0 .5rem; }
+.guarantee-card p { color: var(--muted); font-size: .95rem; margin: 0; }
+
+/* =========================================================================
+   Sticky mobile action bar
+   ========================================================================= */
+.mobile-bar { display: none; }
+@media (max-width: 760px) {
+  .mobile-bar {
+    display: flex; gap: .7rem; align-items: stretch;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 120;
+    padding: .6rem .9rem calc(.6rem + env(safe-area-inset-bottom, 0px));
+    background: rgba(255, 255, 255, .96); backdrop-filter: saturate(180%) blur(10px);
+    border-top: 1px solid var(--line-strong); box-shadow: 0 -4px 18px rgba(15, 29, 46, .1);
+  }
+  .mobile-bar-call {
+    display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2px; padding: 0 1.1rem; border: 1.5px solid var(--line-strong); border-radius: 999px;
+    color: var(--ink); font-weight: 600; font-size: .8rem;
+  }
+  .mobile-bar-call svg { width: 20px; height: 20px; color: var(--accent); }
+  .mobile-bar-cta { flex: 1; }
+  /* Keep the sticky bar from covering page content/footer. */
+  body { padding-bottom: 74px; }
+}
+
+/* =========================================================================
    Responsive
    ========================================================================= */
 @media (max-width: 980px) {
   .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
   .hero-visual { order: -1; }
-  .about-grid, .contact-grid, .review-form-layout, .landlord-inner, .services-hero-inner, .why-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .about-grid, .contact-grid, .review-form-layout, .landlord-inner, .services-hero-inner, .why-inner, .quote-band-inner { grid-template-columns: 1fr; gap: 2rem; }
   .why-media { order: -1; }
   .about-side, .review-intro { position: static; }
-  .diff-grid, .tier-grid, .steps, .benefit-grid { grid-template-columns: 1fr 1fr; }
+  .diff-grid, .tier-grid, .steps, .benefit-grid, .guarantee-grid { grid-template-columns: 1fr 1fr; }
   .values-grid, .trust-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 760px) {
@@ -487,6 +544,9 @@ strong { font-weight: 600; color: var(--ink); }
   .brand-logo { height: 64px; }
   .brand .brand-name { font-size: .98rem; white-space: normal; }
   .nav-toggle { display: flex; }
+  .header-right { gap: .7rem; }
+  .header-call-label { display: none; }
+  .header-call-num { font-size: .92rem; }
   .primary-nav {
     position: fixed; inset: 78px 0 auto 0; flex-direction: column; align-items: stretch;
     background: var(--surface); border-bottom: 1px solid var(--line); padding: 1.2rem 1.5rem 1.6rem;
@@ -499,7 +559,7 @@ strong { font-weight: 600; color: var(--ink); }
   .primary-nav a { display: block; padding: .7rem 0; font-size: 1.05rem; }
   .primary-nav a[aria-current="page"]::after { display: none; }
   .nav-cta { text-align: center; margin-top: .4rem; }
-  .diff-grid, .tier-grid, .steps, .benefit-grid, .values-grid, .trust-grid, .form-row { grid-template-columns: 1fr; }
+  .diff-grid, .tier-grid, .steps, .benefit-grid, .values-grid, .trust-grid, .form-row, .guarantee-grid { grid-template-columns: 1fr; }
   .cta-inner { flex-direction: column; align-items: flex-start; }
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .trust-item { justify-content: flex-start; }

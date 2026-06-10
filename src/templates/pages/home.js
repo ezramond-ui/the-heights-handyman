@@ -29,23 +29,66 @@ module.exports = function home() {
   <section class="hero">
     <div class="container hero-inner">
       <div class="hero-copy">
-        <span class="eyebrow">${esc(site.serviceAreaLabel)} · Smart home specialists</span>
-        <h1>Smart living, <span class="accent-text">done simply.</span></h1>
-        <p class="lead">Premium smart lighting and home automation for ${esc(site.serviceAreaLabel)} homeowners — installed cleanly and elegantly, with <strong>no major construction, no mess, and no stress</strong>.</p>
+        <span class="eyebrow">Cleveland Smart Home Solutions · ${esc(site.serviceAreaLabel)}</span>
+        <h1>Smart home installation, <span class="accent-text">without tearing your house apart.</span></h1>
+        <p class="lead">Premium smart lighting, thermostats, locks, and automation for ${esc(site.serviceAreaLabel)} homeowners — installed cleanly in a single tidy visit. No walls opened, no wires run, no mess.</p>
         <div class="hero-actions">
           <a class="btn btn-accent btn-lg" href="${site.primaryCta.href}">${esc(site.primaryCta.label)}</a>
           <a class="btn btn-outline btn-lg" href="${site.secondaryCta.href}">${esc(site.secondaryCta.label)}</a>
         </div>
-        <ul class="hero-points">
-          <li>${C.icon('check', 'icon icon-sm icon-accent')} No walls opened</li>
-          <li>${C.icon('check', 'icon icon-sm icon-accent')} No wires run</li>
-          <li>${C.icon('check', 'icon icon-sm icon-accent')} Licensed &amp; insured</li>
+        ${C.ctaNote()}
+        <ul class="hero-points hero-benefits">
+          <li>${C.icon('lock', 'icon icon-sm icon-accent')} Lock up &amp; check your door from anywhere</li>
+          <li>${C.icon('bulb', 'icon icon-sm icon-accent')} Every light, one tap — or fully automatic</li>
+          <li>${C.icon('thermostat', 'icon icon-sm icon-accent')} Lower bills, year-round comfort</li>
         </ul>
       </div>
       <div class="hero-visual">
         <img class="hero-photo" src="/images/thermostat-install.jpg?v=2" width="1408" height="768"
              alt="Cleveland Smart Home Solutions technician installing a smart thermostat on a living room wall" loading="eager" decoding="async">
       </div>
+    </div>
+  </section>
+
+  <section class="section quote-band" aria-labelledby="quote-band-h">
+    <div class="container quote-band-inner">
+      <div class="quote-band-copy">
+        <span class="eyebrow">Free in-home consult</span>
+        <h2 id="quote-band-h">Tell us about your home</h2>
+        <p>Share a couple of details and we’ll follow up to schedule your free, no-pressure consult — usually within one business day.</p>
+        <ul class="check-list">
+          <li>${C.icon('check', 'icon icon-sm icon-accent')}<span>Honest, transparent advice — never an upsell</span></li>
+          <li>${C.icon('check', 'icon icon-sm icon-accent')}<span>Clean installs with no major construction</span></li>
+        </ul>
+      </div>
+      <form id="home-quote-form" class="form quote-band-form" action="/api/contact" method="POST" novalidate>
+        <div class="field">
+          <label for="hq-name">Name <span class="req">*</span></label>
+          <input type="text" id="hq-name" name="name" autocomplete="name" required>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="hq-phone">Phone</label>
+            <input type="tel" id="hq-phone" name="phone" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="hq-email">Email <span class="req">*</span></label>
+            <input type="email" id="hq-email" name="email" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="hq-message">What are you thinking about? <span class="req">*</span></label>
+          <textarea id="hq-message" name="message" rows="3" required placeholder="e.g. smart lighting downstairs, a video doorbell, or a whole-home plan."></textarea>
+        </div>
+        <!-- Honeypot anti-spam field: humans never see or fill this. -->
+        <div class="hp" aria-hidden="true">
+          <label for="hq-company">Company</label>
+          <input type="text" id="hq-company" name="company" tabindex="-1" autocomplete="off">
+        </div>
+        <button type="submit" class="btn btn-accent btn-lg form-submit">Request my free consult</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+        <p class="form-fineprint">By submitting, you agree to be contacted about your request. We never share your information.</p>
+      </form>
     </div>
   </section>
 
@@ -110,17 +153,9 @@ module.exports = function home() {
 
   ${C.processSteps()}
 
-  <section class="section section-soft" aria-labelledby="reviews-h">
-    <div class="container">
-      <div class="section-head center">
-        <span class="eyebrow">Reviews</span>
-        <h2 id="reviews-h">Be among our first reviewers</h2>
-      </div>
-      ${C.reviewInvite()}
-    </div>
-  </section>
+  ${C.guarantee()}
 
-  ${C.ctaBand('Ready for a smarter, simpler home?', 'Get a free, no-pressure quote today. We’ll design a clean install that fits your home and your life.')}
+  ${C.ctaBand('Ready for a smarter, simpler home?', 'Book a free, no-pressure in-home consult today. We’ll design a clean install that fits your home and your life.')}
   `;
 
   return {

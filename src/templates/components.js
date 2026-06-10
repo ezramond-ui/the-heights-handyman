@@ -131,7 +131,10 @@ function popularInstalls({ id, lead } = {}) {
         <p class="lead">${esc(leadText)}</p>
       </div>
       <div class="service-grid">${cards}</div>
-      <div class="center mt-lg"><a class="btn btn-accent btn-lg" href="/contact.html">Get a Free Quote</a></div>
+      <div class="center mt-lg">
+        <a class="btn btn-accent btn-lg" href="${site.primaryCta.href}">${esc(site.primaryCta.label)}</a>
+        ${ctaNote()}
+      </div>
     </div>
   </section>
   ${switchDemoModal()}`;
@@ -230,6 +233,11 @@ function trustRow() {
   </section>`;
 }
 
+// Small reassurance line shown beneath a primary CTA.
+function ctaNote(text) {
+  return `<p class="cta-note">${esc(text || site.ctaNote)}</p>`;
+}
+
 // Final call-to-action band.
 function ctaBand(heading, sub) {
   return `<section class="cta-band" aria-labelledby="cta-h">
@@ -241,7 +249,33 @@ function ctaBand(heading, sub) {
       <div class="cta-actions">
         <a class="btn btn-accent btn-lg" href="/contact.html">${esc(site.primaryCta.label)}</a>
         <a class="btn btn-ghost btn-lg" href="tel:${site.phoneHref}">${icon('phone', 'icon icon-sm')} ${esc(site.phone)}</a>
+        <p class="cta-note cta-note-band">${esc(site.ctaNote)}</p>
       </div>
+    </div>
+  </section>`;
+}
+
+// Trust-building guarantee — used on the homepage in place of testimonials
+// until owner-approved reviews arrive. Honest, confident, and reassuring.
+function guarantee() {
+  const promises = [
+    { icon: 'shield', t: 'Spotless, careful work', d: 'We protect your floors and finishes and leave every space cleaner than we found it.' },
+    { icon: 'clock', t: 'On time, every time', d: 'We arrive when we say we will and respect your home like the neighbors we are.' },
+    { icon: 'hand', t: 'We make it right', d: 'We walk you through everything until it just works — and stand behind every install.' },
+  ];
+  const cards = promises
+    .map(
+      (p) => `<div class="guarantee-card">${icon(p.icon, 'icon icon-lg icon-accent')}<h3>${p.t}</h3><p>${p.d}</p></div>`
+    )
+    .join('');
+  return `<section class="section guarantee-section" aria-labelledby="guarantee-h">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">Our promise to your home</span>
+        <h2 id="guarantee-h">Locally owned, licensed &amp; insured — and personally accountable</h2>
+        <p class="lead">No call centers, no rotating crews. One local specialist who treats your home like their own, from the first walkthrough to the final tap on your phone.</p>
+      </div>
+      <div class="guarantee-grid">${cards}</div>
     </div>
   </section>`;
 }
@@ -336,6 +370,8 @@ module.exports = {
   processSteps,
   trustRow,
   ctaBand,
+  ctaNote,
+  guarantee,
   reviewInvite,
   jsonLdScript,
   localBusinessSchema,

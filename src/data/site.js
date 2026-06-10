@@ -58,6 +58,17 @@ module.exports = {
   insured: true,
 
   // Primary call-to-action copy reused across the site.
-  primaryCta: { label: 'Get a Free Quote', href: '/contact.html' },
-  secondaryCta: { label: 'Explore Services', href: '/services.html' },
+  // The offer is concrete and low-commitment: a free in-home consultation.
+  primaryCta: { label: 'Book a Free Consult', href: '/contact.html' },
+  secondaryCta: { label: 'See how it works', href: '/services.html' },
+
+  // Reassurance microcopy shown beneath primary CTAs sitewide.
+  ctaNote: 'Free in-home consult · No pressure · Reply within 1 business day',
+
+  // ── PRICING ANCHOR (optional) ────────────────────────────────────────
+  // Leave `startingAt` empty until you have a firm floor price you're
+  // comfortable publishing. When set (e.g. '$249'), the Services pricing
+  // section shows a concrete "starting at" anchor; when empty it falls back
+  // to softer, no-number reassurance copy. Search "pricing.startingAt".
+  pricing: { startingAt: '$299' },
 };

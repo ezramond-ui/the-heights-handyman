@@ -21,8 +21,8 @@ module.exports = function contact() {
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow">Contact us</span>
-      <h1>Let’s talk about your smart home</h1>
-      <p class="lead">Tell us a little about your home and what you’re hoping for. We’ll get back to you with a free, no-pressure quote — usually within one business day.</p>
+      <h1>Book your free in-home consult</h1>
+      <p class="lead">Tell us a little about your home and what you’re hoping for. We’ll follow up to schedule a free, no-pressure in-home consult — usually within one business day.</p>
     </div>
   </section>
 
