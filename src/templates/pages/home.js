@@ -50,6 +50,8 @@ module.exports = function home() {
     </div>
   </section>
 
+  ${C.ctaBand('Ready for a smarter, simpler home?', 'Book a free, no-pressure in-home consult today. We’ll design a clean install that fits your home and your life.')}
+
   <section class="section quote-band" aria-labelledby="quote-band-h">
     <div class="container quote-band-inner">
       <div class="quote-band-copy">
@@ -152,8 +154,6 @@ module.exports = function home() {
   </section>
 
   ${C.processSteps()}
-
-  ${C.ctaBand('Ready for a smarter, simpler home?', 'Book a free, no-pressure in-home consult today. We’ll design a clean install that fits your home and your life.')}
   `;
 
   return {
