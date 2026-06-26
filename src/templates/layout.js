@@ -14,7 +14,9 @@ const NAV = [
   { label: 'Services', href: '/services.html' },
   { label: 'Landlords', href: '/landlords.html' },
   { label: 'Service Areas', href: '/service-areas.html' },
-  { label: 'Reviews', href: '/reviews.html' },
+  // Reviews hidden from nav until we have published reviews. The page still
+  // builds so the "Leave a Review" form + approval flow keep working.
+  // { label: 'Reviews', href: '/reviews.html' },
   { label: 'Contact', href: '/contact.html' },
 ];
 
@@ -67,7 +69,6 @@ function footer() {
         <li><a href="/index.html">Home</a></li>
         <li><a href="/services.html">Services</a></li>
         <li><a href="/landlords.html">For Landlords</a></li>
-        <li><a href="/reviews.html">Reviews</a></li>
         <li><a href="/service-areas.html">Service Areas</a></li>
         <li><a href="/contact.html">Contact</a></li>
       </ul>

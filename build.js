@@ -110,7 +110,9 @@ console.log(`  ✓ ${pages.length} pages rendered (+ 404).`);
 
 /* ─────────────────────── sitemap.xml + robots ────────────────────── */
 const today = new Date().toISOString().slice(0, 10);
-const urls = pages.map((p) => {
+// reviews.html is hidden (not linked in nav) until we have published reviews,
+// so keep it out of the sitemap too — the page itself still builds.
+const urls = pages.filter((p) => p.path !== 'reviews.html').map((p) => {
   const loc = site.url + '/' + p.path;
   // Home and area pages get higher priority.
   let priority = '0.7';
