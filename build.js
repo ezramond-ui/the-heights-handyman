@@ -1,5 +1,5 @@
 /**
- * Static site generator for Cleveland Smart Home Solutions.
+ * Static site generator for The Heights Handyman.
  * Renders every page into /dist, copies /public assets, and writes
  * sitemap.xml + robots.txt. Run with: npm run build
  */
@@ -17,8 +17,7 @@ const { layout } = require('./src/templates/layout');
 const home = require('./src/templates/pages/home');
 const services = require('./src/templates/pages/services');
 const contact = require('./src/templates/pages/contact');
-const landlords = require('./src/templates/pages/landlords');
-const reviews = require('./src/templates/pages/reviews');
+const posViolations = require('./src/templates/pages/posViolations');
 const serviceAreas = require('./src/templates/pages/serviceAreas');
 const locationPages = require('./src/templates/pages/location');
 
@@ -66,11 +65,11 @@ function notFoundPage() {
   <section class="page-hero center" style="min-height:50vh;display:flex;align-items:center;">
     <div class="container">
       <span class="eyebrow">404</span>
-      <h1>This page took the night off</h1>
-      <p class="lead">We couldn’t find that page — but your smarter home is still just a click away.</p>
+      <h1>We couldn’t find that page</h1>
+      <p class="lead">The page you’re looking for moved or doesn’t exist — but help is still one tap away.</p>
       <div class="hero-actions" style="justify-content:center;">
         <a class="btn btn-accent btn-lg" href="/index.html">Back to home</a>
-        <a class="btn btn-outline btn-lg" href="/service-areas.html">Find your area</a>
+        <a class="btn btn-outline btn-lg" href="/contact.html">Get a free estimate</a>
       </div>
     </div>
   </section>`;
@@ -83,7 +82,7 @@ function notFoundPage() {
 }
 
 /* ───────────────────────────── build ─────────────────────────────── */
-console.log('Building Cleveland Smart Home Solutions…');
+console.log('Building The Heights Handyman…');
 rmrf(DIST);
 ensureDir(DIST);
 
@@ -94,9 +93,8 @@ copyDir(PUBLIC, DIST);
 const pages = [
   home(),
   services(),
+  posViolations(),
   contact(),
-  landlords(),
-  reviews(),
   serviceAreas(),
   ...locationPages(),
 ];
@@ -110,15 +108,14 @@ console.log(`  ✓ ${pages.length} pages rendered (+ 404).`);
 
 /* ─────────────────────── sitemap.xml + robots ────────────────────── */
 const today = new Date().toISOString().slice(0, 10);
-// reviews.html is hidden (not linked in nav) until we have published reviews,
-// so keep it out of the sitemap too — the page itself still builds.
-const urls = pages.filter((p) => p.path !== 'reviews.html').map((p) => {
+const urls = pages.map((p) => {
   const loc = site.url + '/' + p.path;
-  // Home and area pages get higher priority.
+  // Home, the POS focus page, and area pages get higher priority.
   let priority = '0.7';
   if (p.path === 'index.html') priority = '1.0';
+  else if (p.path === 'pos-violations.html') priority = '0.9';
   else if (p.path.startsWith('areas/')) priority = '0.8';
-  else if (['services.html', 'landlords.html', 'contact.html'].includes(p.path)) priority = '0.9';
+  else if (['services.html', 'contact.html'].includes(p.path)) priority = '0.9';
   return `  <url><loc>${loc}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>${priority}</priority></url>`;
 });
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

@@ -1,38 +1,38 @@
 const { layout, site, esc } = require('../layout');
 const C = require('../components');
 const { locations } = require('../../data/locations');
-const { keyServices } = require('../../data/services');
+const { categories } = require('../../data/services');
 
 // A few intro phrasings, chosen by index, so pages don't share identical
 // sentence structure even though every page also has unique local detail.
 const introTemplates = [
   (l) =>
-    `Looking for a smarter home in ${l.name}? Cleveland Smart Home Solutions brings premium smart lighting and home automation to ${l.name}, ${l.county} County — installed cleanly, with no major construction and no mess.`,
+    `Need a handyman in ${l.name}? ${site.name} handles repairs, small renovations, and point of sale inspection violations across ${l.name}, ${l.county} County — done right, done clean, done on time.`,
   (l) =>
-    `${l.name} is ${l.character} It deserves smart home technology installed with the same care — which is exactly what we do: elegant, minimal-impact upgrades with no walls opened and no wires run.`,
+    `${l.name} is ${l.character} We keep those homes in great shape with skilled, code-compliant handyman work — and we fix the exact items city inspectors flag before a sale.`,
   (l) =>
-    `${l.name} homeowners trust Cleveland Smart Home Solutions for clean, sophisticated smart home installs. We make ${l.name} homes smarter without the disruption of traditional installations — no demolition, no mess, no stress.`,
+    `${l.name} homeowners call ${site.name} for reliable repairs and fast point of sale violation corrections. One local pro for electrical, drywall, paint, tile, masonry, carpentry, and flooring.`,
   (l) =>
-    `Bringing premium smart home technology to ${l.name}, ${site.serviceAreaLabel}. From smart lighting to whole-home automation, we deliver a premium experience to ${l.name} at honest, local prices — and we keep your home spotless while we do it.`,
+    `Bringing dependable handyman service and point of sale repair to ${l.name}, Ohio. From a quick fix to a small renovation — or a failed city inspection — we get it done and keep your home clean.`,
 ];
 
 function locationFaq(l) {
   return [
     {
-      q: `Do you install smart home systems in ${l.name}?`,
-      a: `Yes — ${l.name} is part of our core service area in ${site.serviceAreaLabel}. We install smart lighting, three-way switches, thermostats, locks, shades, doorbell cameras, and full home automation throughout ${l.name} and ${l.county} County.`,
+      q: `Do you offer handyman services in ${l.name}?`,
+      a: `Yes — ${l.name} is part of our core service area. We handle electrical, drywall, painting, tile, masonry, carpentry, flooring, and general repairs and small renovations throughout ${l.name} and ${l.county} County.`,
     },
     {
-      q: `Will installation damage my ${l.name} home?`,
-      a: `No. Unlike companies that open walls and run new wire, we specialize in clean, minimal-impact installs. With ${l.homes.replace(/\.$/, '')}, that careful approach protects your home’s character — no major construction, no mess, no stress.`,
+      q: `Can you fix point of sale (POS) inspection violations in ${l.name}?`,
+      a: `Absolutely. ${l.name} requires a point of sale inspection before a home sells, and we specialize in correcting the violations on that report — fast — so you can pass re-inspection and get to closing on time.`,
     },
     {
-      q: `Do you work with landlords and rental properties in ${l.name}?`,
-      a: `Absolutely. Everything we install is ideal for ${l.name} landlords and rental owners who want remote control, scheduling, and smart management of their properties — all from a single app, with minimal disruption to occupied units.`,
+      q: `Are you licensed, insured, and bonded?`,
+      a: `Yes. ${site.name} is licensed, insured, and bonded. We treat every ${l.name} home with care and leave each space cleaner than we found it.`,
     },
     {
-      q: `How much does a smart home install in ${l.name} cost?`,
-      a: `Every quote is custom and free. Pricing depends on the size of your home and the upgrades you choose. We’ll give you an honest, transparent recommendation with no pressure and no upsell.`,
+      q: `How much does a repair in ${l.name} cost?`,
+      a: `Every estimate is free and honest. Pricing depends on the scope of the work — call or text us at ${site.phone}, or send a photo of the job, and we’ll get you a fast quote.`,
     },
   ];
 }
@@ -76,11 +76,11 @@ function renderLocation(l, index) {
     C.jsonLdScript({
       '@context': 'https://schema.org',
       '@type': 'Service',
-      serviceType: 'Smart home installation',
-      name: `Smart Home Installation in ${l.name}, OH`,
+      serviceType: 'Handyman services and point of sale violation repair',
+      name: `Handyman & POS Violation Repair in ${l.name}, OH`,
       provider: { '@id': site.url + '/#business' },
       areaServed: { '@type': 'City', name: `${l.name}, OH` },
-      description: `Smart lighting and home automation in ${l.name}, ${l.county} County — clean, premium installs with no major construction.`,
+      description: `Handyman repairs, small renovations, and point of sale inspection violation corrections in ${l.name}, ${l.county} County, Ohio.`,
     }) +
     C.jsonLdScript({
       '@context': 'https://schema.org',
@@ -92,8 +92,8 @@ function renderLocation(l, index) {
       })),
     });
 
-  // A focused services list for the location page.
-  const svcItems = keyServices
+  // A focused trades list for the location page.
+  const svcItems = categories
     .map(
       (s) =>
         `<li>${C.icon(s.icon, 'icon icon-sm icon-accent')}<span>${esc(s.name)}</span></li>`
@@ -109,18 +109,16 @@ function renderLocation(l, index) {
     )
     .join('');
 
-  const placeWord = l.type === 'neighborhood' ? 'neighborhood' : 'community';
-
   const body = `
   ${C.breadcrumbTrail(crumbs)}
   <section class="page-hero loc-hero">
     <div class="container">
-      <span class="eyebrow">${C.icon('pin', 'icon icon-sm')} Smart home installation · ${esc(l.name)}, OH</span>
-      <h1>Smart Home Installation in ${esc(l.name)}, Ohio</h1>
+      <span class="eyebrow">${C.icon('pin', 'icon icon-sm')} Handyman &amp; POS repair · ${esc(l.name)}, OH</span>
+      <h1>Handyman &amp; POS Violation Repair in ${esc(l.name)}, Ohio</h1>
       <p class="lead">${esc(intro)}</p>
       <div class="hero-actions">
-        <a class="btn btn-accent btn-lg" href="/contact.html?city=${encodeURIComponent(l.name)}">Book a free ${esc(l.name)} consult</a>
-        <a class="btn btn-outline btn-lg" href="tel:${site.phoneHref}">${C.icon('phone', 'icon icon-sm')} ${esc(site.phone)}</a>
+        ${C.callButton()}
+        <a class="btn btn-outline btn-lg" href="/contact.html?city=${encodeURIComponent(l.name)}">Get a free ${esc(l.name)} estimate</a>
       </div>
     </div>
   </section>
@@ -129,27 +127,26 @@ function renderLocation(l, index) {
 
   <section class="section">
     <div class="container prose-wide loc-body">
-      <h2>Premium smart home technology for ${esc(l.name)} homeowners</h2>
-      <p>${esc(l.name)} is ${esc(l.character)} The homes here — ${esc(l.homes)} — are exactly why our approach fits so well. We bring a sophisticated, modern way to make your home smart: <strong>clean, simple, elegant installs with minimal impact</strong>. No opening walls. No running new wire. No construction-zone chaos in your living room.</p>
-      <p>Smart lighting is our specialty and the heart of a great smart home in ${esc(l.name)}. From a few smart switches to whole-home scenes like “Movie Night” and “Good Morning,” we design a system that fits how you actually live — and we walk you through every bit of it until it feels effortless.</p>
+      <h2>Your handyman in ${esc(l.name)}</h2>
+      <p>${esc(l.name)} is ${esc(l.character)} The homes here — ${esc(l.homes)} That’s exactly the kind of work we do best: skilled, code-compliant repairs, done clean and on time. From a single fix to a small renovation, one local pro handles the whole list.</p>
 
-      <h2>Smart home services we offer in ${esc(l.name)}</h2>
+      <h2>Point of sale violation repair in ${esc(l.name)}</h2>
+      <p>Selling in ${esc(l.name)}? The city’s point of sale inspection has to pass before you close. Send us your violation report and we’ll correct the flagged items — electrical, drywall, paint, carpentry, and masonry — fast enough to keep your closing date. <a href="/pos-violations.html">Learn more about POS violation repair →</a></p>
+
+      <h2>Handyman services we offer in ${esc(l.name)}</h2>
       <ul class="loc-services">${svcItems}</ul>
-
-      <h2>Landlords &amp; rental owners in ${esc(l.name)}</h2>
-      <p>Own a rental ${placeWord === 'neighborhood' ? 'in the ' + esc(l.name) + ' neighborhood' : 'in ' + esc(l.name)}? Everything we install is ideal for landlords who want remote control and smart management of their properties. Adjust lighting and schedules between tenants, issue smart-lock codes for showings, and oversee multiple units from one app — all installed with minimal disruption to occupied units. <a href="/landlords.html">See our landlord solutions →</a></p>
     </div>
   </section>
 
-  ${C.popularInstalls()}
-
-  ${C.differentiator('band')}
+  <section class="section section-soft">
+    <div class="container">${C.estimateCta({ heading: `Get a free estimate in ${l.name}`, sub: `Call or text us at ${site.phone} — send a photo of the job for a fast quote.` })}</div>
+  </section>
 
   <section class="section" aria-labelledby="faq-h">
     <div class="container prose-wide">
       <div class="section-head">
         <span class="eyebrow">Questions from ${esc(l.name)}</span>
-        <h2 id="faq-h">Smart home FAQs for ${esc(l.name)}, OH</h2>
+        <h2 id="faq-h">Handyman &amp; POS FAQs for ${esc(l.name)}, OH</h2>
       </div>
       <div class="faq-list">${faqHtml}</div>
     </div>
@@ -168,16 +165,16 @@ function renderLocation(l, index) {
   }
 
   ${C.ctaBand(
-    `Ready for a smarter home in ${esc(l.name)}?`,
-    `Get a free, no-pressure quote for your ${esc(l.name)} home. Clean install, honest price, zero hassle.`
+    `Need a hand in ${l.name}?`,
+    `Get a free, honest estimate for your ${l.name} home — repairs, renovations, or a failed inspection. Call or text us.`
   )}
   `;
 
   return {
     path: `areas/${slug}.html`,
     html: layout({
-      title: `Smart Home Installation in ${l.name}, OH | ${site.shortName}`,
-      description: `Premium smart lighting & home automation in ${l.name}, ${l.county} County, OH. Clean installs — no construction, no mess. Locally owned, licensed & insured. Free ${l.name} quotes.`,
+      title: `Handyman & POS Violation Repair in ${l.name}, OH | ${site.name}`,
+      description: `Handyman services, small renovations & point of sale inspection violation repair in ${l.name}, ${l.county} County, OH. Licensed, insured & bonded. Call or text us for a free ${l.name} estimate.`,
       path,
       body,
       jsonLd,

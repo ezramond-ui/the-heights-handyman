@@ -1,7 +1,7 @@
 {
-  "name": "clevelandsmarthomesolutions",
+  "name": "theheightshandyman",
   "version": "1.0.0",
-  "description": "Cleveland Smart Home Solutions — Smart Living, Done Simply. Premium smart home installation across Northeast Ohio.",
+  "description": "The Heights Handyman — Done right. Done clean. Done on time. Handyman services, small renovations, and point-of-sale violation repair across South Euclid, University Heights, Cleveland Heights & Beachwood, OH.",
   "private": true,
   "scripts": {
     "build": "node build.js",
@@ -9,10 +9,9 @@
     "serve": "node serve.js",
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
   },
-  "author": "Cleveland Smart Home Solutions",
+  "author": "The Heights Handyman",
   "license": "UNLICENSED",
   "dependencies": {
-    "@vercel/blob": "^2.4.0",
     "nodemailer": "^6.9.13"
   }
 }

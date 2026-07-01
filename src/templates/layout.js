@@ -1,4 +1,4 @@
-/** Base HTML shell: SEO head, header with logo placeholder, nav, footer. */
+/** Base HTML shell: SEO head, header with logo mark, nav, footer. */
 const site = require('../data/site');
 
 const esc = (s = '') =>
@@ -12,13 +12,16 @@ const esc = (s = '') =>
 const NAV = [
   { label: 'Home', href: '/index.html' },
   { label: 'Services', href: '/services.html' },
-  { label: 'Landlords', href: '/landlords.html' },
+  { label: 'POS Violations', href: '/pos-violations.html' },
   { label: 'Service Areas', href: '/service-areas.html' },
-  // Reviews hidden from nav until we have published reviews. The page still
-  // builds so the "Leave a Review" form + approval flow keep working.
-  // { label: 'Reviews', href: '/reviews.html' },
   { label: 'Contact', href: '/contact.html' },
 ];
+
+// Lightweight, image-free brand mark: "HH" initials in a gold badge.
+// Drop a real logo into public/images/ and swap this block if desired.
+function brandMark() {
+  return `<span class="brand-badge" aria-hidden="true">HH</span>`;
+}
 
 function header(activePath) {
   const links = NAV.map((n) => {
@@ -29,7 +32,7 @@ function header(activePath) {
   return `<header class="site-header" id="top">
   <div class="container header-inner">
     <a class="brand" href="/index.html" aria-label="${esc(site.name)} home">
-      <img class="brand-logo" src="/images/logo-mark.png?v=6" width="89" height="76" alt="">
+      ${brandMark()}
       <span class="brand-name">${esc(site.name)}</span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu">
@@ -60,15 +63,15 @@ function footer() {
     <div class="footer-brand">
       <span class="brand-name">${esc(site.name)}</span>
       <p class="footer-tag">${esc(site.tagline)}</p>
-      <p class="footer-blurb">Clean, simple, elegant smart home installs across ${esc(site.serviceAreaLabel)} — no major construction, no mess, no stress.</p>
-      <p class="footer-trust">Locally owned &amp; operated · Licensed &amp; insured</p>
+      <p class="footer-blurb">Handyman services, small renovations, and point-of-sale inspection violation repair across ${esc(site.serviceCities.join(', '))}, Ohio.</p>
+      <p class="footer-trust">Licensed · Insured · Bonded</p>
     </div>
     <nav class="footer-col" aria-label="Site">
       <h2>Explore</h2>
       <ul>
         <li><a href="/index.html">Home</a></li>
         <li><a href="/services.html">Services</a></li>
-        <li><a href="/landlords.html">For Landlords</a></li>
+        <li><a href="/pos-violations.html">POS Violations</a></li>
         <li><a href="/service-areas.html">Service Areas</a></li>
         <li><a href="/contact.html">Contact</a></li>
       </ul>
@@ -76,9 +79,9 @@ function footer() {
     <div class="footer-col">
       <h2>Get in Touch</h2>
       <ul class="footer-contact">
-        <li><a href="tel:${site.phoneHref}">${esc(site.phone)}</a></li>
-        <li><a href="mailto:${site.salesEmail}">${esc(site.salesEmail)}</a></li>
-        <li>${esc(site.address.locality)}, ${esc(site.address.region)} — serving ${esc(site.serviceAreaLabel)}</li>
+        <li><a href="tel:${site.phoneHref}">Call or text: ${esc(site.phone)}</a></li>
+        <li><a href="mailto:${site.email}">${esc(site.email)}</a></li>
+        <li>${esc(site.serviceCities.join(', '))}, OH</li>
         <li>${esc(site.hours)}</li>
       </ul>
       ${socialLinks ? `<div class="footer-social">${socialLinks}</div>` : ''}
@@ -87,18 +90,19 @@ function footer() {
   <div class="footer-bottom">
     <div class="container">
       <p class="footer-fineprint">${esc(site.tagline)}</p>
+      <p class="footer-parent">${esc(site.parentCompany)}</p>
     </div>
   </div>
   <div class="footer-legal">
     <div class="container">
-      <p>&copy; 2026 North Coast Residential Services LLC. All Rights Reserved. Cleveland Smart Home Solutions&trade; is a registered trade name of North Coast Residential Services LLC.</p>
+      <p>&copy; 2026 ${esc(site.legalName)}. All Rights Reserved. ${esc(site.name)} is a division of ${esc(site.legalName)}.</p>
     </div>
   </div>
 </footer>`;
 }
 
 // Sticky bottom action bar — mobile only (hidden on desktop via CSS).
-// Keeps "Call" and "Book a Free Consult" one tap away on long pages.
+// Keeps "Call" and "Free Estimate" one tap away on long pages.
 function mobileBar() {
   const phoneIcon =
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2Z"/></svg>';
@@ -131,7 +135,7 @@ function layout({ title, description, path, body, jsonLd = '', bodyClass = '', o
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}">
   <link rel="canonical" href="${canonical}">
-  <meta name="theme-color" content="#0f1d2e">
+  <meta name="theme-color" content="#12233F">
   <meta name="format-detection" content="telephone=no">
 
   <meta property="og:type" content="${ogType}">
@@ -149,8 +153,8 @@ function layout({ title, description, path, body, jsonLd = '', bodyClass = '', o
   <link rel="apple-touch-icon" href="/images/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
-  <link rel="stylesheet" href="/css/styles.css?v=13">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/styles.css?v=14">
   ${jsonLd}
 </head>
 <body class="${bodyClass}">
@@ -161,7 +165,7 @@ ${body}
   </main>
   ${footer()}
   ${mobileBar()}
-  <script src="/js/main.js?v=4" defer></script>
+  <script src="/js/main.js?v=5" defer></script>
 </body>
 </html>`;
 }

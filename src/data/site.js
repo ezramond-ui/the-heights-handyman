@@ -7,40 +7,45 @@
  * └─────────────────────────────────────────────────────────────────────┘
  */
 module.exports = {
-  name: 'Cleveland Smart Home Solutions',
-  shortName: 'Cleveland Smart Home',
-  tagline: 'Smart Living, Done Simply.',
-  legalName: 'Cleveland Smart Home Solutions LLC',
+  name: 'The Heights Handyman',
+  shortName: 'The Heights Handyman',
+  tagline: 'Done right. Done clean. Done on time.',
+  legalName: 'North Coast Residential Solutions LLC',
+  // Shown in the footer beneath the brand.
+  parentCompany: 'A division of North Coast Residential Solutions LLC',
 
   // The canonical production URL (no trailing slash). Used for sitemap,
   // canonical tags, Open Graph, and structured data.
-  url: 'https://www.clevelandsmarthomesolutions.com',
+  url: 'https://www.theheightshandyman.com', // PLACEHOLDER — confirm final domain
 
-  // ── PLACEHOLDER CONTACT DETAILS ──────────────────────────────────────
+  // ── CONTACT DETAILS ──────────────────────────────────────────────────
   phone: '(216) 284-9433',
   phoneHref: '+12162849433',
-  email: 'hello@clevelandsmarthomesolutions.com', // PLACEHOLDER email
-  // Where contact-form and review submissions are emailed for approval.
+  // Text-message link uses the same number.
+  smsHref: '+12162849433',
+  email: 'ezra@theheightshandyman.com',
+  // Where contact-form submissions are emailed.
   // Used as the default MAIL_TO recipient for the contact API (see api/_lib/mailer.js).
-  ownerEmail: 'ezra@clevelandsmarthomesolutions.com',
-  salesEmail: 'sales@clevelandsmarthomesolutions.com',
+  ownerEmail: 'ezra@theheightshandyman.com',
 
   // ── BUSINESS LOCATION ────────────────────────────────────────────────
   address: {
-    locality: 'University Heights',
+    locality: 'South Euclid',
     region: 'OH',
     regionName: 'Ohio',
-    postalCode: '44118',             // PLACEHOLDER ZIP
+    postalCode: '44121',             // PLACEHOLDER ZIP — update to real address
     country: 'US',
-    // Approx. coordinates for University Heights, OH (fine for LocalBusiness).
-    latitude: 41.4948,
-    longitude: -81.5357,
+    // Approx. coordinates for South Euclid, OH (fine for LocalBusiness).
+    latitude: 41.5231,
+    longitude: -81.5190,
   },
-  serviceAreaLabel: 'Northeast Ohio',
+  serviceAreaLabel: 'the Heights',
+  // The four communities we serve, in copy order.
+  serviceCities: ['South Euclid', 'University Heights', 'Cleveland Heights', 'Beachwood'],
 
-  hours: 'Monday–Friday, 8:30am–5:00pm',
+  hours: 'Monday–Saturday, 8:00am–6:00pm',
   hoursSchema: [
-    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:30', closes: '17:00' },
+    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '08:00', closes: '18:00' },
   ],
 
   // ── SOCIAL (optional — leave blank to hide) ──────────────────────────
@@ -56,19 +61,13 @@ module.exports = {
   founded: '2025',
   licensed: true,
   insured: true,
+  bonded: true,
 
-  // Primary call-to-action copy reused across the site.
-  // The offer is concrete and low-commitment: a free in-home consultation.
-  primaryCta: { label: 'Book a Free Consult', href: '/contact.html' },
-  secondaryCta: { label: 'See how it works', href: '/services.html' },
+  // Primary call-to-action copy reused across the site. A free estimate is
+  // the low-commitment ask; calling/texting is the most prominent action.
+  primaryCta: { label: 'Get a Free Estimate', href: '/contact.html' },
+  secondaryCta: { label: 'View services', href: '/services.html' },
 
   // Reassurance microcopy shown beneath primary CTAs sitewide.
-  ctaNote: 'Free in-home consult · No pressure · Reply within 1 business day',
-
-  // ── PRICING ANCHOR (optional) ────────────────────────────────────────
-  // Leave `startingAt` empty until you have a firm floor price you're
-  // comfortable publishing. When set (e.g. '$249'), the Services pricing
-  // section shows a concrete "starting at" anchor; when empty it falls back
-  // to softer, no-number reassurance copy. Search "pricing.startingAt".
-  pricing: { startingAt: '$299' },
+  ctaNote: 'Free estimates · Call or text us · Licensed, insured & bonded',
 };

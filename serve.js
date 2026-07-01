@@ -32,9 +32,6 @@ const MIME = {
 
 const apiHandlers = {
   '/api/contact': require('./api/contact'),
-  '/api/review': require('./api/review'),
-  '/api/approve-review': require('./api/approve-review'),
-  '/api/reviews': require('./api/reviews'),
 };
 
 function send(res, status, body, type) {
@@ -85,5 +82,5 @@ function stream(res, filePath, status) {
 }
 
 server.listen(PORT, () => {
-  console.log(`\n  Cleveland Smart Home Solutions running at http://localhost:${PORT}\n`);
+  console.log(`\n  The Heights Handyman running at http://localhost:${PORT}\n`);
 });

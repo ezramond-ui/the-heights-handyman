@@ -8,9 +8,6 @@ module.exports = function serviceAreas() {
     { name: 'Service Areas', path: '/service-areas.html' },
   ];
 
-  const suburbs = locations.filter((l) => l.type === 'suburb');
-  const neighborhoods = locations.filter((l) => l.type === 'neighborhood');
-
   const cardFor = (l) =>
     `<li><a class="area-link" href="/areas/${l.slug}.html" data-name="${esc(l.name.toLowerCase())}">${C.icon('pin', 'icon icon-sm icon-accent')}<span>${esc(l.name)}</span></a></li>`;
 
@@ -19,12 +16,12 @@ module.exports = function serviceAreas() {
     C.jsonLdScript({
       '@context': 'https://schema.org',
       '@type': 'ItemList',
-      name: `Smart home service areas in ${site.serviceAreaLabel}`,
+      name: 'Handyman service areas in the Heights',
       numberOfItems: locations.length,
       itemListElement: locations.map((l, i) => ({
         '@type': 'ListItem',
         position: i + 1,
-        name: `Smart Home Installation in ${l.name}, OH`,
+        name: `Handyman & POS violation repair in ${l.name}, OH`,
         url: `${site.url}/areas/${l.slug}.html`,
       })),
     });
@@ -34,36 +31,26 @@ module.exports = function serviceAreas() {
   <section class="page-hero center">
     <div class="container">
       <span class="eyebrow">Service areas</span>
-      <h1>Smart home installation across ${esc(site.serviceAreaLabel)}</h1>
-      <p class="lead">From University Heights to the lakeshore and the historic neighborhoods of Cleveland, we bring clean, premium smart home installs to <strong>${locations.length} communities</strong> — and everywhere in between.</p>
+      <h1>Your local handyman across the Heights</h1>
+      <p class="lead">${esc(site.name)} serves ${esc(site.serviceCities.join(', '))}, Ohio — handyman repairs, small renovations, and point of sale violation corrections. Pick your city for details.</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <div class="area-search">
-        <label for="area-filter" class="visually-hidden">Find your city or neighborhood</label>
-        <input type="search" id="area-filter" placeholder="Find your city or neighborhood…" autocomplete="off">
-      </div>
-
-      <h2 class="area-group-title">Cities &amp; suburbs</h2>
-      <ul class="area-list" id="area-list-suburbs">${suburbs.map(cardFor).join('')}</ul>
-
-      <h2 class="area-group-title">Cleveland neighborhoods</h2>
-      <ul class="area-list" id="area-list-neighborhoods">${neighborhoods.map(cardFor).join('')}</ul>
-
-      <p class="area-empty" hidden>No match — but we likely serve your area too. <a href="/contact.html">Just ask us</a>.</p>
+      <ul class="area-list area-list-lg">${locations.map(cardFor).join('')}</ul>
     </div>
   </section>
 
-  ${C.ctaBand('Don’t see your street? We probably serve it.', 'If you’re in or around Northeast Ohio, reach out — we’ll let you know right away and get you a free quote.')}
+  ${C.ctaBand('Not sure if you’re in our area?', 'Just ask — call or text us and we’ll let you know right away and get you a free estimate.')}
   `;
 
   return {
     path: 'service-areas.html',
     html: layout({
-      title: `Service Areas | Smart Home Installation Across ${site.serviceAreaLabel}`,
-      description: `Cleveland Smart Home Solutions serves ${locations.length}+ communities across Northeast Ohio — University Heights, Shaker Heights, Beachwood, Lakewood, Cleveland & more. Find your area.`,
+      title: `Service Areas | Handyman in South Euclid, University Heights, Cleveland Heights & Beachwood`,
+      description:
+        'The Heights Handyman serves South Euclid, University Heights, Cleveland Heights & Beachwood, Ohio — handyman repairs, small renovations, and point of sale inspection violation repair. Find your city.',
       path: '/service-areas.html',
       body,
       jsonLd,

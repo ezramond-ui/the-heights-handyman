@@ -1,5 +1,5 @@
 /**
- * Shared email helper for the contact + review form handlers.
+ * Shared email helper for the contact form handler.
  *
  * Configure these environment variables in your host (Vercel/Netlify/etc.):
  *   SMTP_HOST       e.g. smtp.gmail.com
@@ -7,9 +7,9 @@
  *   SMTP_USER       SMTP username / login
  *   SMTP_PASS       SMTP password or app password
  *   MAIL_FROM       (optional) From address; defaults to SMTP_USER
- *   MAIL_TO         Owner inbox that receives submissions for approval
+ *   MAIL_TO         Inbox that receives contact-form submissions
  *
- * If SMTP is not configured, handlers respond 503 with a friendly message
+ * If SMTP is not configured, the handler responds 503 with a friendly message
  * so the site still works and the form degrades gracefully.
  */
 const nodemailer = require('nodemailer');
@@ -32,7 +32,7 @@ function getTransport() {
 }
 
 // Default recipient for form submissions when MAIL_TO isn't set in the host env.
-const DEFAULT_MAIL_TO = 'ezra@clevelandsmarthomesolutions.com';
+const DEFAULT_MAIL_TO = 'ezra@theheightshandyman.com';
 
 async function sendMail({ subject, text, html, replyTo }) {
   const to = process.env.MAIL_TO || DEFAULT_MAIL_TO;

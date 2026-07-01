@@ -1,15 +1,22 @@
 /** Reusable UI sections, inline SVG icons, and JSON-LD schema builders. */
 const { esc, site } = require('./layout');
-const { tiers, keyServices } = require('../data/services');
+const { categories } = require('../data/services');
 
 /* ───────────────────────── Inline SVG icons ───────────────────────── */
+// Trade icons for the service tiles + a few generic UI icons. All are drawn
+// on a 24×24 grid with `stroke="currentColor"` and no fill.
 const icons = {
-  bulb: '<path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/>',
-  switch: '<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M9 7h6M12 12v5"/>',
-  thermostat: '<path d="M14 14.76V5a2 2 0 0 0-4 0v9.76a4 4 0 1 0 4 0Z"/>',
-  camera: '<rect x="3" y="6" width="14" height="12" rx="2"/><path d="M17 10l4-2v8l-4-2"/><circle cx="10" cy="12" r="2.5"/>',
-  lock: '<rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
-  shade: '<path d="M3 4h18M4 4v8a8 8 0 0 0 16 0V4M12 12v8M12 20l-2.5-2.5M12 20l2.5-2.5"/>',
+  // Trades
+  bolt: '<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/>',
+  panel: '<rect x="3.5" y="4.5" width="17" height="15" rx="1"/><path d="M9 4.5v15M15 4.5v15"/>',
+  roller: '<rect x="4" y="4" width="12" height="6" rx="1"/><path d="M16 7h3.5a1 1 0 0 1 1 1v2.5a1 1 0 0 1-1 1H12"/><path d="M12 12.5V15a1 1 0 0 1-1 1h-1v5"/>',
+  tile: '<rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><rect x="13.5" y="13.5" width="7" height="7" rx="1"/>',
+  brick: '<rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 12h18M10 5v7M17 5v7M6 12v7M13.5 12v7"/>',
+  saw: '<path d="M13.5 8.5 4.9 17.1a1.9 1.9 0 0 0 0 2.7 1.9 1.9 0 0 0 2.7 0L16.2 11"/><path d="M11.8 6.8l5.4 5.4 3-3a2.4 2.4 0 0 0 0-3.4l-2-2a2.4 2.4 0 0 0-3.4 0z"/>',
+  plank: '<rect x="3" y="5" width="18" height="14" rx="1"/><path d="M3 9.7h18M3 14.3h18M9 5v4.7M15 9.7v4.6M6 14.3V19M13 14.3V19"/>',
+  wrench: '<path d="M14.5 4.5a4 4 0 0 0-4.9 5.2L3 16.3V21h4.7l6.6-6.6a4 4 0 0 0 5.2-4.9l-2.7 2.7-2.8-.8-.8-2.8z"/>',
+  // General UI
+  clipboard: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2H9z"/><path d="M8.5 12.5l2.5 2.5 4.5-4.5"/>',
   home: '<path d="M3 11l9-7 9 7M5 10v10h5v-6h4v6h5V10"/>',
   shield: '<path d="M12 2l8 3v6c0 5-3.4 8.5-8 11-4.6-2.5-8-6-8-11V5l8-3Z"/><path d="M9 12l2 2 4-4"/>',
   spark: '<path d="M12 2v6M12 16v6M2 12h6M16 12h6M5 5l4 4M15 15l4 4M19 5l-4 4M9 15l-4 4"/>',
@@ -19,185 +26,165 @@ const icons = {
   check: '<path d="M20 6 9 17l-5-5"/>',
   star: '<path d="M12 2l3 7 7 .5-5.5 4.5 2 7L12 17l-6.5 4 2-7L2 9.5 9 9z"/>',
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
-  leaf: '<path d="M11 20A7 7 0 0 1 4 13c0-5 5-9 16-9 0 11-4 16-9 16Z"/><path d="M11 20c0-5 2-9 6-12"/>',
-  voice: '<rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>',
+  broom: '<path d="M19 4 9 14M4 20s1-4 3.5-6.5S14 10 14 10l0 0s-1 4-3.5 6.5S4 20 4 20Z"/><path d="M12 12l3 3"/>',
 };
 
 function icon(name, cls = 'icon') {
-  return `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name] || icons.spark}</svg>`;
+  return `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name] || icons.wrench}</svg>`;
 }
 
-/* ─────────────────────── Shared content sections ──────────────────── */
+/* ─────────────────────── Call-to-action helpers ───────────────────── */
 
-// The core differentiator — reused prominently across the site.
-function differentiator(variant = 'band') {
+// Small reassurance line shown beneath a primary CTA.
+function ctaNote(text) {
+  return `<p class="cta-note">${esc(text || site.ctaNote)}</p>`;
+}
+
+// The primary tap-to-call button — large, matching the flyer's "Call or Text"
+// treatment. `variant` controls styling on light vs. dark backgrounds.
+function callButton({ variant = 'accent' } = {}) {
+  const cls = variant === 'ghost' ? 'btn btn-ghost btn-lg' : 'btn btn-call btn-lg';
+  return `<a class="${cls}" href="tel:${site.phoneHref}">${icon('phone', 'icon icon-sm')} Call or text us</a>`;
+}
+
+// A repeated "Get a Free Estimate" + call block. Used across pages.
+function estimateCta({ heading, sub, center = true } = {}) {
+  return `<div class="estimate-cta${center ? ' center' : ''}">
+    ${heading ? `<h2 class="estimate-cta-h">${esc(heading)}</h2>` : ''}
+    ${sub ? `<p class="estimate-cta-sub">${esc(sub)}</p>` : ''}
+    <div class="cta-actions${center ? ' cta-actions-center' : ''}">
+      <a class="btn btn-accent btn-lg" href="/contact.html">${esc(site.primaryCta.label)}</a>
+      ${callButton()}
+    </div>
+    ${ctaNote()}
+  </div>`;
+}
+
+// Final call-to-action band (navy).
+function ctaBand(heading, sub) {
+  return `<section class="cta-band" aria-labelledby="cta-h">
+    <div class="container cta-inner">
+      <div>
+        <h2 id="cta-h">${esc(heading)}</h2>
+        <p>${esc(sub)}</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-accent btn-lg" href="/contact.html">${esc(site.primaryCta.label)}</a>
+        ${callButton({ variant: 'ghost' })}
+        <p class="cta-note cta-note-band">${esc(site.ctaNote)}</p>
+      </div>
+    </div>
+  </section>`;
+}
+
+/* ─────────────────────── Service (trade) tiles ────────────────────── */
+
+// Minimal trade tiles: circular icon badge, bold label, thin gold underline.
+// Each links to the matching anchor on the Services page.
+function serviceTiles() {
+  const tiles = categories
+    .map(
+      (c) => `<a class="tile" href="/services.html#${c.id}">
+        <span class="tile-badge">${icon(c.icon, 'icon icon-lg')}</span>
+        <span class="tile-label">${esc(c.name)}</span>
+      </a>`
+    )
+    .join('');
+  return `<div class="tile-grid">${tiles}</div>`;
+}
+
+// Detailed trade cards (icon badge + label + one line), each with an id anchor
+// so tiles on other pages can deep-link to it. Used on the Services page.
+function serviceDetail() {
+  return categories
+    .map(
+      (c) => `<article class="trade-card" id="${c.id}">
+        <span class="tile-badge">${icon(c.icon, 'icon icon-lg')}</span>
+        <h3>${esc(c.name)}</h3>
+        <p>${esc(c.blurb)}</p>
+      </article>`
+    )
+    .join('');
+}
+
+/* ─────────────────── Point-of-Sale violation banner ───────────────── */
+
+// Prominent navy banner — the site's primary SEO focus. Matches the flyer's
+// navy treatment. Used on the homepage and reused elsewhere.
+function posBanner() {
+  return `<section class="pos-banner" aria-labelledby="pos-banner-h">
+    <div class="container pos-banner-inner">
+      <div class="pos-banner-copy">
+        <span class="eyebrow">Point of Sale (POS) violations</span>
+        <h2 id="pos-banner-h">Specializing in Point of Sale Violations</h2>
+        <p class="pos-banner-lead">Failed your inspection? We’ll get you to closing — <strong>fast</strong>. We repair the exact items city inspectors flag across ${esc(site.serviceCities.join(', '))}.</p>
+        <div class="pos-banner-actions">
+          <a class="btn btn-accent btn-lg" href="/pos-violations.html">POS violation repairs</a>
+          ${callButton({ variant: 'ghost' })}
+        </div>
+      </div>
+      <figure class="pos-banner-media">
+        <img src="https://placehold.co/1000x760/F4EEE1/12233F/png?text=Home+exterior+%2F%0Ainspection+clipboard%0A(replace+photo)" width="1000" height="760"
+             alt="Home exterior in the Heights being prepared for a point of sale city inspection" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>`;
+}
+
+/* ───────────────────────── Shared sections ────────────────────────── */
+
+// The three-part promise — echoes the tagline.
+function differentiator() {
   const points = [
-    { icon: 'home', title: 'No major construction', text: 'We don’t open walls or run new wire. Your home stays your home.' },
-    { icon: 'leaf', title: 'No mess', text: 'Clean, careful, tidy work — we leave each space better than we found it.' },
-    { icon: 'spark', title: 'No stress', text: 'A sophisticated, modern approach. You relax while we handle everything.' },
+    { icon: 'check', title: 'Done right', text: 'Code-compliant, quality repairs that pass inspection and last — no shortcuts.' },
+    { icon: 'broom', title: 'Done clean', text: 'We protect your floors and finishes and leave every space tidier than we found it.' },
+    { icon: 'clock', title: 'Done on time', text: 'We show up when we say we will and hit your closing and project deadlines.' },
   ];
   const cards = points
     .map(
       (p) => `<div class="diff-card">
-        ${icon(p.icon, 'icon icon-accent')}
+        ${icon(p.icon, 'icon icon-lg icon-accent')}
         <h3>${p.title}</h3>
         <p>${p.text}</p>
       </div>`
     )
     .join('');
-
-  return `<section class="section diff-section ${variant === 'band' ? 'diff-band' : ''}" aria-labelledby="diff-h">
+  return `<section class="section diff-section" aria-labelledby="diff-h">
     <div class="container">
       <div class="section-head center">
-        <span class="eyebrow">The premium difference</span>
-        <h2 id="diff-h">Smart home technology, without tearing your home apart</h2>
-        <p class="lead">Many companies treat smart home installation like a renovation — opening walls, running wire, and disrupting your home and your life for days. We do the opposite. Cleveland Smart Home Solutions specializes in <strong>clean, simple, elegant installs with minimal impact</strong>.</p>
+        <span class="eyebrow">Why neighbors call us</span>
+        <h2 id="diff-h">Done right. Done clean. Done on time.</h2>
       </div>
       <div class="diff-grid">${cards}</div>
     </div>
   </section>`;
 }
 
-// Tier cards — used on home (compact) and services (full).
-function tierCards({ full = false } = {}) {
-  return tiers
-    .map((t) => {
-      const feats = t.features
-        .map((f) => `<li>${icon('check', 'icon icon-sm icon-accent')}<span>${esc(f)}</span></li>`)
-        .join('');
-      return `<article class="tier-card${t.popular ? ' tier-popular' : ''}" id="${t.id}">
-        ${t.popular ? '<span class="tier-flag">Most popular</span>' : ''}
-        <div class="tier-head">
-          <h3 class="tier-name">${esc(t.name)}</h3>
-          <p class="tier-headline">${esc(t.headline)}</p>
-        </div>
-        <p class="tier-summary">${esc(t.summary)}</p>
-        ${full ? `<ul class="tier-features">${feats}</ul>` : ''}
-        <div class="tier-landlord">
-          ${icon('home', 'icon icon-sm')}
-          <p><strong>Great for landlords &amp; rentals:</strong> ${esc(t.landlord)}</p>
-        </div>
-        ${full ? `<p class="tier-price">${esc(t.priceNote)}</p>` : ''}
-        <a class="btn ${t.popular ? 'btn-accent' : 'btn-outline'} tier-cta" href="/contact.html?tier=${t.id}">Get a ${esc(t.name)} quote</a>
-      </article>`;
-    })
-    .join('');
-}
-
-// Popular installs — a curated highlight of our most-requested upgrades.
-// Replaces the old tier cards on the home and location pages, so both share
-// the same simple card layout.
-const popularInstallIds = [
-  'smart-lighting',
-  'three-way-switches',
-  'smart-thermostats',
-  'smart-locks',
-  'doorbell-cameras',
-  'smart-shades',
-];
-
-function popularInstalls({ id, lead } = {}) {
-  const cards = popularInstallIds
-    .map((id) => keyServices.find((s) => s.id === id))
-    .filter(Boolean)
-    .map((s) => {
-      // The second-switch card is clickable everywhere it appears — it opens
-      // the animated before/after explainer modal. The trigger sits at the
-      // top of the card.
-      if (s.id === 'three-way-switches') {
-        return `<article class="service-card service-card-interactive" role="button" tabindex="0"
-        data-switch-demo-open aria-haspopup="dialog" aria-controls="switch-demo-modal">
-      ${icon(s.icon, 'icon icon-lg icon-accent')}
-      <h3>${esc(s.name)}</h3>
-      <span class="service-card-cta">${icon('spark', 'icon icon-sm')} See the before &amp; after</span>
-      <p>${esc(s.blurb)}</p>
-    </article>`;
-      }
-      return `<article class="service-card">
-      ${icon(s.icon, 'icon icon-lg icon-accent')}
-      <h3>${esc(s.name)}</h3>
-      <p>${esc(s.blurb)}</p>
-    </article>`;
-    })
-    .join('');
-  const leadText =
-    lead ||
-    'No rigid packages — just the upgrades homeowners ask for most. Mix and match what fits your home, and we’ll figure out the best solution for you.';
-  return `<section class="section section-soft"${id ? ` id="${id}"` : ''} aria-labelledby="popular-h">
-    <div class="container">
-      <div class="section-head center">
-        <span class="eyebrow">Popular installs</span>
-        <h2 id="popular-h">Our most-requested smart upgrades</h2>
-        <p class="lead">${esc(leadText)}</p>
-        ${
-          site.pricing && site.pricing.startingAt
-            ? `<p class="popular-price">Projects start around <strong>${esc(site.pricing.startingAt)}</strong> installed — every quote is free and custom.</p>`
-            : ''
-        }
-      </div>
-      <div class="service-grid">${cards}</div>
-      <div class="center mt-lg">
-        <a class="btn btn-accent btn-lg" href="${site.primaryCta.href}">${esc(site.primaryCta.label)}</a>
-        ${ctaNote()}
-      </div>
+// Trust badges row — Licensed, Insured, Bonded.
+function trustRow() {
+  const items = [
+    { icon: 'shield', t: 'Licensed', d: 'Professional, code-compliant work' },
+    { icon: 'check', t: 'Insured', d: 'Fully covered, start to finish' },
+    { icon: 'star', t: 'Bonded', d: 'Protected and accountable work' },
+  ];
+  return `<section class="trust-row" aria-label="Licensed, insured, and bonded">
+    <div class="container trust-grid">
+      ${items
+        .map(
+          (i) => `<div class="trust-item">${icon(i.icon, 'icon icon-accent')}<div><strong>${i.t}</strong><span>${i.d}</span></div></div>`
+        )
+        .join('')}
     </div>
-  </section>
-  ${switchDemoModal()}`;
+  </section>`;
 }
 
-// Animated before/after explainer for the second-switch upgrade.
-// The canvases are driven by the switch-demo code in /js/main.js.
-function switchDemoModal() {
-  return `<div class="modal-overlay" id="switch-demo-modal" hidden>
-    <div class="modal switch-demo" role="dialog" aria-modal="true" aria-labelledby="switch-demo-title">
-      <button class="modal-close" type="button" data-switch-demo-close aria-label="Close explainer">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
-      </button>
-      <div class="switch-demo-head">
-        <span class="eyebrow">A second switch, anywhere</span>
-        <h2 id="switch-demo-title">The old way vs. a smart wireless switch</h2>
-      </div>
-      <div class="switch-demo-grid">
-        <figure class="switch-demo-panel switch-demo-before">
-          <figcaption class="switch-demo-side-title">Before</figcaption>
-          <div class="switch-demo-stage"><canvas class="switch-demo-canvas" data-scene="before" aria-label="Animation: a person walks across the room to reach a single light switch, then walks back."></canvas></div>
-          <p class="switch-demo-status" data-status="before" aria-live="polite"></p>
-        </figure>
-        <figure class="switch-demo-panel switch-demo-after">
-          <figcaption class="switch-demo-side-title">After — Smart Switch</figcaption>
-          <div class="switch-demo-stage"><canvas class="switch-demo-canvas" data-scene="after" aria-label="Animation: a person taps a smart switch beside them; a wireless signal crosses to the far switch and turns the light off."></canvas></div>
-          <p class="switch-demo-status" data-status="after" aria-live="polite"></p>
-        </figure>
-      </div>
-      <div class="switch-demo-actions">
-        <button class="btn btn-accent" type="button" data-switch-demo-replay>
-          ${icon('spark', 'icon icon-sm')} Replay
-        </button>
-      </div>
-    </div>
-  </div>`;
-}
-
-// Key services grid.
-function serviceGrid() {
-  return keyServices
-    .map(
-      (s) => `<article class="service-card${s.core ? ' service-core' : ''}">
-      ${icon(s.icon, 'icon icon-lg icon-accent')}
-      <h3>${esc(s.name)}${s.core ? ' <span class="badge">Our specialty</span>' : ''}</h3>
-      <p>${esc(s.blurb)}</p>
-    </article>`
-    )
-    .join('');
-}
-
-// How it works.
+// How it works — short handyman process.
 function processSteps() {
   const steps = [
-    { n: '01', t: 'Free consultation', d: 'We listen to how you live and what you want — by phone, video, or in your home. No pressure, ever.' },
-    { n: '02', t: 'A simple plan', d: 'We design a clean, no-demolition plan and an honest, transparent quote tailored to your home.' },
-    { n: '03', t: 'Tidy install day', d: 'We arrive on time, work cleanly, and respect your space like the neighbors we are.' },
-    { n: '04', t: 'Walkthrough', d: 'We set up your scenes and app, then walk you through everything until it feels effortless.' },
+    { n: '01', t: 'Call or text us', d: 'Tell us what you need — send a few photos if it’s easier. We reply fast.' },
+    { n: '02', t: 'Free estimate', d: 'A clear, honest price with no surprises and no pressure.' },
+    { n: '03', t: 'We get to work', d: 'On time, clean, and code-compliant — done around your schedule and deadlines.' },
+    { n: '04', t: 'Done & spotless', d: 'We finish the job right and leave your home clean.' },
   ];
   const items = steps
     .map(
@@ -212,90 +199,11 @@ function processSteps() {
     <div class="container">
       <div class="section-head center">
         <span class="eyebrow">How it works</span>
-        <h2 id="process-h">From hello to “wow” — without the headache</h2>
+        <h2 id="process-h">Simple, from first call to finished job</h2>
       </div>
       <ol class="steps">${items}</ol>
     </div>
   </section>`;
-}
-
-// Trust badges row.
-function trustRow() {
-  const items = [
-    { icon: 'pin', t: 'Locally owned', d: 'Based in University Heights' },
-    { icon: 'shield', t: 'Licensed &amp; insured', d: 'Protected from start to finish' },
-    { icon: 'hand', t: 'Genuine care', d: 'We treat your home like our own' },
-    { icon: 'star', t: 'Honest, local pricing', d: 'Fair rates, never an upsell' },
-  ];
-  return `<section class="trust-row" aria-label="Why homeowners trust us">
-    <div class="container trust-grid">
-      ${items
-        .map(
-          (i) => `<div class="trust-item">${icon(i.icon, 'icon icon-accent')}<div><strong>${i.t}</strong><span>${i.d}</span></div></div>`
-        )
-        .join('')}
-    </div>
-  </section>`;
-}
-
-// Small reassurance line shown beneath a primary CTA.
-function ctaNote(text) {
-  return `<p class="cta-note">${esc(text || site.ctaNote)}</p>`;
-}
-
-// Final call-to-action band.
-function ctaBand(heading, sub) {
-  return `<section class="cta-band" aria-labelledby="cta-h">
-    <div class="container cta-inner">
-      <div>
-        <h2 id="cta-h">${heading}</h2>
-        <p>${sub}</p>
-      </div>
-      <div class="cta-actions">
-        <a class="btn btn-accent btn-lg" href="/contact.html">${esc(site.primaryCta.label)}</a>
-        <a class="btn btn-ghost btn-lg" href="tel:${site.phoneHref}">${icon('phone', 'icon icon-sm')} ${esc(site.phone)}</a>
-        <p class="cta-note cta-note-band">${esc(site.ctaNote)}</p>
-      </div>
-    </div>
-  </section>`;
-}
-
-// Trust-building guarantee — used on the homepage in place of testimonials
-// until owner-approved reviews arrive. Honest, confident, and reassuring.
-function guarantee() {
-  const promises = [
-    { icon: 'shield', t: 'Spotless, careful work', d: 'We protect your floors and finishes and leave every space cleaner than we found it.' },
-    { icon: 'clock', t: 'On time, every time', d: 'We arrive when we say we will and respect your home like the neighbors we are.' },
-    { icon: 'hand', t: 'We make it right', d: 'We walk you through everything until it just works — and stand behind every install.' },
-  ];
-  const cards = promises
-    .map(
-      (p) => `<div class="guarantee-card">${icon(p.icon, 'icon icon-lg icon-accent')}<h3>${p.t}</h3><p>${p.d}</p></div>`
-    )
-    .join('');
-  return `<section class="section guarantee-section" aria-labelledby="guarantee-h">
-    <div class="container">
-      <div class="section-head center">
-        <span class="eyebrow">Our promise to your home</span>
-        <h2 id="guarantee-h">Locally owned, licensed &amp; insured — and personally accountable</h2>
-        <p class="lead">No call centers, no rotating crews. One local specialist who treats your home like their own, from the first walkthrough to the final tap on your phone.</p>
-      </div>
-      <div class="guarantee-grid">${cards}</div>
-    </div>
-  </section>`;
-}
-
-// Review invitation — an honest, confident call for the first reviews
-// (used in place of testimonials until real, owner-approved ones arrive).
-function reviewInvite({ reviewHref = '/reviews.html#leave-review' } = {}) {
-  return `<div class="review-invite">
-    ${icon('star', 'icon icon-xl icon-accent')}
-    <p class="review-invite-lead">We’d love the chance to earn your trust. Every ${esc(site.name)} install is backed by clean, careful work and genuine care — and your honest feedback helps neighbors across ${esc(site.serviceAreaLabel)} choose with confidence. Contact us today for a free quote.</p>
-    <div class="review-invite-actions">
-      <a class="btn btn-accent btn-lg" href="/contact.html">Get a Free Quote</a>
-      <a class="btn btn-outline" href="${reviewHref}">Leave a Review</a>
-    </div>
-  </div>`;
 }
 
 /* ──────────────────────── JSON-LD schema builders ─────────────────── */
@@ -303,6 +211,10 @@ function reviewInvite({ reviewHref = '/reviews.html#leave-review' } = {}) {
 function jsonLdScript(obj) {
   return `<script type="application/ld+json">${JSON.stringify(obj)}</script>`;
 }
+
+// The services we advertise, reused in schema descriptions.
+const SERVICE_SUMMARY =
+  'Handyman services, small renovations, and point-of-sale (POS) inspection violation repair — electrical, drywall, painting, tile, masonry, carpentry, and flooring.';
 
 function localBusinessSchema(extra = {}) {
   return {
@@ -312,6 +224,7 @@ function localBusinessSchema(extra = {}) {
     name: site.name,
     legalName: site.legalName,
     slogan: site.tagline,
+    description: SERVICE_SUMMARY,
     url: site.url,
     telephone: site.phone,
     email: site.email,
@@ -329,7 +242,7 @@ function localBusinessSchema(extra = {}) {
       latitude: site.address.latitude,
       longitude: site.address.longitude,
     },
-    areaServed: { '@type': 'GeoCircle', name: site.serviceAreaLabel },
+    areaServed: site.serviceCities.map((c) => ({ '@type': 'City', name: `${c}, OH` })),
     openingHoursSpecification: site.hoursSchema.map((h) => ({
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: h.days,
@@ -367,18 +280,18 @@ function breadcrumbTrail(crumbs) {
 
 module.exports = {
   icon,
-  differentiator,
-  tierCards,
-  popularInstalls,
-  switchDemoModal,
-  serviceGrid,
-  processSteps,
-  trustRow,
-  ctaBand,
   ctaNote,
-  guarantee,
-  reviewInvite,
+  callButton,
+  estimateCta,
+  ctaBand,
+  serviceTiles,
+  serviceDetail,
+  posBanner,
+  differentiator,
+  trustRow,
+  processSteps,
   jsonLdScript,
+  SERVICE_SUMMARY,
   localBusinessSchema,
   breadcrumbSchema,
   breadcrumbTrail,
