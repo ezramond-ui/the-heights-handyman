@@ -91,7 +91,6 @@ module.exports = function contact() {
           <h2>Reach us directly</h2>
           <ul class="contact-list">
             <li>${C.icon('phone', 'icon icon-accent')}<div><span class="contact-label">Call or text</span><a href="tel:${site.phoneHref}">${esc(site.phone)}</a></div></li>
-            <li>${C.icon('spark', 'icon icon-accent')}<div><span class="contact-label">Email (backup)</span><a href="mailto:${site.email}">${esc(site.email)}</a></div></li>
             <li>${C.icon('pin', 'icon icon-accent')}<div><span class="contact-label">Serving</span><span>${esc(site.serviceCities.join(', '))}, OH</span></div></li>
             <li>${C.icon('clock', 'icon icon-accent')}<div><span class="contact-label">Hours</span><span>${esc(site.hours)}</span></div></li>
           </ul>

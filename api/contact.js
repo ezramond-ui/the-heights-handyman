@@ -32,7 +32,7 @@ module.exports = async function handler(req, res) {
     return res.end(
       JSON.stringify({
         error:
-          'Our online form isn’t connected yet. Please email or call us directly and we’ll respond right away.',
+          'Our online form isn’t connected yet. Please call or text us directly and we’ll respond right away.',
       })
     );
   }

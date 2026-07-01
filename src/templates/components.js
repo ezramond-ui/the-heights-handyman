@@ -227,7 +227,6 @@ function localBusinessSchema(extra = {}) {
     description: SERVICE_SUMMARY,
     url: site.url,
     telephone: site.phone,
-    email: site.email,
     image: site.url + site.ogImage,
     priceRange: '$$',
     address: {

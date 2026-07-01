@@ -80,7 +80,6 @@ function footer() {
       <h2>Get in Touch</h2>
       <ul class="footer-contact">
         <li><a href="tel:${site.phoneHref}">Call or text: ${esc(site.phone)}</a></li>
-        <li><a href="mailto:${site.email}">${esc(site.email)}</a></li>
         <li>${esc(site.serviceCities.join(', '))}, OH</li>
         <li>${esc(site.hours)}</li>
       </ul>
