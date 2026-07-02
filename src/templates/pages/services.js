@@ -34,8 +34,8 @@ module.exports = function services() {
         ${C.ctaNote()}
       </div>
       <figure class="services-hero-media">
-        <img src="https://placehold.co/600x450/12233F/F4EEE1/png?text=Handyman+at+work%0A(replace+photo)" width="600" height="450"
-             alt="Handyman repairing trim in a Cleveland Heights home" loading="eager" decoding="async">
+        <img src="/images/services-tools.jpg" width="600" height="450"
+             alt="A tape measure, square, pliers, wrench and drill — the tools behind our Cleveland Heights handyman services" loading="eager" decoding="async">
       </figure>
     </div>
   </section>

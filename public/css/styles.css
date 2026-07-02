@@ -436,7 +436,7 @@ strong { font-weight: 600; color: var(--ink); }
 .pos-banner-lead strong { color: #fff; }
 .pos-banner-actions { display: flex; gap: .8rem; flex-wrap: wrap; margin-top: 1.5rem; }
 .pos-banner-media { margin: 0; }
-.pos-banner-media img { width: 100%; height: auto; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+.pos-banner-media img { width: 100%; aspect-ratio: 4 / 3; height: auto; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
 
 .pos-callout { display: grid; grid-template-columns: 1.3fr .7fr; gap: 2.5rem; align-items: center; }
 .pos-callout-card { background: var(--dark); color: #dce4ef; border-radius: var(--radius-lg); padding: 2.1rem; box-shadow: var(--shadow-lg); text-align: center; }

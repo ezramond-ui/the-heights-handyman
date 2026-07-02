@@ -124,8 +124,8 @@ function posBanner() {
         </div>
       </div>
       <figure class="pos-banner-media">
-        <img src="https://placehold.co/1000x760/F4EEE1/12233F/png?text=Home+exterior+%2F%0Ainspection+clipboard%0A(replace+photo)" width="1000" height="760"
-             alt="Home exterior in the Heights being prepared for a point of sale city inspection" loading="lazy" decoding="async">
+        <img src="/images/pos-tools.jpg" width="1000" height="760"
+             alt="Drill, hammer and supplies staged indoors for point of sale violation repairs before a city inspection" loading="lazy" decoding="async">
       </figure>
     </div>
   </section>`;

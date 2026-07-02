@@ -45,8 +45,8 @@ module.exports = function home() {
         </ul>
       </div>
       <div class="hero-visual">
-        <img class="hero-photo" src="https://placehold.co/1200x800/12233F/F4EEE1/png?text=Handyman+with+tool+belt%0A(replace+photo)" width="1200" height="800"
-             alt="Handyman with a tool belt making home repairs in the Heights" loading="eager" decoding="async">
+        <img class="hero-photo" src="/images/hero-tools.jpg" width="1200" height="800"
+             alt="Drill, hammer, paintbrush and fasteners laid out on a workbench, ready for home repairs in the Heights" loading="eager" decoding="async">
       </div>
     </div>
   </section>

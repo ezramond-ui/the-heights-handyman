@@ -13,5 +13,8 @@
   "license": "UNLICENSED",
   "dependencies": {
     "nodemailer": "^6.9.13"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.3"
   }
 }
