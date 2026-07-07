@@ -131,9 +131,12 @@ strong { font-weight: 600; color: var(--ink); }
 .brand:hover { color: #fff; }
 .brand-badge {
   display: inline-flex; align-items: center; justify-content: center; flex: none;
-  width: 50px; height: 50px; border-radius: 50%;
+  width: 50px; height: 50px;
+  /* House silhouette: peaked roof over a square body. */
+  clip-path: polygon(50% 0%, 100% 38%, 100% 100%, 0% 100%, 0% 38%);
+  padding-top: 10px;
   background: var(--accent); color: var(--dark);
-  font-family: 'Manrope', var(--sans); font-weight: 800; font-size: 1.2rem; letter-spacing: .01em;
+  font-family: 'Manrope', var(--sans); font-weight: 800; font-size: 1.1rem; letter-spacing: .01em;
 }
 .brand .brand-name { font-family: 'Manrope', var(--sans); font-weight: 800; font-size: 1.16rem; letter-spacing: -.02em; white-space: nowrap; color: #fff; }
 .brand-name { font-family: var(--serif); font-weight: 600; font-size: 1.12rem; letter-spacing: -.01em; }

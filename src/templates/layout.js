@@ -17,7 +17,7 @@ const NAV = [
   { label: 'Contact', href: '/contact.html' },
 ];
 
-// Lightweight, image-free brand mark: "HH" initials in a gold badge.
+// Lightweight, image-free brand mark: "HH" initials in a gold house badge.
 // Drop a real logo into public/images/ and swap this block if desired.
 function brandMark() {
   return `<span class="brand-badge" aria-hidden="true">HH</span>`;
