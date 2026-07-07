@@ -5,6 +5,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const ROOT = __dirname;
 const DIST = path.join(ROOT, 'dist');
@@ -12,6 +13,7 @@ const PUBLIC = path.join(ROOT, 'public');
 
 const site = require('./src/data/site');
 const { layout } = require('./src/templates/layout');
+const { setVersion } = require('./src/lib/assets');
 
 // Page builders.
 const home = require('./src/templates/pages/home');
@@ -88,6 +90,15 @@ ensureDir(DIST);
 
 // Copy static assets first (css, js, images, etc.).
 copyDir(PUBLIC, DIST);
+
+// Hash the cache-busted assets so their `?v=` changes only when they change.
+// Must run before pages render, since layout reads these versions.
+for (const asset of ['/css/styles.css', '/js/main.js']) {
+  const full = path.join(DIST, asset);
+  if (!fs.existsSync(full)) continue;
+  const hash = crypto.createHash('sha1').update(fs.readFileSync(full)).digest('hex').slice(0, 10);
+  setVersion(asset, hash);
+}
 
 // Collect all rendered pages.
 const pages = [

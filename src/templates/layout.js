@@ -1,5 +1,6 @@
 /** Base HTML shell: SEO head, header with logo mark, nav, footer. */
 const site = require('../data/site');
+const { assetUrl } = require('../lib/assets');
 
 const esc = (s = '') =>
   String(s)
@@ -153,7 +154,7 @@ function layout({ title, description, path, body, jsonLd = '', bodyClass = '', o
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap">
-  <link rel="stylesheet" href="/css/styles.css?v=14">
+  <link rel="stylesheet" href="${assetUrl('/css/styles.css')}">
   ${jsonLd}
 </head>
 <body class="${bodyClass}">
@@ -164,7 +165,7 @@ ${body}
   </main>
   ${footer()}
   ${mobileBar()}
-  <script src="/js/main.js?v=5" defer></script>
+  <script src="${assetUrl('/js/main.js')}" defer></script>
 </body>
 </html>`;
 }
