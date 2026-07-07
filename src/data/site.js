@@ -43,9 +43,10 @@ module.exports = {
   // The four communities we serve, in copy order.
   serviceCities: ['South Euclid', 'University Heights', 'Cleveland Heights', 'Beachwood'],
 
-  hours: 'Monday–Saturday, 8:00am–6:00pm',
+  hours: 'Monday–Thursday, 8:30am–5:30pm · Friday, 8:30am–2:00pm',
   hoursSchema: [
-    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '08:00', closes: '18:00' },
+    { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'], opens: '08:30', closes: '17:30' },
+    { days: ['Friday'], opens: '08:30', closes: '14:00' },
   ],
 
   // ── SOCIAL (optional — leave blank to hide) ──────────────────────────
