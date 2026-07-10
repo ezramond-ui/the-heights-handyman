@@ -63,7 +63,8 @@ module.exports = function terms() {
       </ul>
 
       <h2>5. Payment terms</h2>
-      <p>Payment terms, including deposits, accepted payment methods, and invoicing, will be provided with your confirmed estimate or written agreement for a given project. Payment is due as specified in that agreement. <em>[Placeholder — specific payment terms to be finalized.]</em></p>
+      <p>We accept <strong>cash, credit and debit cards, and digital payments such as Zelle, Venmo, and Cash App</strong>. The payment methods and amounts that apply to your project are confirmed with your estimate or written agreement.</p>
+      <p>For most small jobs, <strong>payment in full is due upon completion of the work</strong>. For larger projects — or those requiring us to purchase significant materials up front — we may require a <strong>deposit before work begins</strong>, with the remaining balance due on completion. Any deposit and its amount will be agreed with you in advance as part of your confirmed estimate. If the scope of a project changes, the final amount due will reflect the revised scope as discussed with you.</p>
 
       <h2>6. Limitation of liability</h2>
       <p>We perform our work with reasonable care and skill. To the fullest extent permitted by law, ${esc(site.name)} and ${esc(site.legalName)} shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or for any loss of profits, revenue, or data, arising out of or related to our services or your use of this website. Our total liability for any claim arising out of a project shall not exceed the amount you paid us for that project. Nothing in these Terms limits any liability that cannot lawfully be limited, including liability for personal injury caused by negligence. This section does not affect any warranty expressly provided in a written agreement for a specific project.</p>
