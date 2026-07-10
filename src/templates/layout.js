@@ -96,6 +96,7 @@ function footer() {
   <div class="footer-legal">
     <div class="container">
       <p>&copy; 2026 ${esc(site.legalName)}. All Rights Reserved. ${esc(site.name)} is a division of ${esc(site.legalName)}.</p>
+      <p class="footer-legal-links"><a href="/terms.html">Terms of Service</a> · <a href="/privacy.html">Privacy Policy</a></p>
     </div>
   </div>
 </footer>`;

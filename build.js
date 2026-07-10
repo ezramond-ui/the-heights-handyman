@@ -22,6 +22,8 @@ const contact = require('./src/templates/pages/contact');
 const posViolations = require('./src/templates/pages/posViolations');
 const serviceAreas = require('./src/templates/pages/serviceAreas');
 const locationPages = require('./src/templates/pages/location');
+const terms = require('./src/templates/pages/terms');
+const privacy = require('./src/templates/pages/privacy');
 
 /* ───────────────────────────── helpers ───────────────────────────── */
 function rmrf(dir) {
@@ -108,6 +110,8 @@ const pages = [
   contact(),
   serviceAreas(),
   ...locationPages(),
+  terms(),
+  privacy(),
 ];
 
 for (const page of pages) {
