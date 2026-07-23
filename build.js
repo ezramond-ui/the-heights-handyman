@@ -6,6 +6,7 @@
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { execSync } = require('child_process');
 
 const ROOT = __dirname;
 const DIST = path.join(ROOT, 'dist');
@@ -72,16 +73,17 @@ function notFoundPage() {
       <h1>We couldn’t find that page</h1>
       <p class="lead">The page you’re looking for moved or doesn’t exist — but help is still one tap away.</p>
       <div class="hero-actions" style="justify-content:center;">
-        <a class="btn btn-accent btn-lg" href="/index.html">Back to home</a>
-        <a class="btn btn-outline btn-lg" href="/contact.html">Get a free estimate</a>
+        <a class="btn btn-accent btn-lg" href="/">Back to home</a>
+        <a class="btn btn-outline btn-lg" href="/contact">Get a free estimate</a>
       </div>
     </div>
   </section>`;
   return layout({
     title: `Page not found | ${site.name}`,
     description: 'The page you’re looking for could not be found.',
-    path: '/404.html',
+    path: '/404',
     body,
+    noindex: true,
   });
 }
 
@@ -122,16 +124,35 @@ writeFile('404.html', notFoundPage());
 console.log(`  ✓ ${pages.length} pages rendered (+ 404).`);
 
 /* ─────────────────────── sitemap.xml + robots ────────────────────── */
-const today = new Date().toISOString().slice(0, 10);
+// Use the last commit date that touched the site's source as <lastmod>,
+// so it only moves when content actually changes (Google distrusts a
+// lastmod that bumps on every deploy). Falls back to today outside git.
+let lastmod;
+try {
+  lastmod = execSync('git log -1 --format=%cs -- src public build.js', { cwd: ROOT })
+    .toString()
+    .trim();
+} catch {
+  /* not a git checkout */
+}
+if (!lastmod) lastmod = new Date().toISOString().slice(0, 10);
+
+// Map an output file path ("areas/beachwood.html") to its clean URL
+// ("/areas/beachwood") — matching canonicals and Vercel's cleanUrls.
+const cleanUrl = (outPath) =>
+  outPath === 'index.html' ? '/' : '/' + outPath.replace(/\.html$/, '');
+
 const urls = pages.map((p) => {
-  const loc = site.url + '/' + p.path;
+  const loc = site.url + cleanUrl(p.path);
   // Home, the POS focus page, and area pages get higher priority.
-  let priority = '0.7';
+  let priority = '0.5';
   if (p.path === 'index.html') priority = '1.0';
   else if (p.path === 'pos-violations.html') priority = '0.9';
   else if (p.path.startsWith('areas/')) priority = '0.8';
   else if (['services.html', 'contact.html'].includes(p.path)) priority = '0.9';
-  return `  <url><loc>${loc}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>${priority}</priority></url>`;
+  else if (p.path === 'service-areas.html') priority = '0.7';
+  else if (['terms.html', 'privacy.html'].includes(p.path)) priority = '0.3';
+  return `  <url><loc>${loc}</loc><lastmod>${lastmod}</lastmod><changefreq>monthly</changefreq><priority>${priority}</priority></url>`;
 });
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

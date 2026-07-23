@@ -6,8 +6,8 @@ const LAST_UPDATED = 'July 10, 2026';
 
 module.exports = function terms() {
   const crumbs = [
-    { name: 'Home', path: '/index.html' },
-    { name: 'Terms of Service', path: '/terms.html' },
+    { name: 'Home', path: '/' },
+    { name: 'Terms of Service', path: '/terms' },
   ];
 
   const cityList = site.serviceCities.join(', ');
@@ -19,7 +19,7 @@ module.exports = function terms() {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
       name: `Terms of Service | ${site.name}`,
-      url: site.url + '/terms.html',
+      url: site.url + '/terms',
     });
 
   const body = `
@@ -59,7 +59,7 @@ module.exports = function terms() {
         <li>${C.icon('check', 'icon icon-sm icon-accent')}<span><strong>Rates.</strong> Message and data rates may apply, depending on your mobile carrier and plan.</span></li>
         <li>${C.icon('check', 'icon icon-sm icon-accent')}<span><strong>Help.</strong> Text <strong>HELP</strong> to ${esc(site.phone)} for assistance, or contact us using the details below.</span></li>
         <li>${C.icon('check', 'icon icon-sm icon-accent')}<span><strong>Opt-out.</strong> You can cancel text messages at any time by texting <strong>STOP</strong> to ${esc(site.phone)}. After you opt out, we will not send you further text messages unless you opt in again.</span></li>
-        <li>${C.icon('check', 'icon icon-sm icon-accent')}<span><strong>Privacy.</strong> We do not share mobile opt-in data or consent with third parties for their marketing purposes. See our <a href="/privacy.html">Privacy Policy</a> for details.</span></li>
+        <li>${C.icon('check', 'icon icon-sm icon-accent')}<span><strong>Privacy.</strong> We do not share mobile opt-in data or consent with third parties for their marketing purposes. See our <a href="/privacy">Privacy Policy</a> for details.</span></li>
       </ul>
 
       <h2>5. Payment terms</h2>
@@ -90,7 +90,7 @@ module.exports = function terms() {
     html: layout({
       title: `Terms of Service | ${site.name}`,
       description: `The Terms of Service for ${site.name}, including service, estimate, payment, and SMS/text-messaging terms for customers across ${cityList}, Ohio.`,
-      path: '/terms.html',
+      path: '/terms',
       body,
       jsonLd,
     }),

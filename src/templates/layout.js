@@ -10,12 +10,14 @@ const esc = (s = '') =>
     .replace(/"/g, '&quot;');
 
 // Primary navigation, reused everywhere.
+// Clean URLs (no .html) — matches Vercel's `cleanUrls: true` so links,
+// canonicals, and the sitemap all agree on one URL per page.
 const NAV = [
-  { label: 'Home', href: '/index.html' },
-  { label: 'Services', href: '/services.html' },
-  { label: 'POS Violations', href: '/pos-violations.html' },
-  { label: 'Service Areas', href: '/service-areas.html' },
-  { label: 'Contact', href: '/contact.html' },
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'POS Violations', href: '/pos-violations' },
+  { label: 'Service Areas', href: '/service-areas' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 // Lightweight, image-free brand mark: "HH" initials in a gold house badge.
@@ -32,7 +34,7 @@ function header(activePath) {
 
   return `<header class="site-header" id="top">
   <div class="container header-inner">
-    <a class="brand" href="/index.html" aria-label="${esc(site.name)} home">
+    <a class="brand" href="/" aria-label="${esc(site.name)} home">
       ${brandMark()}
       <span class="brand-name">${esc(site.name)}</span>
     </a>
@@ -70,11 +72,11 @@ function footer() {
     <nav class="footer-col" aria-label="Site">
       <h2>Explore</h2>
       <ul>
-        <li><a href="/index.html">Home</a></li>
-        <li><a href="/services.html">Services</a></li>
-        <li><a href="/pos-violations.html">POS Violations</a></li>
-        <li><a href="/service-areas.html">Service Areas</a></li>
-        <li><a href="/contact.html">Contact</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/pos-violations">POS Violations</a></li>
+        <li><a href="/service-areas">Service Areas</a></li>
+        <li><a href="/contact">Contact</a></li>
       </ul>
     </nav>
     <div class="footer-col">
@@ -96,7 +98,7 @@ function footer() {
   <div class="footer-legal">
     <div class="container">
       <p>&copy; 2026 ${esc(site.legalName)}. All Rights Reserved. ${esc(site.name)} is a division of ${esc(site.legalName)}.</p>
-      <p class="footer-legal-links"><a href="/terms.html">Terms of Service</a> · <a href="/privacy.html">Privacy Policy</a></p>
+      <p class="footer-legal-links"><a href="/terms">Terms of Service</a> · <a href="/privacy">Privacy Policy</a></p>
     </div>
   </div>
 </footer>`;
@@ -118,15 +120,19 @@ function mobileBar() {
  * @param {object} opts
  * @param {string} opts.title       – <title> (unique per page)
  * @param {string} opts.description – meta description (unique per page)
- * @param {string} opts.path        – canonical path, e.g. "/services.html"
+ * @param {string} opts.path        – canonical URL path (clean, no .html), e.g. "/services" or "/"
  * @param {string} opts.body        – page body HTML
  * @param {string} [opts.jsonLd]    – JSON-LD structured data block(s)
  * @param {string} [opts.bodyClass] – extra class on <body>
  * @param {string} [opts.ogType]    – Open Graph type (default "website")
+ * @param {boolean} [opts.noindex]  – true for pages search engines should skip (404)
  */
-function layout({ title, description, path, body, jsonLd = '', bodyClass = '', ogType = 'website' }) {
+function layout({ title, description, path, body, jsonLd = '', bodyClass = '', ogType = 'website', noindex = false }) {
   const canonical = site.url + path;
   const og = site.url + site.ogImage;
+  const robots = noindex
+    ? '<meta name="robots" content="noindex, nofollow">'
+    : `<meta name="robots" content="index, follow, max-image-preview:large">\n  <link rel="canonical" href="${canonical}">`;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -135,16 +141,20 @@ function layout({ title, description, path, body, jsonLd = '', bodyClass = '', o
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}">
-  <link rel="canonical" href="${canonical}">
+  ${robots}
   <meta name="theme-color" content="#12233F">
   <meta name="format-detection" content="telephone=no">
 
   <meta property="og:type" content="${ogType}">
   <meta property="og:site_name" content="${esc(site.name)}">
+  <meta property="og:locale" content="en_US">
   <meta property="og:title" content="${esc(title)}">
   <meta property="og:description" content="${esc(description)}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${og}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="${esc(site.name)} — ${esc(site.tagline)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(title)}">
   <meta name="twitter:description" content="${esc(description)}">

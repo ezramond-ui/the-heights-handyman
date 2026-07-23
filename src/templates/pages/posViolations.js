@@ -4,8 +4,8 @@ const { locations } = require('../../data/locations');
 
 module.exports = function posViolations() {
   const crumbs = [
-    { name: 'Home', path: '/index.html' },
-    { name: 'POS Violations', path: '/pos-violations.html' },
+    { name: 'Home', path: '/' },
+    { name: 'POS Violations', path: '/pos-violations' },
   ];
 
   const cityList = site.serviceCities.join(', ');
@@ -65,7 +65,7 @@ module.exports = function posViolations() {
     .join('');
 
   const cityLinks = locations
-    .map((l) => `<a href="/areas/${l.slug}.html">${esc(l.name)}</a>`)
+    .map((l) => `<a href="/areas/${l.slug}">${esc(l.name)}</a>`)
     .join('');
 
   const commonFails = [
@@ -148,7 +148,7 @@ module.exports = function posViolations() {
       title: `Point of Sale Violation Repair | Cleveland Heights, University Heights, South Euclid & Beachwood`,
       description:
         'Failed a point of sale inspection in Cleveland Heights, University Heights, South Euclid or Beachwood? We repair POS violations fast — electrical, drywall, paint, carpentry & masonry — so you can pass city inspection and get to closing. Call or text us.',
-      path: '/pos-violations.html',
+      path: '/pos-violations',
       body,
       jsonLd,
       bodyClass: 'page-pos',

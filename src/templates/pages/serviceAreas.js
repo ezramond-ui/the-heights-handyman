@@ -4,12 +4,12 @@ const { locations } = require('../../data/locations');
 
 module.exports = function serviceAreas() {
   const crumbs = [
-    { name: 'Home', path: '/index.html' },
-    { name: 'Service Areas', path: '/service-areas.html' },
+    { name: 'Home', path: '/' },
+    { name: 'Service Areas', path: '/service-areas' },
   ];
 
   const cardFor = (l) =>
-    `<li><a class="area-link" href="/areas/${l.slug}.html" data-name="${esc(l.name.toLowerCase())}">${C.icon('pin', 'icon icon-sm icon-accent')}<span>${esc(l.name)}</span></a></li>`;
+    `<li><a class="area-link" href="/areas/${l.slug}" data-name="${esc(l.name.toLowerCase())}">${C.icon('pin', 'icon icon-sm icon-accent')}<span>${esc(l.name)}</span></a></li>`;
 
   const jsonLd =
     C.jsonLdScript(C.breadcrumbSchema(crumbs)) +
@@ -22,7 +22,7 @@ module.exports = function serviceAreas() {
         '@type': 'ListItem',
         position: i + 1,
         name: `Handyman & POS violation repair in ${l.name}, OH`,
-        url: `${site.url}/areas/${l.slug}.html`,
+        url: `${site.url}/areas/${l.slug}`,
       })),
     });
 
@@ -51,7 +51,7 @@ module.exports = function serviceAreas() {
       title: `Service Areas | Handyman in South Euclid, University Heights, Cleveland Heights & Beachwood`,
       description:
         'The Heights Handyman serves South Euclid, University Heights, Cleveland Heights & Beachwood, Ohio — handyman repairs, small renovations, and point of sale inspection violation repair. Find your city.',
-      path: '/service-areas.html',
+      path: '/service-areas',
       body,
       jsonLd,
     }),

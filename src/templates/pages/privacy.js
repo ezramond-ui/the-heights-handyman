@@ -6,8 +6,8 @@ const LAST_UPDATED = 'July 10, 2026';
 
 module.exports = function privacy() {
   const crumbs = [
-    { name: 'Home', path: '/index.html' },
-    { name: 'Privacy Policy', path: '/privacy.html' },
+    { name: 'Home', path: '/' },
+    { name: 'Privacy Policy', path: '/privacy' },
   ];
 
   const cityList = site.serviceCities.join(', ');
@@ -19,7 +19,7 @@ module.exports = function privacy() {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
       name: `Privacy Policy | ${site.name}`,
-      url: site.url + '/privacy.html',
+      url: site.url + '/privacy',
     });
 
   const body = `
@@ -59,7 +59,7 @@ module.exports = function privacy() {
 
       <h2>4. SMS / text-message data</h2>
       <p>When you provide your mobile number — by submitting our contact form or by texting our business number at ${esc(site.phone)} — we use it to communicate with you about estimates, scheduling, and your project.</p>
-      <p><strong>We do not share or sell your mobile opt-in data or phone number to third parties or affiliates for their marketing or promotional purposes.</strong> Your consent to receive text messages is never shared with third parties for marketing. You can opt out of text messages at any time by replying <strong>STOP</strong>, or text <strong>HELP</strong> for assistance. See our <a href="/terms.html">Terms of Service</a> for the full SMS terms.</p>
+      <p><strong>We do not share or sell your mobile opt-in data or phone number to third parties or affiliates for their marketing or promotional purposes.</strong> Your consent to receive text messages is never shared with third parties for marketing. You can opt out of text messages at any time by replying <strong>STOP</strong>, or text <strong>HELP</strong> for assistance. See our <a href="/terms">Terms of Service</a> for the full SMS terms.</p>
 
       <h2>5. Third-party services</h2>
       <p>We use a limited number of service providers to operate our business — for example, an email/SMTP provider that delivers contact-form submissions to us, and a text-messaging provider that carries our SMS communications. These providers process your information only to provide their service to us and are not permitted to use it for their own marketing. We do not otherwise share your information with third parties except as required by law or to complete work you have requested (for instance, coordinating with a party involved in your home sale, with your consent).</p>
@@ -91,7 +91,7 @@ module.exports = function privacy() {
     html: layout({
       title: `Privacy Policy | ${site.name}`,
       description: `The Privacy Policy for ${site.name} — what we collect, how we use it, and our commitment never to share or sell your mobile opt-in data or phone number for marketing.`,
-      path: '/privacy.html',
+      path: '/privacy',
       body,
       jsonLd,
     }),

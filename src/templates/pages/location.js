@@ -39,7 +39,7 @@ function locationFaq(l) {
 
 function renderLocation(l, index) {
   const slug = l.slug;
-  const path = `/areas/${slug}.html`;
+  const path = `/areas/${slug}`;
   const intro = introTemplates[index % introTemplates.length](l);
   const nearby = l.nearby || [];
 
@@ -48,14 +48,14 @@ function renderLocation(l, index) {
     .map((n) => {
       const match = locations.find((x) => x.name.toLowerCase() === n.toLowerCase());
       return match
-        ? `<a href="/areas/${match.slug}.html">${esc(match.name)}</a>`
+        ? `<a href="/areas/${match.slug}">${esc(match.name)}</a>`
         : `<span>${esc(n)}</span>`;
     })
     .join('');
 
   const crumbs = [
-    { name: 'Home', path: '/index.html' },
-    { name: 'Service Areas', path: '/service-areas.html' },
+    { name: 'Home', path: '/' },
+    { name: 'Service Areas', path: '/service-areas' },
     { name: l.name, path },
   ];
 
@@ -118,7 +118,7 @@ function renderLocation(l, index) {
       <p class="lead">${esc(intro)}</p>
       <div class="hero-actions">
         ${C.callButton()}
-        <a class="btn btn-outline btn-lg" href="/contact.html?city=${encodeURIComponent(l.name)}">Get a free ${esc(l.name)} estimate</a>
+        <a class="btn btn-outline btn-lg" href="/contact?city=${encodeURIComponent(l.name)}">Get a free ${esc(l.name)} estimate</a>
       </div>
     </div>
   </section>
@@ -131,7 +131,7 @@ function renderLocation(l, index) {
       <p>${esc(l.name)} is ${esc(l.character)} The homes here — ${esc(l.homes)} That’s exactly the kind of work we do best: skilled, code-compliant repairs, done clean and on time. From a single fix to a small renovation, one local pro handles the whole list.</p>
 
       <h2>Point of sale violation repair in ${esc(l.name)}</h2>
-      <p>Selling in ${esc(l.name)}? The city’s point of sale inspection has to pass before you close. Send us your violation report and we’ll correct the flagged items — electrical, drywall, paint, carpentry, and masonry — fast enough to keep your closing date. <a href="/pos-violations.html">Learn more about POS violation repair →</a></p>
+      <p>Selling in ${esc(l.name)}? The city’s point of sale inspection has to pass before you close. Send us your violation report and we’ll correct the flagged items — electrical, drywall, paint, carpentry, and masonry — fast enough to keep your closing date. <a href="/pos-violations">Learn more about POS violation repair →</a></p>
 
       <h2>Handyman services we offer in ${esc(l.name)}</h2>
       <ul class="loc-services">${svcItems}</ul>
@@ -158,7 +158,7 @@ function renderLocation(l, index) {
     <div class="container">
       <h2 id="near-h" class="center">We also serve communities near ${esc(l.name)}</h2>
       <div class="nearby-links">${nearbyLinks}</div>
-      <p class="center mt-md"><a class="btn btn-outline" href="/service-areas.html">View all service areas</a></p>
+      <p class="center mt-md"><a class="btn btn-outline" href="/service-areas">View all service areas</a></p>
     </div>
   </section>`
       : ''

@@ -3,8 +3,8 @@ const C = require('../components');
 
 module.exports = function services() {
   const crumbs = [
-    { name: 'Home', path: '/index.html' },
-    { name: 'Services', path: '/services.html' },
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
   ];
 
   const serviceSchema = {
@@ -58,7 +58,7 @@ module.exports = function services() {
         <span class="eyebrow">Selling your home?</span>
         <h2 id="pos-h">Failed a point-of-sale inspection?</h2>
         <p>Cleveland Heights, University Heights, South Euclid, and Beachwood all require a city inspection before you sell. If yours turned up violations, we fix the exact items on the list and get you to closing — fast.</p>
-        <a class="btn btn-accent" href="/pos-violations.html">POS violation repairs</a>
+        <a class="btn btn-accent" href="/pos-violations">POS violation repairs</a>
       </div>
       <div class="pos-callout-card">
         ${C.icon('clipboard', 'icon icon-xl icon-accent')}
@@ -79,7 +79,7 @@ module.exports = function services() {
       title: `Handyman Services in the Heights | ${site.name}`,
       description:
         'Electrical, drywall, painting, tile, masonry, carpentry, flooring, and small renovations across South Euclid, University Heights, Cleveland Heights & Beachwood. Free estimates — call or text us.',
-      path: '/services.html',
+      path: '/services',
       body,
       jsonLd,
     }),

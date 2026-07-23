@@ -57,7 +57,9 @@ module.exports = {
   },
 
   // Default Open Graph / social share image (relative to site root).
-  ogImage: '/images/og-default.svg',
+  // PNG, 1200×630 — Google/Facebook/Twitter don't render SVG previews.
+  // Regenerate from og-default.svg with: node scripts/generate-og.js
+  ogImage: '/images/og-default.png',
 
   founded: '2025',
   licensed: true,
@@ -66,8 +68,8 @@ module.exports = {
 
   // Primary call-to-action copy reused across the site. A free estimate is
   // the low-commitment ask; calling/texting is the most prominent action.
-  primaryCta: { label: 'Get a Free Estimate', href: '/contact.html' },
-  secondaryCta: { label: 'View services', href: '/services.html' },
+  primaryCta: { label: 'Get a Free Estimate', href: '/contact' },
+  secondaryCta: { label: 'View services', href: '/services' },
 
   // Reassurance microcopy shown beneath primary CTAs sitewide.
   ctaNote: 'Free estimates · Call or text us · Licensed, insured & bonded',

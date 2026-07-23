@@ -10,11 +10,6 @@ module.exports = function home() {
       '@type': 'WebSite',
       name: site.name,
       url: site.url,
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: site.url + '/service-areas.html?q={search_term_string}',
-        'query-input': 'required name=search_term_string',
-      },
     }) +
     C.jsonLdScript(C.localBusinessSchema()) +
     C.jsonLdScript({
@@ -61,7 +56,7 @@ module.exports = function home() {
         <p class="lead">From a single repair to a small renovation — tap a trade to see more.</p>
       </div>
       ${C.serviceTiles()}
-      <div class="center mt-lg"><a class="btn btn-outline" href="/services.html">See all services</a></div>
+      <div class="center mt-lg"><a class="btn btn-outline" href="/services">See all services</a></div>
     </div>
   </section>
 
@@ -120,7 +115,7 @@ module.exports = function home() {
       title: `${site.name} | Handyman & POS Violation Repair in South Euclid, University Heights, Cleveland Heights & Beachwood`,
       description:
         'Local handyman for repairs, small renovations, and point-of-sale (POS) inspection violation repair across South Euclid, University Heights, Cleveland Heights & Beachwood, OH. Licensed, insured & bonded. Call or text us for a free estimate.',
-      path: '/index.html',
+      path: '/',
       body,
       jsonLd,
       bodyClass: 'page-home',

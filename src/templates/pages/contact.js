@@ -3,8 +3,8 @@ const C = require('../components');
 
 module.exports = function contact() {
   const crumbs = [
-    { name: 'Home', path: '/index.html' },
-    { name: 'Contact', path: '/contact.html' },
+    { name: 'Home', path: '/' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   const jsonLd =
@@ -13,7 +13,7 @@ module.exports = function contact() {
       '@context': 'https://schema.org',
       '@type': 'ContactPage',
       name: `Contact ${site.name}`,
-      url: site.url + '/contact.html',
+      url: site.url + '/contact',
     });
 
   const body = `
@@ -94,7 +94,7 @@ module.exports = function contact() {
             <li>${C.icon('pin', 'icon icon-accent')}<div><span class="contact-label">Serving</span><span>${esc(site.serviceCities.join(', '))}, OH</span></div></li>
             <li>${C.icon('clock', 'icon icon-accent')}<div><span class="contact-label">Hours</span><span>${esc(site.hours)}</span></div></li>
           </ul>
-          <p class="contact-area"><a href="/service-areas.html">See all service areas</a>.</p>
+          <p class="contact-area"><a href="/service-areas">See all service areas</a>.</p>
         </div>
         <div class="contact-promise">
           ${C.icon('shield', 'icon icon-lg icon-accent')}
@@ -111,7 +111,7 @@ module.exports = function contact() {
       title: `Contact | Free Handyman Estimate in the Heights | ${site.name}`,
       description:
         'Call or text (216) 284-9433 for a free handyman estimate across South Euclid, University Heights, Cleveland Heights & Beachwood — including fast point of sale violation repairs. Licensed, insured & bonded.',
-      path: '/contact.html',
+      path: '/contact',
       body,
       jsonLd,
     }),

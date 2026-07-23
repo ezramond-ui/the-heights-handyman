@@ -53,7 +53,7 @@ function estimateCta({ heading, sub, center = true } = {}) {
     ${heading ? `<h2 class="estimate-cta-h">${esc(heading)}</h2>` : ''}
     ${sub ? `<p class="estimate-cta-sub">${esc(sub)}</p>` : ''}
     <div class="cta-actions${center ? ' cta-actions-center' : ''}">
-      <a class="btn btn-accent btn-lg" href="/contact.html">${esc(site.primaryCta.label)}</a>
+      <a class="btn btn-accent btn-lg" href="/contact">${esc(site.primaryCta.label)}</a>
       ${callButton()}
     </div>
     ${ctaNote()}
@@ -69,7 +69,7 @@ function ctaBand(heading, sub) {
         <p>${esc(sub)}</p>
       </div>
       <div class="cta-actions">
-        <a class="btn btn-accent btn-lg" href="/contact.html">${esc(site.primaryCta.label)}</a>
+        <a class="btn btn-accent btn-lg" href="/contact">${esc(site.primaryCta.label)}</a>
         ${callButton({ variant: 'ghost' })}
         <p class="cta-note cta-note-band">${esc(site.ctaNote)}</p>
       </div>
@@ -84,7 +84,7 @@ function ctaBand(heading, sub) {
 function serviceTiles() {
   const tiles = categories
     .map(
-      (c) => `<a class="tile" href="/services.html#${c.id}">
+      (c) => `<a class="tile" href="/services#${c.id}">
         <span class="tile-badge">${icon(c.icon, 'icon icon-lg')}</span>
         <span class="tile-label">${esc(c.name)}</span>
       </a>`
@@ -119,7 +119,7 @@ function posBanner() {
         <h2 id="pos-banner-h">Specializing in Point of Sale Violations</h2>
         <p class="pos-banner-lead">Failed your inspection? We’ll get you to closing — <strong>fast</strong>. We repair the exact items city inspectors flag across ${esc(site.serviceCities.join(', '))}.</p>
         <div class="pos-banner-actions">
-          <a class="btn btn-accent btn-lg" href="/pos-violations.html">POS violation repairs</a>
+          <a class="btn btn-accent btn-lg" href="/pos-violations">POS violation repairs</a>
           ${callButton({ variant: 'ghost' })}
         </div>
       </div>
@@ -227,6 +227,8 @@ function localBusinessSchema(extra = {}) {
     description: SERVICE_SUMMARY,
     url: site.url,
     telephone: site.phone,
+    email: site.email,
+    foundingDate: site.founded,
     image: site.url + site.ogImage,
     priceRange: '$$',
     address: {
