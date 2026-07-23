@@ -50,10 +50,11 @@ module.exports = {
   ],
 
   // ── SOCIAL (optional — leave blank to hide) ──────────────────────────
+  // Note: the business intentionally has no social media accounts.
   social: {
-    facebook: '',   // PLACEHOLDER e.g. https://facebook.com/...
-    instagram: '',  // PLACEHOLDER
-    google: '',     // PLACEHOLDER Google Business Profile
+    facebook: '',
+    instagram: '',
+    google: 'https://share.google/f09PdFQ8WWnFDUGM2', // Google Business Profile
   },
 
   // Default Open Graph / social share image (relative to site root).

@@ -217,6 +217,9 @@ const SERVICE_SUMMARY =
   'Handyman services, small renovations, and point-of-sale (POS) inspection violation repair — electrical, drywall, painting, tile, masonry, carpentry, and flooring.';
 
 function localBusinessSchema(extra = {}) {
+  // Link the business entity to its profiles elsewhere (Google Business
+  // Profile etc.) so search engines connect them as one business.
+  const sameAs = [site.social.google, site.social.facebook, site.social.instagram].filter(Boolean);
   return {
     '@context': 'https://schema.org',
     '@type': 'HomeAndConstructionBusiness',
@@ -250,6 +253,7 @@ function localBusinessSchema(extra = {}) {
       opens: h.opens,
       closes: h.closes,
     })),
+    ...(sameAs.length ? { sameAs } : {}),
     ...extra,
   };
 }
