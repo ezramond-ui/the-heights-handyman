@@ -8,12 +8,15 @@ module.exports = function posViolations() {
     { name: 'POS Violations', path: '/pos-violations' },
   ];
 
+  // Headline list stays short so the H1 reads well; body copy claims the
+  // full footprint via C.AREA_PHRASE / the city-link grid below.
   const cityList = site.serviceCities.join(', ');
+  const allCities = locations.map((l) => l.name).join(', ');
 
   const faqs = [
     {
       q: 'What is a point of sale (POS) inspection?',
-      a: `Many Ohio cities — including ${cityList} — require a point of sale inspection before a home can be sold. A city inspector walks the property and issues a report listing code violations that must be corrected (or escrowed) before a point of sale certificate is granted and the sale can close.`,
+      a: `Many Ohio cities — including ${C.AREA_PHRASE} — require a point of sale inspection before a home can be sold. A city inspector walks the property and issues a report listing code violations that must be corrected (or escrowed) before a point of sale certificate is granted and the sale can close.`,
     },
     {
       q: 'Why do homes fail a POS inspection?',
@@ -21,7 +24,7 @@ module.exports = function posViolations() {
     },
     {
       q: 'Which cities do you handle POS violation repairs in?',
-      a: `We repair point of sale violations across ${cityList}, Ohio, and correct the specific items on your city inspection report.`,
+      a: `We repair point of sale violations across ${allCities}, Ohio — and correct the specific items on your city inspection report.`,
     },
     {
       q: 'How fast can you complete the repairs before closing?',
@@ -42,8 +45,8 @@ module.exports = function posViolations() {
       serviceType: 'Point of sale inspection violation repair',
       name: 'Point of Sale (POS) Violation Repair',
       provider: { '@id': site.url + '/#business' },
-      areaServed: site.serviceCities.map((c) => ({ '@type': 'City', name: `${c}, OH` })),
-      description: `Fast point of sale inspection violation repair across ${cityList}, Ohio — electrical, drywall, paint, carpentry, and masonry corrections to help homeowners pass city inspection and get to closing.`,
+      areaServed: C.AREA_SERVED,
+      description: `Fast point of sale inspection violation repair across ${C.AREA_PHRASE} in Ohio — electrical, drywall, paint, carpentry, and masonry corrections to help homeowners pass city inspection and get to closing.`,
     }) +
     C.jsonLdScript({
       '@context': 'https://schema.org',
@@ -99,7 +102,7 @@ module.exports = function posViolations() {
   <section class="section">
     <div class="container prose-wide">
       <h2>What is a point of sale inspection?</h2>
-      <p>Before you can sell a home in ${esc(cityList)}, the city sends an inspector to check the property against local housing and safety codes. Anything that doesn’t pass goes on a <strong>point of sale violation report</strong>. Those items generally have to be repaired — or the money escrowed — before the city issues a certificate and your sale can close.</p>
+      <p>Before you can sell a home in ${esc(C.AREA_PHRASE)}, the city sends an inspector to check the property against local housing and safety codes. Anything that doesn’t pass goes on a <strong>point of sale violation report</strong>. Those items generally have to be repaired — or the money escrowed — before the city issues a certificate and your sale can close.</p>
       <p>That puts sellers on a clock. A long list of violations and a looming closing date is exactly the situation we specialize in.</p>
 
       <h2>Why homes fail — the most common violations</h2>
@@ -145,9 +148,9 @@ module.exports = function posViolations() {
   return {
     path: 'pos-violations.html',
     html: layout({
-      title: `Point of Sale Violation Repair | Cleveland Heights, University Heights, South Euclid & Beachwood`,
+      title: `Point of Sale Violation Repair | Cleveland Heights, Shaker Heights, South Euclid, Euclid & More`,
       description:
-        'Failed a point of sale inspection in Cleveland Heights, University Heights, South Euclid or Beachwood? We repair POS violations fast — electrical, drywall, paint, carpentry & masonry — so you can pass city inspection and get to closing. Call or text us.',
+        'Failed a point of sale inspection in Cleveland Heights, Shaker Heights, South Euclid, Euclid, Maple Heights or nearby? We repair POS violations fast — electrical, drywall, paint, carpentry & masonry — so you pass re-inspection and get to closing.',
       path: '/pos-violations',
       body,
       jsonLd,

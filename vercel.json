@@ -4,6 +4,11 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/areas", "destination": "/service-areas", "permanent": true },
+    { "source": "/service-area", "destination": "/service-areas", "permanent": true },
+    { "source": "/locations", "destination": "/service-areas", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

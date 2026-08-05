@@ -1,6 +1,7 @@
 /** Base HTML shell: SEO head, header with logo mark, nav, footer. */
 const site = require('../data/site');
 const { assetUrl } = require('../lib/assets');
+const { areaPhrase, locations } = require('../data/locations');
 
 const esc = (s = '') =>
   String(s)
@@ -66,7 +67,7 @@ function footer() {
     <div class="footer-brand">
       <span class="brand-name">${esc(site.name)}</span>
       <p class="footer-tag">${esc(site.tagline)}</p>
-      <p class="footer-blurb">Handyman services, small renovations, and point-of-sale inspection violation repair across ${esc(site.serviceCities.join(', '))}, Ohio.</p>
+      <p class="footer-blurb">Handyman services, small renovations, and point-of-sale inspection violation repair across ${esc(areaPhrase)} in ${esc(site.address.regionName)}.</p>
       <p class="footer-trust">Licensed · Insured · Bonded</p>
     </div>
     <nav class="footer-col" aria-label="Site">
@@ -83,7 +84,7 @@ function footer() {
       <h2>Get in Touch</h2>
       <ul class="footer-contact">
         <li><a href="tel:${site.phoneHref}">Call or text: ${esc(site.phone)}</a></li>
-        <li>${esc(site.serviceCities.join(', '))}, OH</li>
+        <li><a href="/service-areas">${locations.length} eastside communities</a>, OH</li>
         <li>${esc(site.hours)}</li>
       </ul>
       ${socialLinks ? `<div class="footer-social">${socialLinks}</div>` : ''}

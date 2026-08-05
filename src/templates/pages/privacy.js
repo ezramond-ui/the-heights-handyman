@@ -10,7 +10,7 @@ module.exports = function privacy() {
     { name: 'Privacy Policy', path: '/privacy' },
   ];
 
-  const cityList = site.serviceCities.join(', ');
+  const cityList = C.AREA_PHRASE;
   const location = `${site.address.locality}, ${site.address.regionName}`;
 
   const jsonLd =

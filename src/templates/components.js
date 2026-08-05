@@ -1,6 +1,13 @@
 /** Reusable UI sections, inline SVG icons, and JSON-LD schema builders. */
 const { esc, site } = require('./layout');
 const { categories } = require('../data/services');
+// Derived from the location pages (not site.serviceCities, which is only the
+// short headline list) so adding an area page automatically widens both our
+// structured-data footprint and the service-area wording in body copy.
+const {
+  areaServedSchema: AREA_SERVED,
+  areaPhrase: AREA_PHRASE,
+} = require('../data/locations');
 
 /* ───────────────────────── Inline SVG icons ───────────────────────── */
 // Trade icons for the service tiles + a few generic UI icons. All are drawn
@@ -117,7 +124,7 @@ function posBanner() {
       <div class="pos-banner-copy">
         <span class="eyebrow">Point of Sale (POS) violations</span>
         <h2 id="pos-banner-h">Specializing in Point of Sale Violations</h2>
-        <p class="pos-banner-lead">Failed your inspection? We’ll get you to closing — <strong>fast</strong>. We repair the exact items city inspectors flag across ${esc(site.serviceCities.join(', '))}.</p>
+        <p class="pos-banner-lead">Failed your inspection? We’ll get you to closing — <strong>fast</strong>. We repair the exact items city inspectors flag across ${esc(AREA_PHRASE)}.</p>
         <div class="pos-banner-actions">
           <a class="btn btn-accent btn-lg" href="/pos-violations">POS violation repairs</a>
           ${callButton({ variant: 'ghost' })}
@@ -246,7 +253,7 @@ function localBusinessSchema(extra = {}) {
       latitude: site.address.latitude,
       longitude: site.address.longitude,
     },
-    areaServed: site.serviceCities.map((c) => ({ '@type': 'City', name: `${c}, OH` })),
+    areaServed: AREA_SERVED,
     openingHoursSpecification: site.hoursSchema.map((h) => ({
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: h.days,
@@ -297,6 +304,8 @@ module.exports = {
   processSteps,
   jsonLdScript,
   SERVICE_SUMMARY,
+  AREA_SERVED,
+  AREA_PHRASE,
   localBusinessSchema,
   breadcrumbSchema,
   breadcrumbTrail,

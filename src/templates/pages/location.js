@@ -3,8 +3,9 @@ const C = require('../components');
 const { locations } = require('../../data/locations');
 const { categories } = require('../../data/services');
 
-// A few intro phrasings, chosen by index, so pages don't share identical
-// sentence structure even though every page also has unique local detail.
+// Intro phrasings, chosen by index, so pages don't share identical sentence
+// structure even though every page also has unique local detail. Keep this
+// list at least as long as the location list so wording doesn't repeat.
 const introTemplates = [
   (l) =>
     `Need a handyman in ${l.name}? ${site.name} handles repairs, small renovations, and point of sale inspection violations across ${l.name}, ${l.county} County — done right, done clean, done on time.`,
@@ -14,18 +15,50 @@ const introTemplates = [
     `${l.name} homeowners call ${site.name} for reliable repairs and fast point of sale violation corrections. One local pro for electrical, drywall, paint, tile, masonry, carpentry, and flooring.`,
   (l) =>
     `Bringing dependable handyman service and point of sale repair to ${l.name}, Ohio. From a quick fix to a small renovation — or a failed city inspection — we get it done and keep your home clean.`,
+  (l) =>
+    `Looking for a trusted handyman near ${l.name}? We repair, refinish, and renovate ${l.county} County homes — and we clear point of sale inspection violations before they cost you a closing date.`,
+  (l) =>
+    `From the small stuff to the whole punch list, ${site.name} is the ${l.name} handyman homeowners call back. Licensed, insured, bonded — and fast on point of sale violation repairs.`,
+  (l) =>
+    `Serving ${l.name}, Ohio with honest handyman work and same-week scheduling on most repairs. Electrical, drywall, paint, tile, masonry, carpentry, flooring — plus point of sale inspection fixes.`,
+  (l) =>
+    `Your neighbors in ${l.name} trust ${site.name} for repairs that hold up and a site left spotless. Selling? We correct point of sale violations quickly so your closing stays on track.`,
+  (l) =>
+    `Handyman service in ${l.name}, ${l.county} County — one local pro for the repairs, upgrades, and inspection corrections that keep a home safe, sellable, and looking sharp.`,
+  (l) =>
+    `${site.name} works throughout ${l.name} on everything from a stuck door to a full room refresh — and on the point of sale violation reports that stand between sellers and the closing table.`,
+  (l) =>
+    `Whether it's a repair you've put off or a violation list from the city, ${l.name} homeowners get the same thing from us: straight answers, a free estimate, and work done right the first time.`,
+];
+
+// Non-POS variants for cities without a point-of-sale inspection program.
+const introTemplatesNoPos = [
+  (l) =>
+    `Need a handyman in ${l.name}? ${site.name} handles repairs, small renovations, and the whole to-do list across ${l.name}, ${l.county} County — done right, done clean, done on time.`,
+  (l) =>
+    `${l.name} is ${l.character} We keep those homes in great shape with skilled, code-compliant handyman work, from a single fix to a small renovation.`,
+  (l) =>
+    `${l.name} homeowners call ${site.name} for reliable repairs they don't have to think about twice. One local pro for electrical, drywall, paint, tile, masonry, carpentry, and flooring.`,
+  (l) =>
+    `Bringing dependable handyman service to ${l.name}, Ohio. From a quick fix to a small renovation, we get it done on schedule and leave your home cleaner than we found it.`,
 ];
 
 function locationFaq(l) {
-  return [
+  const faqs = [
     {
       q: `Do you offer handyman services in ${l.name}?`,
       a: `Yes — ${l.name} is part of our core service area. We handle electrical, drywall, painting, tile, masonry, carpentry, flooring, and general repairs and small renovations throughout ${l.name} and ${l.county} County.`,
     },
-    {
+  ];
+
+  if (l.pos !== false) {
+    faqs.push({
       q: `Can you fix point of sale (POS) inspection violations in ${l.name}?`,
       a: `Absolutely. ${l.name} requires a point of sale inspection before a home sells, and we specialize in correcting the violations on that report — fast — so you can pass re-inspection and get to closing on time.`,
-    },
+    });
+  }
+
+  faqs.push(
     {
       q: `Are you licensed, insured, and bonded?`,
       a: `Yes. ${site.name} is licensed, insured, and bonded. We treat every ${l.name} home with care and leave each space cleaner than we found it.`,
@@ -34,13 +67,21 @@ function locationFaq(l) {
       q: `How much does a repair in ${l.name} cost?`,
       a: `Every estimate is free and honest. Pricing depends on the scope of the work — call or text us at ${site.phone}, or send a photo of the job, and we’ll get you a fast quote.`,
     },
-  ];
+    {
+      q: `How soon can you get to a job in ${l.name}?`,
+      a: `${l.name} is minutes from our home base in ${site.address.locality}, so most repairs are scheduled within the same week — and urgent inspection work sooner. Call or text ${site.phone} and we’ll tell you exactly when we can be there.`,
+    }
+  );
+
+  return faqs;
 }
 
 function renderLocation(l, index) {
   const slug = l.slug;
   const path = `/areas/${slug}`;
-  const intro = introTemplates[index % introTemplates.length](l);
+  const hasPos = l.pos !== false;
+  const templates = hasPos ? introTemplates : introTemplatesNoPos;
+  const intro = templates[index % templates.length](l);
   const nearby = l.nearby || [];
 
   // Match nearby names to real location pages for internal linking.
@@ -76,11 +117,17 @@ function renderLocation(l, index) {
     C.jsonLdScript({
       '@context': 'https://schema.org',
       '@type': 'Service',
-      serviceType: 'Handyman services and point of sale violation repair',
-      name: `Handyman & POS Violation Repair in ${l.name}, OH`,
+      serviceType: hasPos
+        ? 'Handyman services and point of sale violation repair'
+        : 'Handyman services',
+      name: hasPos
+        ? `Handyman & POS Violation Repair in ${l.name}, OH`
+        : `Handyman Services in ${l.name}, OH`,
       provider: { '@id': site.url + '/#business' },
       areaServed: { '@type': 'City', name: `${l.name}, OH` },
-      description: `Handyman repairs, small renovations, and point of sale inspection violation corrections in ${l.name}, ${l.county} County, Ohio.`,
+      description: hasPos
+        ? `Handyman repairs, small renovations, and point of sale inspection violation corrections in ${l.name}, ${l.county} County, Ohio.`
+        : `Handyman repairs and small renovations in ${l.name}, ${l.county} County, Ohio.`,
     }) +
     C.jsonLdScript({
       '@context': 'https://schema.org',
@@ -113,8 +160,8 @@ function renderLocation(l, index) {
   ${C.breadcrumbTrail(crumbs)}
   <section class="page-hero loc-hero">
     <div class="container">
-      <span class="eyebrow">${C.icon('pin', 'icon icon-sm')} Handyman &amp; POS repair · ${esc(l.name)}, OH</span>
-      <h1>Handyman &amp; POS Violation Repair in ${esc(l.name)}, Ohio</h1>
+      <span class="eyebrow">${C.icon('pin', 'icon icon-sm')} ${hasPos ? 'Handyman &amp; POS repair' : 'Handyman services'} · ${esc(l.name)}, OH</span>
+      <h1>${hasPos ? `Handyman &amp; POS Violation Repair in ${esc(l.name)}, Ohio` : `Handyman Services in ${esc(l.name)}, Ohio`}</h1>
       <p class="lead">${esc(intro)}</p>
       <div class="hero-actions">
         ${C.callButton()}
@@ -130,8 +177,12 @@ function renderLocation(l, index) {
       <h2>Your handyman in ${esc(l.name)}</h2>
       <p>${esc(l.name)} is ${esc(l.character)} The homes here — ${esc(l.homes)} That’s exactly the kind of work we do best: skilled, code-compliant repairs, done clean and on time. From a single fix to a small renovation, one local pro handles the whole list.</p>
 
-      <h2>Point of sale violation repair in ${esc(l.name)}</h2>
-      <p>Selling in ${esc(l.name)}? The city’s point of sale inspection has to pass before you close. Send us your violation report and we’ll correct the flagged items — electrical, drywall, paint, carpentry, and masonry — fast enough to keep your closing date. <a href="/pos-violations">Learn more about POS violation repair →</a></p>
+      ${
+        hasPos
+          ? `<h2>Point of sale violation repair in ${esc(l.name)}</h2>
+      <p>Selling in ${esc(l.name)}? The city’s point of sale inspection has to pass before you close. Send us your violation report and we’ll correct the flagged items — electrical, drywall, paint, carpentry, and masonry — fast enough to keep your closing date. <a href="/pos-violations">Learn more about POS violation repair →</a></p>`
+          : ''
+      }
 
       <h2>Handyman services we offer in ${esc(l.name)}</h2>
       <ul class="loc-services">${svcItems}</ul>
@@ -146,7 +197,7 @@ function renderLocation(l, index) {
     <div class="container prose-wide">
       <div class="section-head">
         <span class="eyebrow">Questions from ${esc(l.name)}</span>
-        <h2 id="faq-h">Handyman &amp; POS FAQs for ${esc(l.name)}, OH</h2>
+        <h2 id="faq-h">${hasPos ? 'Handyman &amp; POS FAQs' : 'Handyman FAQs'} for ${esc(l.name)}, OH</h2>
       </div>
       <div class="faq-list">${faqHtml}</div>
     </div>
@@ -173,8 +224,12 @@ function renderLocation(l, index) {
   return {
     path: `areas/${slug}.html`,
     html: layout({
-      title: `Handyman & POS Violation Repair in ${l.name}, OH | ${site.name}`,
-      description: `Handyman services, small renovations & point of sale inspection violation repair in ${l.name}, ${l.county} County, OH. Licensed, insured & bonded. Call or text us for a free ${l.name} estimate.`,
+      title: hasPos
+        ? `Handyman & POS Violation Repair in ${l.name}, OH | ${site.name}`
+        : `Handyman Services in ${l.name}, OH | ${site.name}`,
+      description: hasPos
+        ? `Handyman services, small renovations & point of sale inspection violation repair in ${l.name}, ${l.county} County, OH. Licensed, insured & bonded. Call or text us for a free ${l.name} estimate.`
+        : `Handyman services, repairs & small renovations in ${l.name}, ${l.county} County, OH. Licensed, insured & bonded. Call or text us for a free ${l.name} estimate.`,
       path,
       body,
       jsonLd,

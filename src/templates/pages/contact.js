@@ -91,7 +91,7 @@ module.exports = function contact() {
           <h2>Reach us directly</h2>
           <ul class="contact-list">
             <li>${C.icon('phone', 'icon icon-accent')}<div><span class="contact-label">Call or text</span><a href="tel:${site.phoneHref}">${esc(site.phone)}</a></div></li>
-            <li>${C.icon('pin', 'icon icon-accent')}<div><span class="contact-label">Serving</span><span>${esc(site.serviceCities.join(', '))}, OH</span></div></li>
+            <li>${C.icon('pin', 'icon icon-accent')}<div><span class="contact-label">Serving</span><span>${esc(C.AREA_PHRASE)}, OH — <a href="/service-areas">see all areas</a></span></div></li>
             <li>${C.icon('clock', 'icon icon-accent')}<div><span class="contact-label">Hours</span><span>${esc(site.hours)}</span></div></li>
           </ul>
           <p class="contact-area"><a href="/service-areas">See all service areas</a>.</p>

@@ -10,7 +10,7 @@ module.exports = function terms() {
     { name: 'Terms of Service', path: '/terms' },
   ];
 
-  const cityList = site.serviceCities.join(', ');
+  const cityList = C.AREA_PHRASE;
   const location = `${site.address.locality}, ${site.address.regionName}`;
 
   const jsonLd =
@@ -89,7 +89,7 @@ module.exports = function terms() {
     path: 'terms.html',
     html: layout({
       title: `Terms of Service | ${site.name}`,
-      description: `The Terms of Service for ${site.name}, including service, estimate, payment, and SMS/text-messaging terms for customers across ${cityList}, Ohio.`,
+      description: `The Terms of Service for ${site.name}, including service, estimate, payment, and SMS/text-messaging terms for customers across ${cityList} in Ohio.`,
       path: '/terms',
       body,
       jsonLd,

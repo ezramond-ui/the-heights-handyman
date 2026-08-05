@@ -32,7 +32,7 @@ module.exports = function serviceAreas() {
     <div class="container">
       <span class="eyebrow">Service areas</span>
       <h1>Your local handyman across the Heights</h1>
-      <p class="lead">${esc(site.name)} serves ${esc(site.serviceCities.join(', '))}, Ohio — handyman repairs, small renovations, and point of sale violation corrections. Pick your city for details.</p>
+      <p class="lead">${esc(site.name)} serves ${locations.length} communities across ${esc(site.address.regionName)}’s eastside — from our home base in ${esc(site.address.locality)} out through the Heights, the Mayfield Road corridor, and the lakefront. Handyman repairs, small renovations, and point of sale violation corrections. Pick your city for details.</p>
     </div>
   </section>
 
@@ -48,9 +48,9 @@ module.exports = function serviceAreas() {
   return {
     path: 'service-areas.html',
     html: layout({
-      title: `Service Areas | Handyman in South Euclid, University Heights, Cleveland Heights & Beachwood`,
+      title: `Service Areas | Handyman in South Euclid, Cleveland Heights, Shaker Heights, Euclid & More`,
       description:
-        'The Heights Handyman serves South Euclid, University Heights, Cleveland Heights & Beachwood, Ohio — handyman repairs, small renovations, and point of sale inspection violation repair. Find your city.',
+        'Handyman repairs & point of sale violation fixes across 11 eastside Cleveland communities — South Euclid, Cleveland Heights, Shaker Heights, Beachwood, Lyndhurst, Euclid, Maple Heights & more. Find your city.',
       path: '/service-areas',
       body,
       jsonLd,

@@ -12,7 +12,7 @@ module.exports = function services() {
     '@type': 'Service',
     serviceType: 'Handyman services and small renovations',
     provider: { '@id': site.url + '/#business' },
-    areaServed: site.serviceCities.map((c) => ({ '@type': 'City', name: `${c}, OH` })),
+    areaServed: C.AREA_SERVED,
     description: C.SERVICE_SUMMARY,
   };
 
