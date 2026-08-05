@@ -47,7 +47,7 @@ module.exports = function reviews() {
     <div class="container">
       <span class="eyebrow">${C.icon('star', 'icon icon-sm')} ${esc(R.ratingLabel)}</span>
       <h1>What your neighbors say</h1>
-      <p class="lead">Every review below is a real, verified Google review from a ${esc(site.serviceAreaLabel)} homeowner. Read them all on our Google profile — and if we've worked for you, we'd be grateful if you left one.</p>
+      <p class="lead">Every review below was left on our Google profile by a real customer, in their own words. Read them all on Google — and if we've worked for you, we'd be grateful if you left one.</p>
     </div>
   </section>
 

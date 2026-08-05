@@ -490,9 +490,13 @@ strong { font-weight: 600; color: var(--ink); }
 .rating-text { font-size: .87rem; color: var(--muted); }
 .rating-text strong { color: var(--ink); font-weight: 600; }
 
+/* Two columns, not auto-fit: the reviews vary a lot in length, and three
+   narrow columns turn the longest one into a sliver of a text column.
+   `align-items: start` lets each card size to its own content. */
 .review-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: grid; grid-template-columns: repeat(2, 1fr);
   gap: 1.2rem; align-items: start;
+  max-width: 940px; margin-inline: auto;
 }
 .review-card {
   margin: 0; padding: 1.5rem 1.6rem;

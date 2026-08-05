@@ -37,10 +37,40 @@ const googleUrl = 'https://www.google.com/maps?cid=10895257445163107977';
  */
 const writeReviewUrl = 'https://g.page/r/CYmGYLvrujOXEBE/review';
 
-// PLACEHOLDER — awaiting real reviews from the Google profile.
-// Shape of an entry:
-//   { author: 'Jane D.', rating: 5, date: 'July 2026', text: '…' },
-const reviews = [];
+// Transcribed from the Google profile 2026-08-05. Text is verbatim; the
+// only edits are restoring the spaces after full stops that were lost when
+// the reviews were copied out of Google (paragraph breaks became joins).
+// Newest first, matching how Google orders them.
+const reviews = [
+  {
+    author: 'Shaya Bassman',
+    rating: 5,
+    date: 'July 2026',
+    text:
+      `I highly recommend Ezra the Handyman. He was gracious, professional, and a pleasure to work with from start to finish. He was always helpful, constantly problem-solving, and took the time to make sure everything was done the right way. Ezra was punctual, stuck to the timeline he gave me, and always showed up when he said he would. He completed a wide variety of projects for me, including installing shower curtain rods and hanging blinds in my bathroom, putting up a light fixture, and even tightening some plumbing pipes. He also took the initiative to order the necessary materials himself, which made the entire process much easier and more convenient. His pricing was fair and reasonable, and I felt I received excellent value for the quality of his work. Ezra is truly an all-around handyman who is dependable, skilled, resourceful, and easy to work with. I would not hesitate to recommend him to anyone looking for quality handyman services.`,
+  },
+  {
+    author: 'Lansdale Home Solutions',
+    rating: 5,
+    date: 'July 2026',
+    text:
+      `Ezra did an outstanding job and exceeded my expectations. He was professional, reliable, and true to his word throughout the entire process. He successfully completed two of my projects in a single day—something I initially thought wouldn't be possible. Not only did he finish both projects on time, but the quality of his workmanship was exceptional. I highly recommend Ezra for anyone looking for dependable, high-quality work. I will definitely be using his services again for future projects. He is my go-to contractor.`,
+  },
+  {
+    author: 'Tuvy Miller',
+    rating: 5,
+    date: 'July 2026',
+    text:
+      `Ezra did an amazing job making sure our house was POS compliant, as well as taking care of a few other items. He was professional, prompt and worked very efficiently. I would definitely use him again and highly recommend him!`,
+  },
+  {
+    author: 'Shlomie L',
+    rating: 5,
+    date: 'July 2026',
+    text:
+      `Ezra at Heights Handyman did a terrific job for us! He installed two new ceiling fans in our bedrooms and also fixed the hinges on our front door. Everything was completed with great attention to detail, and the quality of the work was excellent. Ezra was extremely professional, punctual, and easy to work with throughout the entire process. He showed up on time, communicated clearly, and made sure everything was done right. I wouldn't hesitate to use Heights Handyman again and highly recommend them to anyone looking for reliable, high-quality handyman services.`,
+  },
+];
 
 /** Ratings actually shown on the site, derived — never hand-written. */
 const count = reviews.length;
