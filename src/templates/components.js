@@ -265,6 +265,30 @@ function localBusinessSchema(extra = {}) {
   };
 }
 
+/**
+ * A single review rendered as a pull quote, for featuring one testimonial
+ * on a topic page. Distinct from the cards on /reviews: bigger type, one
+ * per page, sitting where a visitor is deciding whether to call.
+ * Renders nothing when passed no review, so callers can stay unconditional.
+ */
+function reviewQuote(review, { link = true } = {}) {
+  if (!review) return '';
+  const R = require('../data/reviews');
+  const stars = Array.from({ length: review.rating }, () =>
+    icon('star', 'icon icon-sm star-on')
+  ).join('');
+
+  return `<figure class="review-quote">
+    <span class="stars" role="img" aria-label="${review.rating} out of 5 stars">${stars}</span>
+    <blockquote><p>${esc(review.text)}</p></blockquote>
+    <figcaption>
+      <span class="review-author">${esc(review.author)}</span>
+      <span class="review-meta">${esc(review.date)} · via Google</span>
+    </figcaption>
+    ${link ? `<a class="review-quote-link" href="/reviews">Read all ${R.count} reviews →</a>` : ''}
+  </figure>`;
+}
+
 function breadcrumbSchema(crumbs) {
   return {
     '@context': 'https://schema.org',
@@ -302,6 +326,7 @@ module.exports = {
   differentiator,
   trustRow,
   processSteps,
+  reviewQuote,
   jsonLdScript,
   SERVICE_SUMMARY,
   AREA_SERVED,

@@ -515,6 +515,26 @@ strong { font-weight: 600; color: var(--ink); }
 
 .review-actions { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; }
 
+/* One featured review on a topic page. Deliberately unlike the /reviews
+   cards: larger type, gold rule, reads as an aside rather than a listing. */
+.review-quote {
+  margin: 2.2rem 0 0; padding: 1.6rem 1.8rem;
+  background: var(--accent-tint); border: 1px solid var(--accent-soft);
+  border-left: 4px solid var(--accent); border-radius: var(--radius);
+  display: flex; flex-direction: column; gap: .9rem;
+}
+.review-quote blockquote { margin: 0; }
+.review-quote blockquote p {
+  margin: 0; font-family: var(--serif); font-size: 1.22rem;
+  line-height: 1.55; color: var(--ink);
+}
+.review-quote figcaption { display: flex; flex-wrap: wrap; align-items: baseline; gap: .1rem .6rem; }
+.review-quote-link {
+  font-size: .9rem; font-weight: 600; text-decoration: none;
+  color: var(--accent-dark);
+}
+.review-quote-link:hover { text-decoration: underline; }
+
 /* =========================================================================
    Responsive
    ========================================================================= */

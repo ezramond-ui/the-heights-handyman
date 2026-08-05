@@ -60,6 +60,7 @@ const reviews = [
     author: 'Tuvy Miller',
     rating: 5,
     date: 'July 2026',
+    topics: ['pos'],
     text:
       `Ezra did an amazing job making sure our house was POS compliant, as well as taking care of a few other items. He was professional, prompt and worked very efficiently. I would definitely use him again and highly recommend him!`,
   },
@@ -93,10 +94,19 @@ const ratingLabel = allFiveStar
   ? '5-star rated on Google'
   : `Rated ${average} on Google`;
 
+/**
+ * Pick a review to feature on a topic page — see the `topics` field above.
+ * Returns undefined when nothing is tagged, and callers render nothing, so
+ * a page never ends up with an empty testimonial slot.
+ */
+const byTopic = (topic) =>
+  enabled ? reviews.find((r) => (r.topics || []).includes(topic)) : undefined;
+
 module.exports = {
   googleUrl,
   writeReviewUrl,
   reviews,
+  byTopic,
   count,
   average,
   allFiveStar,

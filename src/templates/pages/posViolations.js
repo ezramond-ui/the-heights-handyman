@@ -1,6 +1,7 @@
 const { layout, site, esc } = require('../layout');
 const C = require('../components');
 const { locations } = require('../../data/locations');
+const R = require('../../data/reviews');
 
 module.exports = function posViolations() {
   const crumbs = [
@@ -117,6 +118,8 @@ module.exports = function posViolations() {
         <li>${C.icon('wrench', 'icon icon-sm icon-accent')}<span>One crew for electrical, drywall, paint, carpentry, and masonry.</span></li>
         <li>${C.icon('check', 'icon icon-sm icon-accent')}<span>Repairs done right and code-compliant, ready for re-inspection.</span></li>
       </ul>
+
+      ${C.reviewQuote(R.byTopic('pos'))}
 
       <div class="mt-lg">${C.estimateCta({ sub: 'Send us a photo of your violation report for a fast, free estimate.' })}</div>
     </div>
