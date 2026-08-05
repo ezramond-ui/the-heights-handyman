@@ -58,7 +58,7 @@ module.exports = function reviews() {
       <div class="review-grid">${cards}</div>
       <div class="center mt-lg review-actions">
         ${seeMore}
-        <a class="btn btn-accent btn-lg" href="${esc(R.googleUrl)}" target="_blank" rel="noopener">Leave us a review</a>
+        <a class="btn btn-accent btn-lg" href="${esc(R.writeReviewUrl)}" target="_blank" rel="noopener">Leave us a review</a>
       </div>
     </div>
   </section>

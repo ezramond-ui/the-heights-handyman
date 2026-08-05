@@ -21,9 +21,21 @@
  *            but never reword.
  */
 
-// Public link to the reviews list on the Google Business Profile.
-// Used by the "See all reviews on Google" buttons.
-const googleUrl = '';
+/**
+ * Public link to the Google Business Profile — the "See all reviews on
+ * Google" button. Built from the profile's CID rather than a share.google
+ * short link or a URL copied from the address bar: those carry an
+ * `authuser` parameter tied to one Google account and break for everyone
+ * else. This form is account-neutral and stable.
+ *   Derived from place id 0xaf60def0371c4357:0x9733baebbb608689
+ */
+const googleUrl = 'https://www.google.com/maps?cid=10895257445163107977';
+
+/**
+ * Drops the visitor straight into the write-a-review form. Comes from the
+ * profile's own "Ask for reviews" short link.
+ */
+const writeReviewUrl = 'https://g.page/r/CYmGYLvrujOXEBE/review';
 
 // PLACEHOLDER — awaiting real reviews from the Google profile.
 // Shape of an entry:
@@ -53,6 +65,7 @@ const ratingLabel = allFiveStar
 
 module.exports = {
   googleUrl,
+  writeReviewUrl,
   reviews,
   count,
   average,

@@ -54,7 +54,10 @@ module.exports = {
   social: {
     facebook: '',
     instagram: '',
-    google: 'https://share.google/f09PdFQ8WWnFDUGM2', // Google Business Profile
+    // Google Business Profile. A share.google short link was used here
+    // previously but resolves to a Google error page; this CID form is the
+    // stable, account-neutral address. Kept in sync with data/reviews.js.
+    google: 'https://www.google.com/maps?cid=10895257445163107977',
   },
 
   // Default Open Graph / social share image (relative to site root).
