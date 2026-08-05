@@ -25,6 +25,8 @@ const serviceAreas = require('./src/templates/pages/serviceAreas');
 const locationPages = require('./src/templates/pages/location');
 const terms = require('./src/templates/pages/terms');
 const privacy = require('./src/templates/pages/privacy');
+const reviews = require('./src/templates/pages/reviews');
+const reviewData = require('./src/data/reviews');
 
 /* ───────────────────────────── helpers ───────────────────────────── */
 function rmrf(dir) {
@@ -112,6 +114,8 @@ const pages = [
   contact(),
   serviceAreas(),
   ...locationPages(),
+  // Only built once src/data/reviews.js holds real reviews + a Google link.
+  ...(reviewData.enabled ? [reviews()] : []),
   terms(),
   privacy(),
 ];
@@ -151,6 +155,7 @@ const urls = pages.map((p) => {
   else if (p.path.startsWith('areas/')) priority = '0.8';
   else if (['services.html', 'contact.html'].includes(p.path)) priority = '0.9';
   else if (p.path === 'service-areas.html') priority = '0.7';
+  else if (p.path === 'reviews.html') priority = '0.7';
   else if (['terms.html', 'privacy.html'].includes(p.path)) priority = '0.3';
   return `  <url><loc>${loc}</loc><lastmod>${lastmod}</lastmod><changefreq>monthly</changefreq><priority>${priority}</priority></url>`;
 });

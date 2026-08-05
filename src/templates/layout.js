@@ -2,6 +2,7 @@
 const site = require('../data/site');
 const { assetUrl } = require('../lib/assets');
 const { areaPhrase, locations } = require('../data/locations');
+const reviewData = require('../data/reviews');
 
 const esc = (s = '') =>
   String(s)
@@ -13,11 +14,13 @@ const esc = (s = '') =>
 // Primary navigation, reused everywhere.
 // Clean URLs (no .html) — matches Vercel's `cleanUrls: true` so links,
 // canonicals, and the sitemap all agree on one URL per page.
+// Reviews only appears once we have real reviews to show (see data/reviews.js).
 const NAV = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'POS Violations', href: '/pos-violations' },
   { label: 'Service Areas', href: '/service-areas' },
+  ...(reviewData.enabled ? [{ label: 'Reviews', href: '/reviews' }] : []),
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -77,6 +80,7 @@ function footer() {
         <li><a href="/services">Services</a></li>
         <li><a href="/pos-violations">POS Violations</a></li>
         <li><a href="/service-areas">Service Areas</a></li>
+        ${reviewData.enabled ? '<li><a href="/reviews">Reviews</a></li>' : ''}
         <li><a href="/contact">Contact</a></li>
       </ul>
     </nav>

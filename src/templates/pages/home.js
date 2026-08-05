@@ -1,8 +1,24 @@
 const { layout, site, esc } = require('../layout');
 const C = require('../components');
+const R = require('../../data/reviews');
 
 module.exports = function home() {
   const cities = site.serviceCities.join(' · ');
+
+  // Rating badge under the hero CTAs. Renders only when real reviews exist,
+  // and the wording is derived from them (see data/reviews.js) so it can
+  // never overstate the rating.
+  const ratingBadge = R.enabled
+    ? `<a class="rating-badge" href="/reviews">
+        <span class="stars" role="img" aria-label="${R.average} out of 5 stars">${
+          // Floor, never round: a 4.7 shows four filled stars, not five.
+          Array.from({ length: 5 }, (_, i) =>
+            C.icon('star', `icon icon-sm ${i < Math.floor(R.average) ? 'star-on' : 'star-off'}`)
+          ).join('')
+        }</span>
+        <span class="rating-text"><strong>${esc(R.ratingLabel)}</strong> · ${R.count} review${R.count === 1 ? '' : 's'}</span>
+      </a>`
+    : '';
 
   const jsonLd =
     C.jsonLdScript({
@@ -33,6 +49,7 @@ module.exports = function home() {
           ${C.callButton()}
         </div>
         ${C.ctaNote()}
+        ${ratingBadge}
         <ul class="hero-points">
           <li>${C.icon('bolt', 'icon icon-sm icon-accent')} Electrical, drywall, paint &amp; more</li>
           <li>${C.icon('clipboard', 'icon icon-sm icon-accent')} POS violation repairs</li>
