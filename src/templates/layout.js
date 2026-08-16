@@ -19,6 +19,7 @@ const NAV = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/services' },
   { label: 'POS Violations', href: '/pos-violations' },
+  { label: 'Property Managers', href: '/property-managers' },
   { label: 'Service Areas', href: '/service-areas' },
   ...(reviewData.enabled ? [{ label: 'Reviews', href: '/reviews' }] : []),
   { label: 'Contact', href: '/contact' },
@@ -79,6 +80,7 @@ function footer() {
         <li><a href="/">Home</a></li>
         <li><a href="/services">Services</a></li>
         <li><a href="/pos-violations">POS Violations</a></li>
+        <li><a href="/property-managers">Property Managers</a></li>
         <li><a href="/service-areas">Service Areas</a></li>
         ${reviewData.enabled ? '<li><a href="/reviews">Reviews</a></li>' : ''}
         <li><a href="/contact">Contact</a></li>

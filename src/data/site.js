@@ -16,7 +16,7 @@ module.exports = {
 
   // The canonical production URL (no trailing slash). Used for sitemap,
   // canonical tags, Open Graph, and structured data.
-  url: 'https://www.theheightshandyman.com', // PLACEHOLDER — confirm final domain
+  url: 'https://www.theheightshandyman.com',
 
   // ── CONTACT DETAILS ──────────────────────────────────────────────────
   phone: '(216) 284-9433',
@@ -30,14 +30,14 @@ module.exports = {
 
   // ── BUSINESS LOCATION ────────────────────────────────────────────────
   address: {
-    locality: 'South Euclid',
+    locality: 'University Heights',
     region: 'OH',
     regionName: 'Ohio',
-    postalCode: '44121',             // PLACEHOLDER ZIP — update to real address
+    postalCode: '44118',
     country: 'US',
-    // Approx. coordinates for South Euclid, OH (fine for LocalBusiness).
-    latitude: 41.5231,
-    longitude: -81.5190,
+    // Approx. center of ZIP 44118, University Heights, OH (fine for LocalBusiness).
+    latitude: 41.51,
+    longitude: -81.57,
   },
   serviceAreaLabel: 'the Heights',
   // The four communities we serve, in copy order.
