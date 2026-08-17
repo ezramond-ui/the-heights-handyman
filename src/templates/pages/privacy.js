@@ -1,4 +1,4 @@
-const { layout, site, esc } = require('../layout');
+﻿const { layout, site, esc } = require('../layout');
 const C = require('../components');
 
 // Human-readable "last updated" date. Bump when the policy changes.
@@ -78,7 +78,7 @@ module.exports = function privacy() {
       </ol>
 
       <h2>5. Third-party services</h2>
-      <p>We use a limited number of service providers to operate our business — for example, an email/SMTP provider that delivers contact-form submissions to us, and a text-messaging provider that carries our SMS communications. These providers process your information only to provide their service to us and are not permitted to use it for their own marketing. We do not otherwise share your information with third parties except as required by law or to complete work you have requested (for instance, coordinating with a party involved in your home sale, with your consent).</p>
+      <p><strong>We do not sell, rent, transfer, or share your personal data - including your phone number, text-message content, and mobile opt-in data - with any external organization for any purpose, even if you give your consent.</strong> The only exception is the contracted service providers who are strictly necessary to deliver or secure our SMS messaging service, such as our text-messaging platform and the email/SMTP provider that delivers contact-form submissions to us. These providers may act only on our behalf, and are never permitted to use your data for their own purposes.</p>
 
       <h2>6. Cookies and analytics</h2>
       <p>Our website is intentionally lightweight. We do not use advertising cookies or sell data to advertisers. If we use basic, privacy-respecting analytics to understand general site usage, that data is aggregated and is not used to identify you personally. Your browser settings let you control or block cookies at any time.</p>
