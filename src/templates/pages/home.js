@@ -118,7 +118,7 @@ module.exports = function home() {
         </div>
         <button type="submit" class="btn btn-accent btn-lg form-submit">Request my free estimate</button>
         <p class="form-status" role="status" aria-live="polite"></p>
-        ${C.smsFinePrint()}
+        ${C.smsConsentField('home')}
       </form>
     </div>
   </section>

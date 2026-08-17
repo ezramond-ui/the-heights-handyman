@@ -282,6 +282,11 @@ strong { font-weight: 600; color: var(--ink); }
 .form-status.is-success { color: var(--success); }
 .form-status.is-error { color: #b3261e; }
 .form-fineprint { font-size: .8rem; color: var(--muted); margin: 1rem 0 0; }
+.sms-consent { border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1rem 1.1rem; margin: 1rem 0 0; }
+.sms-consent legend { font-size: .85rem; font-weight: 600; padding: 0 .3rem; }
+.sms-consent .form-fineprint { margin-top: .5rem; }
+.consent-option { display: flex; align-items: flex-start; gap: .5rem; font-size: .85rem; margin-top: .6rem; cursor: pointer; }
+.consent-option input { margin-top: .2rem; }
 
 .contact-aside { display: flex; flex-direction: column; gap: 1.3rem; }
 .contact-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 1.8rem; box-shadow: var(--shadow-sm); }

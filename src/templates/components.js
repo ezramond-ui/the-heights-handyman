@@ -62,6 +62,20 @@ function smsFinePrint() {
   return `<p class="form-fineprint">By submitting this form with your phone number, you consent to receive text messages from ${esc(site.name)} about your estimate and project. Message frequency varies. Message and data rates may apply. Reply <strong>STOP</strong> to opt out, <strong>HELP</strong> for help. We never sell or share your information for marketing - see our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Service</a>.</p>`;
 }
 
+// Explicit SMS opt-in control (not just fine print) - a real Yes/No choice
+// the contact can check, matching the disclosure + checkbox pattern carriers
+// require for "opt-in via a website form" 10DLC campaigns. `idPrefix` keeps
+// radio input ids unique when this appears more than once on a page.
+function smsConsentField(idPrefix = 'sms') {
+  return `
+  <fieldset class="sms-consent">
+    <legend>${esc(site.name)} would like your consent to send informational text message communications from ${esc(site.phone)} to your mobile number listed above, in response to your questions or to provide information relevant to your relationship with us.</legend>
+    <p class="form-fineprint">Consent is not a condition of purchase. Message frequency varies. Message and data rates may apply. Reply <strong>STOP</strong> to unsubscribe at any time. Reply <strong>HELP</strong> for assistance. We do not share your mobile opt-in information with anyone. See our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Service</a> for more information.</p>
+    <label class="consent-option"><input type="radio" id="${idPrefix}-consent-yes" name="smsConsent" value="yes"> Yes, I consent to receive informational messages from ${esc(site.name)}</label>
+    <label class="consent-option"><input type="radio" id="${idPrefix}-consent-no" name="smsConsent" value="no"> No, I do not want to receive any text messages from ${esc(site.name)}</label>
+  </fieldset>`;
+}
+
 // A repeated "Get a Free Estimate" + call block. Used across pages.
 function estimateCta({ heading, sub, center = true } = {}) {
   return `<div class="estimate-cta${center ? ' center' : ''}">
@@ -326,6 +340,7 @@ module.exports = {
   icon,
   ctaNote,
   smsFinePrint,
+  smsConsentField,
   callButton,
   estimateCta,
   ctaBand,

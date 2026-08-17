@@ -82,7 +82,7 @@ module.exports = function contact() {
           </div>
           <button type="submit" class="btn btn-accent btn-lg form-submit">Send my request</button>
           <p class="form-status" role="status" aria-live="polite"></p>
-          ${C.smsFinePrint()}
+          ${C.smsConsentField('contact')}
         </form>
       </div>
 
