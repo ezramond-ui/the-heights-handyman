@@ -69,7 +69,7 @@ module.exports = function privacy() {
 
       <h3>${esc(site.name)} Messaging Terms and Conditions</h3>
       <ol>
-        <li>The messaging program consists of general conversational messaging to answer questions and provide support to customers.</li>
+        <li>The messaging program consists of informational messages only - appointment scheduling, estimates, project updates, and general conversational messaging to answer questions and provide support to customers. We do not send marketing or promotional messages.</li>
         <li>You can cancel the SMS service at any time. Just text 'STOP' to the phone number from which you received messages. After you send the SMS message 'STOP' to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us. If you want to join again, just sign up as you did the first time and we will start sending SMS messages to you again.</li>
         <li>If you are experiencing issues with the messaging program you can reply with the keyword HELP for more assistance, or you can get help directly at ${esc(site.email)}.</li>
         <li>Carriers are not liable for delayed or undelivered messages.</li>

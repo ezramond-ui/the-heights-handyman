@@ -1,4 +1,4 @@
-const { layout, site, esc } = require('../layout');
+﻿const { layout, site, esc } = require('../layout');
 const C = require('../components');
 
 // Human-readable "last updated" date. Bump when the terms change.
@@ -54,6 +54,7 @@ module.exports = function terms() {
       <h2>4. SMS / text-message terms</h2>
       <p>We use text messaging to communicate with customers about estimates, scheduling, and their projects. By providing your mobile number, you agree to the following:</p>
       <ul class="check-list">
+        <li>${C.icon('check', 'icon icon-sm icon-accent')}<span><strong>Message type.</strong> The messaging program consists of informational messages only - appointment scheduling, estimates, and project updates. We do not send marketing or promotional messages.</span></li>
         <li>${C.icon('check', 'icon icon-sm icon-accent')}<span><strong>Opt-in.</strong> You consent to receive text messages from us when you submit our contact form with a phone number, or when you text our business number at ${esc(site.phone)}.</span></li>
         <li>${C.icon('check', 'icon icon-sm icon-accent')}<span><strong>Message frequency.</strong> Message frequency varies based on your project and communications with us.</span></li>
         <li>${C.icon('check', 'icon icon-sm icon-accent')}<span><strong>Rates.</strong> Message and data rates may apply, depending on your mobile carrier and plan.</span></li>
