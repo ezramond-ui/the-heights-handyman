@@ -54,6 +54,14 @@ function callButton({ variant = 'accent' } = {}) {
   return `<a class="${cls}" href="tel:${site.phoneHref}">${icon('phone', 'icon icon-sm')} Call or text us</a>`;
 }
 
+// SMS opt-in disclosure shown directly beneath any form that collects a
+// phone number. Carriers / A2P 10DLC campaign review expect this consent
+// language, with links to both legal pages, at the point of collection -
+// not just buried in the footer.
+function smsFinePrint() {
+  return `<p class="form-fineprint">By submitting this form with your phone number, you consent to receive text messages from ${esc(site.name)} about your estimate and project. Message frequency varies. Message and data rates may apply. Reply <strong>STOP</strong> to opt out, <strong>HELP</strong> for help. We never sell or share your information for marketing - see our <a href="/privacy">Privacy Policy</a> and <a href="/terms">Terms of Service</a>.</p>`;
+}
+
 // A repeated "Get a Free Estimate" + call block. Used across pages.
 function estimateCta({ heading, sub, center = true } = {}) {
   return `<div class="estimate-cta${center ? ' center' : ''}">
@@ -317,6 +325,7 @@ function breadcrumbTrail(crumbs) {
 module.exports = {
   icon,
   ctaNote,
+  smsFinePrint,
   callButton,
   estimateCta,
   ctaBand,

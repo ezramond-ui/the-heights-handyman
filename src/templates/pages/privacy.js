@@ -61,6 +61,22 @@ module.exports = function privacy() {
       <p>When you provide your mobile number — by submitting our contact form or by texting our business number at ${esc(site.phone)} — we use it to communicate with you about estimates, scheduling, and your project.</p>
       <p><strong>We do not share or sell your mobile opt-in data or phone number to third parties or affiliates for their marketing or promotional purposes.</strong> Your consent to receive text messages is never shared with third parties for marketing. You can opt out of text messages at any time by replying <strong>STOP</strong>, or text <strong>HELP</strong> for assistance. See our <a href="/terms">Terms of Service</a> for the full SMS terms.</p>
 
+      <h3>Data Sharing</h3>
+      <ul class="check-list">
+        <li>${C.icon('check', 'icon icon-sm icon-accent')}<span>Customer data is not shared with 3rd parties for promotional or marketing purposes.</span></li>
+        <li>${C.icon('check', 'icon icon-sm icon-accent')}<span>Mobile opt-in and consent are never shared with anyone for any purpose. Any information sharing that may be mentioned elsewhere in this policy excludes mobile opt-in data.</span></li>
+      </ul>
+
+      <h3>${esc(site.name)} Messaging Terms and Conditions</h3>
+      <ol>
+        <li>The messaging program consists of general conversational messaging to answer questions and provide support to customers.</li>
+        <li>You can cancel the SMS service at any time. Just text 'STOP' to the phone number from which you received messages. After you send the SMS message 'STOP' to us, we will send you an SMS message to confirm that you have been unsubscribed. After this, you will no longer receive SMS messages from us. If you want to join again, just sign up as you did the first time and we will start sending SMS messages to you again.</li>
+        <li>If you are experiencing issues with the messaging program you can reply with the keyword HELP for more assistance, or you can get help directly at ${esc(site.email)}.</li>
+        <li>Carriers are not liable for delayed or undelivered messages.</li>
+        <li>As always, message and data rates may apply for any messages sent to you from us and to us from you. Message frequency will vary based on communication needs. If you have any questions about your text plan or data plan, it is best to contact your wireless provider.</li>
+        <li>If you have any questions regarding privacy, please read our privacy policy contained in the rest of this document/page.</li>
+      </ol>
+
       <h2>5. Third-party services</h2>
       <p>We use a limited number of service providers to operate our business — for example, an email/SMTP provider that delivers contact-form submissions to us, and a text-messaging provider that carries our SMS communications. These providers process your information only to provide their service to us and are not permitted to use it for their own marketing. We do not otherwise share your information with third parties except as required by law or to complete work you have requested (for instance, coordinating with a party involved in your home sale, with your consent).</p>
 

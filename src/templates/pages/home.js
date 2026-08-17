@@ -118,7 +118,7 @@ module.exports = function home() {
         </div>
         <button type="submit" class="btn btn-accent btn-lg form-submit">Request my free estimate</button>
         <p class="form-status" role="status" aria-live="polite"></p>
-        <p class="form-fineprint">By submitting, you agree to be contacted about your request. We never share your information.</p>
+        ${C.smsFinePrint()}
       </form>
     </div>
   </section>
