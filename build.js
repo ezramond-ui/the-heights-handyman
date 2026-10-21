@@ -22,6 +22,7 @@ const services = require('./src/templates/pages/services');
 const contact = require('./src/templates/pages/contact');
 const posViolations = require('./src/templates/pages/posViolations');
 const propertyManagers = require('./src/templates/pages/propertyManagers');
+const rentalTurnovers = require('./src/templates/pages/rentalTurnovers');
 const serviceAreas = require('./src/templates/pages/serviceAreas');
 const locationPages = require('./src/templates/pages/location');
 const terms = require('./src/templates/pages/terms');
@@ -113,6 +114,7 @@ const pages = [
   services(),
   posViolations(),
   propertyManagers(),
+  rentalTurnovers(),
   contact(),
   serviceAreas(),
   ...locationPages(),
@@ -155,6 +157,7 @@ const urls = pages.map((p) => {
   if (p.path === 'index.html') priority = '1.0';
   else if (p.path === 'pos-violations.html') priority = '0.9';
   else if (p.path === 'property-managers.html') priority = '0.9';
+  else if (p.path === 'rental-turnovers.html') priority = '0.9';
   else if (p.path.startsWith('areas/')) priority = '0.8';
   else if (['services.html', 'contact.html'].includes(p.path)) priority = '0.9';
   else if (p.path === 'service-areas.html') priority = '0.7';

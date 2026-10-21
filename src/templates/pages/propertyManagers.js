@@ -102,6 +102,7 @@ module.exports = function propertyManagers() {
 
       <h2>Turnovers, make-readies &amp; rental inspection repairs</h2>
       <p>Between tenants, we handle the full punch list — paint, drywall, flooring, fixtures, and the small repairs that hold up a unit turning back over. If a property needs to pass a rental license, point-of-occupancy, or point-of-sale inspection, send us the report and we'll repair the exact items flagged so it clears re-inspection.</p>
+      <p>See our <a href="/rental-turnovers">rental turnover services</a> for the full make-ready scope.</p>
       <p>One call covers general portfolio maintenance too — routine repairs and small renovations across every property you manage, not just one address at a time.</p>
 
       <div class="mt-lg">${C.estimateCta({ heading: 'Managing more than one property?', sub: 'Tell us how many properties and what\'s on the list — we\'ll work out a schedule and pricing that fits your portfolio.' })}</div>

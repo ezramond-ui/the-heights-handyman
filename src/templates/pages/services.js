@@ -68,6 +68,22 @@ module.exports = function services() {
     </div>
   </section>
 
+  <section class="section" aria-labelledby="rt-h">
+    <div class="container pos-callout">
+      <div class="pos-callout-copy">
+        <span class="eyebrow">Landlords &amp; investors</span>
+        <h2 id="rt-h">Rental turnovers &amp; make-readies</h2>
+        <p>Between tenants, we handle the whole make-ready on single-family rentals, duplexes, and apartments: paint, drywall, flooring, fixtures, and the punch list. One crew, one invoice, and a unit that is ready to rent.</p>
+        <a class="btn btn-accent" href="/rental-turnovers">Rental turnover services</a>
+      </div>
+      <div class="pos-callout-card">
+        ${C.icon('home', 'icon icon-xl icon-accent')}
+        <p class="pos-callout-stat">Less vacancy, less hassle</p>
+        <p>We schedule around your move-out date so the unit is not sitting empty.</p>
+      </div>
+    </div>
+  </section>
+
   ${C.processSteps()}
 
   ${C.ctaBand('Let’s get it done', 'Tell us what you need and we’ll get you a free, honest estimate — no pressure.')}

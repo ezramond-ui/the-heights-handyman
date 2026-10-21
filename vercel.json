@@ -7,7 +7,10 @@
   "redirects": [
     { "source": "/areas", "destination": "/service-areas", "permanent": true },
     { "source": "/service-area", "destination": "/service-areas", "permanent": true },
-    { "source": "/locations", "destination": "/service-areas", "permanent": true }
+    { "source": "/locations", "destination": "/service-areas", "permanent": true },
+    { "source": "/areas/solon", "destination": "/service-areas", "permanent": true },
+    { "source": "/areas/gates-mills", "destination": "/service-areas", "permanent": true },
+    { "source": "/areas/willoughby-hills", "destination": "/service-areas", "permanent": true }
   ],
   "headers": [
     {

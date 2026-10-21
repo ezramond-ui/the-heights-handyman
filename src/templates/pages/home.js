@@ -53,6 +53,7 @@ module.exports = function home() {
         <ul class="hero-points">
           <li>${C.icon('bolt', 'icon icon-sm icon-accent')} Electrical, drywall, paint &amp; more</li>
           <li>${C.icon('clipboard', 'icon icon-sm icon-accent')} POS violation repairs</li>
+          <li>${C.icon('home', 'icon icon-sm icon-accent')} <a href="/rental-turnovers">Rental turnovers</a></li>
           <li>${C.icon('check', 'icon icon-sm icon-accent')} Licensed, insured &amp; bonded</li>
         </ul>
       </div>
