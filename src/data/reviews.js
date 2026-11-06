@@ -37,11 +37,120 @@ const googleUrl = 'https://www.google.com/maps?cid=10895257445163107977';
  */
 const writeReviewUrl = 'https://g.page/r/CYmGYLvrujOXEBE/review';
 
-// Transcribed from the Google profile 2026-08-05. Text is verbatim; the
-// only edits are restoring the spaces after full stops that were lost when
-// the reviews were copied out of Google (paragraph breaks became joins).
+// First four (July 2026) transcribed from the Google profile 2026-08-05;
+// the rest added 2026-11-05. Text is verbatim; the only edits are restoring
+// the spaces after full stops that were lost when the reviews were copied
+// out of Google (paragraph breaks became joins).
+// Dates: Google only shows relative ages ("a month ago"), so the month for
+// the 2026-11-05 batch is converted from that and may be off by one.
+// Star-only reviews with no text (Andrew Mayor, Jeremy Gant) are left out —
+// there's nothing to quote.
 // Newest first, matching how Google orders them.
 const reviews = [
+  {
+    author: 'Kathy Patton',
+    rating: 5,
+    date: 'November 2026',
+    text:
+      `I found Heights Handyman by way of a Google search, and am glad I did.  He responded quickly, asked a few pertinent questions about the work that needed to be done, gave me a reasonable quote and we scheduled the work.  He arrived when he said he would,  did the work,   cleaned up after himself.  Heights Handyman ticked all the boxes for me and my project.`,
+  },
+  {
+    author: 'Andrew Bohmer',
+    rating: 5,
+    date: 'November 2026',
+    text: `Good communication and fast service for drywall repair`,
+  },
+  {
+    author: 'Ramona Kay Wiles',
+    rating: 5,
+    date: 'October 2026',
+    text:
+      `Ezra and his crew rebuilt the top landing for my basement stairs and some other odd jobs. They did an excellent job and the landing is secure and safe. He was very good about responding to any questions and concerns. The work was completed when he said it would be done. I would recommend him for work needed.`,
+  },
+  {
+    author: 'Brandon Fox',
+    rating: 5,
+    date: 'October 2026',
+    text:
+      `I used the Heights Handyman for driveway repairs that we needed done on short notice. Ezra provided clear and prompt feedback on pricing as well as his availability to complete the job. He showed up on time and provided quality work for a fair price. I would highly recommend his services.`,
+  },
+  {
+    author: 'Sarah Wittine',
+    rating: 5,
+    date: 'October 2026',
+    topics: ['pos'],
+    text:
+      `This exceptional business helped us promptly with a point of sale repair that needed done quickly. They were flexible, both fitting us in with a short window, and understanding when a few things needed to be changed. The work was professional, prompt, and done right. I highly recommend The Heights Handyman and working with Ezra was fantastic from start to finish!`,
+  },
+  {
+    author: 'Cathy Mockus',
+    rating: 5,
+    date: 'September 2026',
+    text:
+      `Ezra responded quickly to give us a quote.  His price was good and he fixed our issues quickly.  We would definately hire him again!!!`,
+  },
+  {
+    author: 'Jeremy Mulloy',
+    rating: 5,
+    date: 'September 2026',
+    topics: ['pos'],
+    text:
+      `Received the violations, contacted the inspector, and got his feedback. Then delivered exactly what was asked for to clear us from our violations. Showed up on time and quickly corrected a ten plus incident violation report and we were able to reinspect a week later. We passed with flying cover 10/10 recommend to get you through a POS issue. Wonderful response time and actually listens.`,
+  },
+  {
+    author: 'John Bugbee',
+    rating: 5,
+    date: 'September 2026',
+    text:
+      `Ezra came to our house on short notice. We had two rooms with sliding closet doors that were sticking and one bedroom entry that would not close properly plus a crack above the door. He fixed them all quickly. Sliders slide perfectly now and entry closes perfectly. Crack fixed. We will call on him again. Reliable and professional.`,
+  },
+  {
+    author: 'Thomas Mcdonald',
+    rating: 5,
+    date: 'September 2026',
+    text:
+      `Ezra followed through reliably on porch railing, exterior door and electrical repairs to my home.  When issues came up unexpectedly along the way Ezra was able to problem solve and complete work with good results!  Price estimate and material cost was very reasonable.`,
+  },
+  {
+    author: 'Melissa Johnson',
+    rating: 5,
+    date: 'September 2026',
+    text: `Prompt service at a reasonable price.`,
+  },
+  {
+    author: 'Menucha Schubert',
+    rating: 5,
+    date: 'August 2026',
+    topics: ['pos'],
+    text:
+      `Ezra was so efficient and amazing! He got all of our work done so fast and even helped us deal with the city inspectors for some of our projects. Would highly recommend.`,
+  },
+  {
+    author: 'AllPro Home Solutions',
+    rating: 5,
+    date: 'August 2026',
+    text:
+      `Ezra did an outstanding job. He came on time and was patience enough to explain to tenant. I will hire him again for future jobs.`,
+  },
+  {
+    author: 'Office Work',
+    rating: 5,
+    date: 'August 2026',
+    text:
+      `I am extremely satisfied with his work! He works with great skill, and the finishing is so flawless that it’s a delight to see. What I appreciated most is his professionalism and sense of responsibility—he is a very polite and honest person. Considering the quality of his work, his service charge is very reasonable. Overall, I am completely satisfied with his work and recommend him 100%`,
+  },
+  {
+    author: 'Stephanie Slavick',
+    rating: 5,
+    date: 'August 2026',
+    text: `Amazing service. Great communication! Got the home repairs done swiftly. Thank you.`,
+  },
+  {
+    author: 'Kory Konte',
+    rating: 5,
+    date: 'August 2026',
+    text: `I was very satisfied with there services. they were on time, Professional and friendly.`,
+  },
   {
     author: 'Shaya Bassman',
     rating: 5,
